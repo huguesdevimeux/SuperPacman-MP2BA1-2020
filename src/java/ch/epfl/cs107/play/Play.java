@@ -3,7 +3,9 @@ package ch.epfl.cs107.play;
 import java.awt.GraphicsEnvironment;
 
 import ch.epfl.cs107.play.game.Game;
+import ch.epfl.cs107.play.game.areagame.AreaGame;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.tutosSolution.Tuto2;
 import ch.epfl.cs107.play.io.DefaultFileSystem;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.io.ResourceFileSystem;
@@ -34,7 +36,7 @@ public class Play {
 		// (it is expected that at the beginning, the provided file does not compile)
        
         //final Game game = new SuperPacman();
-
+		final AreaGame game = new Tuto2();
 		// Use Swing display
 		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
 		window.registerFonts(ResourcePath.FONTS);
