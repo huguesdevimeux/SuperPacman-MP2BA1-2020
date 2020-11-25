@@ -26,67 +26,66 @@ public class Play {
 	 * @param args (Array of String): ignored
 	 */
 	public static void main(String[] args) {
-		System.out.println("hello world!");
 
-		// // Define cascading file system
-		// final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
+		// Define cascading file system
+		final FileSystem fileSystem = new ResourceFileSystem(DefaultFileSystem.INSTANCE);
 
-        // // Create a demo game :
-		// // (it is expected that at the beginning, the provided file does not compile)
+        // Create a demo game :
+		// (it is expected that at the beginning, the provided file does not compile)
        
-        // //final Game game = new SuperPacman();
+        //final Game game = new SuperPacman();
 
-		// // Use Swing display
-		// final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
-		// window.registerFonts(ResourcePath.FONTS);
+		// Use Swing display
+		final Window window = new SwingWindow(game.getTitle(), fileSystem, 550, 550);
+		window.registerFonts(ResourcePath.FONTS);
 		
-		// Recorder recorder = new Recorder(window);
-		// RecordReplayer replayer = new RecordReplayer(window);
-		// try {
+		Recorder recorder = new Recorder(window);
+		RecordReplayer replayer = new RecordReplayer(window);
+		try {
 
-		// 	if (game.begin(window, fileSystem)) {
-		// 		//recorder.start();
-		// 		//replayer.start("record1.xml");
+			if (game.begin(window, fileSystem)) {
+				//recorder.start();
+				//replayer.start("record1.xml");
 
-		// 		// Use system clock to keep track of time progression
-        //         long currentTime = System.nanoTime();
-		// 		long lastTime;
-		// 		final float frameDuration = ONE_SEC / game.getFrameRate();
+				// Use system clock to keep track of time progression
+                long currentTime = System.nanoTime();
+				long lastTime;
+				final float frameDuration = ONE_SEC / game.getFrameRate();
 
-		// 		// Run until the user try to close the window
-		// 		while (!window.isCloseRequested()) {
+				// Run until the user try to close the window
+				while (!window.isCloseRequested()) {
 
-		// 			// Compute time interval
-        //             lastTime = currentTime;
-        //             currentTime = System.nanoTime();
-		// 			float deltaTime = (currentTime - lastTime);
+					// Compute time interval
+                    lastTime = currentTime;
+                    currentTime = System.nanoTime();
+					float deltaTime = (currentTime - lastTime);
 
-        //             try {
-        //                 int timeDiff = Math.max(0, (int) (frameDuration - deltaTime));
-        //                 Thread.sleep((int) (timeDiff / 1E6), (int) (timeDiff % 1E6));
-        //             } catch (InterruptedException e) {
-        //                 System.out.println("Thread sleep interrupted");
-        //             }
+                    try {
+                        int timeDiff = Math.max(0, (int) (frameDuration - deltaTime));
+                        Thread.sleep((int) (timeDiff / 1E6), (int) (timeDiff % 1E6));
+                    } catch (InterruptedException e) {
+                        System.out.println("Thread sleep interrupted");
+                    }
 
-        //             currentTime = System.nanoTime();
-        //             deltaTime = (currentTime - lastTime) / ONE_SEC;
+                    currentTime = System.nanoTime();
+                    deltaTime = (currentTime - lastTime) / ONE_SEC;
 
-        //             // Let the game do its stuff
-        //             game.update(deltaTime);
+                    // Let the game do its stuff
+                    game.update(deltaTime);
 
-        //             // Render and update input
-        //             window.update();
-        //             //recorder.update();
-        //             //replayer.update();
-		// 		}
-		// 	}
-		// 	//recorder.stop("record1.xml");
-		// 	game.end();
+                    // Render and update input
+                    window.update();
+                    //recorder.update();
+                    //replayer.update();
+				}
+			}
+			//recorder.stop("record1.xml");
+			game.end();
 
-		// } finally {
-		// 	// Release resources
-		// 	window.dispose();
-		// }
+		} finally {
+			// Release resources
+			window.dispose();
+		}
 	}
 
 }
