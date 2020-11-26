@@ -32,7 +32,7 @@ public class Tuto1 extends AreaGame {
 	    }
 	    
 	    @Override
-	    public boolean begin(Window window, FileSystem fileSystem) {
+	    public void begin(Window window, FileSystem fileSystem) {
 	        if (super.begin(window, fileSystem)) {
 	            createAreas();
 	            areaIndex = 0;

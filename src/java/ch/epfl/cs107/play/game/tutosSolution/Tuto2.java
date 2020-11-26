@@ -32,7 +32,7 @@ public class Tuto2 extends AreaGame {
 	}
 
 	@Override
-	public boolean begin(Window window, FileSystem fileSystem) {
+	public void begin(Window window, FileSystem fileSystem) {
 
 
 		if (super.begin(window, fileSystem)) {

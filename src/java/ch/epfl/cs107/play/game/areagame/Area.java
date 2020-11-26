@@ -236,7 +236,7 @@ public abstract class Area implements Playable {
 	/// Area implements Playable
 
 	@Override
-	public boolean begin(Window window, FileSystem fileSystem) {
+	public void begin(Window window, FileSystem fileSystem) {
 		this.window = window;
 		this.fileSystem = fileSystem;
 		actors = new LinkedList<>();

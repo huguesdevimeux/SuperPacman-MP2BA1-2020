@@ -18,7 +18,7 @@ public abstract class SuperPacmanArea extends Area {
      */
     protected abstract void createArea();
 
-    public boolean begin(Window window, FileSystem fileSystem){
+    public void begin(Window window, FileSystem fileSystem){
         if(super.begin(window,fileSystem)){
             behavior = new SuperPacmanBehavior(window, getTitle());
             setBehavior(behavior);
