@@ -40,7 +40,7 @@ public abstract class RPG extends AreaGame {
     /// RPG implements Playable
 
     @Override
-    public void begin(Window window, FileSystem fileSystem) {
+    public boolean begin(Window window, FileSystem fileSystem) {
         return super.begin(window, fileSystem);
     }
 

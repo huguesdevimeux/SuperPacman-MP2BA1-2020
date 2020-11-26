@@ -11,8 +11,9 @@ public interface Playable extends Updatable{
      * Note: Need to be Override
      * @param window (Window): display context. Not null
      * @param fileSystem (FileSystem): given file system. Not null
+     * @return (boolean): whether the game was successfully started
      */
-    void begin(Window window, FileSystem fileSystem);
+    boolean begin(Window window, FileSystem fileSystem);
 
     /** Cleans up things, called even if initialisation failed.
      * Note: Need to be Override

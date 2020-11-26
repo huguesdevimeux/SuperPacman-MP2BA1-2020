@@ -28,7 +28,7 @@ abstract public class SimpleArea extends Area {
 	}
 	
 	 @Override
-	    public void begin(Window window, FileSystem fileSystem) {
+	    public boolean begin(Window window, FileSystem fileSystem) {
 		 	this.window = window;
 	        if (super.begin(window, fileSystem)) {
 	            // Set the behavior map

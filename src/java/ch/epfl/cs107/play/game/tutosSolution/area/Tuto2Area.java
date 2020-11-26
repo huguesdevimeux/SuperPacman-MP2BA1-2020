@@ -28,7 +28,7 @@ public abstract class Tuto2Area extends Area {
     /// Demo2Area implements Playable
 
     @Override
-    public void begin(Window window, FileSystem fileSystem) {
+    public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
             // Set the behavior map
         	behavior = new Tuto2Behavior(window, getTitle());

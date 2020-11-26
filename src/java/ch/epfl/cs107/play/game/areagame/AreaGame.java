@@ -82,7 +82,7 @@ abstract public class AreaGame implements Game {
 	/// AreaGame implements Playable
 
 	@Override
-	public void begin(Window window, FileSystem fileSystem) {
+	public boolean begin(Window window, FileSystem fileSystem) {
 
 		// Keep context
 		this.window = window;
