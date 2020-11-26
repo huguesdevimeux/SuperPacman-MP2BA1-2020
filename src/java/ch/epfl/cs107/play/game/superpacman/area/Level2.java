@@ -5,7 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.tutosSolution.actor.SimpleGhost;
 import ch.epfl.cs107.play.math.Vector;
 
-public class Level2 {
+public class Level2 extends SuperPacmanArea{
 
     public String getTitle(){return "sperpacman/Level2";}
 

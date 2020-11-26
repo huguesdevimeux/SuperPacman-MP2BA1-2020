@@ -2,10 +2,16 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Wall;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior {
+
+
     public enum SuperPacmanCellType {
         NONE(0), // never used as real content
         WALL(-16777216), //black
@@ -32,6 +38,28 @@ public class SuperPacmanBehavior extends AreaBehavior {
             System.out.println(type);
             return NONE;
         }
+
+        protected void registerActors(Area area) {
+
+            int height = area.getHeight();
+            int width = area.getWidth();
+
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
+                    for (SuperPacmanCellType cell : SuperPacmanCellType.values()) {
+                        if (cell == WALL) {
+                            Wall wall = new Wall(area, cellPosition, isWall());
+                            area.registerActor(wall);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean[][] isWall(DiscreteCoordinates coord) {
+        return (((SuperPacmanCell) getCell(coord.x, coord.y)).isWall());
     }
 
     /**
@@ -46,20 +74,14 @@ public class SuperPacmanBehavior extends AreaBehavior {
         int width = getWidth();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
-                SuperPacmanBehavior.SuperPacmanCellType color = SuperPacmanBehavior.SuperPacmanCellType.toType(getRGB(height - 1 - y, x));
+                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(height - 1 - y, x));
                 setCell(x, y, new SuperPacmanCell(x, y, color));
             }
         }
     }
 
-    //initialising a 3x3 boolean array
-    boolean[][] a = new boolean[3][3];
 
-    protected void registerActors(Area area) {
-
-    }
-
-    public class SuperPacmanCell {
+    public class SuperPacmanCell extends Cell {
 
         /// Type of the cell following the enum
         private final SuperPacmanCellType type;
@@ -76,8 +98,32 @@ public class SuperPacmanBehavior extends AreaBehavior {
             this.type = type;
         }
 
+        public boolean isWall() {
+            return type == SuperPacmanCellType.WALL;
+        }
+
+        @Override
+        protected boolean canLeave(Interactable entity) {
+            return false;
+        }
+
         protected boolean canEnter(Interactable entity) {
             return true;
+        }
+
+        @Override
+        public boolean isCellInteractable() {
+            return false;
+        }
+
+        @Override
+        public boolean isViewInteractable() {
+            return false;
+        }
+
+        @Override
+        public void acceptInteraction(AreaInteractionVisitor v) {
+
         }
     }
 }
