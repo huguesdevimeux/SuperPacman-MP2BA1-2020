@@ -24,3 +24,5 @@ hs_err_pid*
 
 # Vscode stuff
 .vscode/settings.json
+/out/
+/.idea/
