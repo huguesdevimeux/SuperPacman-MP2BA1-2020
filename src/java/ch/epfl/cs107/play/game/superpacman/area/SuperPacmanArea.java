@@ -6,8 +6,13 @@ import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
 
 public abstract class SuperPacmanArea extends Area {
-    private SuperPacmanBehavior behavior;
 
+    private static SuperPacmanBehavior behavior;
+    //creating a method that level0/1/2 will have in common
+    //to configure walls as actors
+    protected static void configureWalls(Area area){
+        behavior.registerActors(area);
+    }
     public final float getCameraScaleFactor() {
         return SuperPacman.CAMERA_SCALE_FACTOR;
     }

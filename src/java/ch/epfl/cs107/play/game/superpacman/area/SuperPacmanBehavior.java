@@ -38,29 +38,60 @@ public class SuperPacmanBehavior extends AreaBehavior {
             System.out.println(type);
             return NONE;
         }
+    }
+        /*method that will return true if the cell at (x,y) is a
+        @param int x, y - coordinates on the grid
+         */
 
+        public boolean isWall(int x, int y){
+            return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
+        }
+        //method that will register walls as actors
         protected void registerActors(Area area) {
 
             int height = area.getHeight();
             int width = area.getWidth();
+            boolean[][] neighborhood = new boolean[3][3];
 
+            //evaluating if the neighboring cells are walls or not
             for (int y = 0; y < height; y++) {
                 for (int x = 0; x < width; x++) {
-                    DiscreteCoordinates cellPosition = new DiscreteCoordinates(x, y);
-                    for (SuperPacmanCellType cell : SuperPacmanCellType.values()) {
-                        if (cell == WALL) {
-                            Wall wall = new Wall(area, cellPosition, isWall());
-                            area.registerActor(wall);
-                        }
+                    if (isWall(x, y))
+                        //the cell at the center of the 3x3 array will be true as we study the cells around it
+                        neighborhood[2][2] = true;
+
+                    if (isWall(x - 1, y - 1)) {
+                        neighborhood[1][1] = true;
                     }
+                    if (isWall(x + 1, y + 1)) {
+                        neighborhood[3][3] = true;
+                    }
+                    if (isWall(x + 1, y)) {
+                        neighborhood[3][2] = true;
+                    }
+                    if (isWall(x - 1, y)) {
+                        neighborhood[1][2] = true;
+                    }
+                    if (isWall(x, y + 1)) {
+                        neighborhood[2][3] = true;
+                    }
+                    if (isWall(x, y - 1)) {
+                        neighborhood[2][1] = true;
+                    }
+                    if (isWall(x - 1, y + 1)) {
+                        neighborhood[1][3] = true;
+                    }
+                    if (isWall(x + 1, y - 1)) {
+                        neighborhood[3][1] = true;
+                    }
+                    //registering new discrete coordinates that compose a parameter for an wall as actor
+                    DiscreteCoordinates wallPosition = new DiscreteCoordinates(x, y);
+                    Wall wall = new Wall(area, wallPosition, neighborhood);
+                    area.registerActor(wall);
+
                 }
             }
         }
-    }
-
-    public boolean[][] isWall(DiscreteCoordinates coord) {
-        return (((SuperPacmanCell) getCell(coord.x, coord.y)).isWall());
-    }
 
     /**
      * Default SuperPacmanBehavior Constructor
@@ -108,7 +139,10 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         protected boolean canEnter(Interactable entity) {
-            return true;
+            if(entity.takeCellSpace()) {
+                return false;
+            }//?
+            else return true;
         }
 
         @Override
