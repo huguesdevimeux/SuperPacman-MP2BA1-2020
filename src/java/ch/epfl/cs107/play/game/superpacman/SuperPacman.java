@@ -46,7 +46,7 @@ public class SuperPacman extends RPG {
             areaIndex = 0;
             Area area = setCurrentArea(areas[areaIndex], true);
             //TODO complete method
-            player = new SuperPacmanPlayer(, Orientation.DOWN, PLAYER_SPAWN_POSITION[areaIndex] );
+            player = new SuperPacmanPlayer(getCurrentArea(), Orientation.DOWN, PLAYER_SPAWN_POSITION[areaIndex] );
             area.registerActor((Actor) player);
             return true;
         }
