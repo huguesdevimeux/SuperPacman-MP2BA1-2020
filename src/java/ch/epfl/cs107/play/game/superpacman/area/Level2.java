@@ -4,14 +4,23 @@ import ch.epfl.cs107.play.game.areagame.actor.Background;
 import ch.epfl.cs107.play.game.areagame.actor.Foreground;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.tutosSolution.actor.SimpleGhost;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
 
 public class Level2 extends SuperPacmanArea{
+   
+    public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 
     public String getTitle(){return "sperpacman/Level2";}
 
     protected void createArea() {
         // Base
-       SuperPacmanArea.configureWalls(this);
+        // SuperPacmanArea.configureWalls(this);
     }
+    
+    @Override
+    public DiscreteCoordinates getSpawnLocation() {
+        return this.PLAYER_SPAWN_POSITION; 
+    }
+
 }
