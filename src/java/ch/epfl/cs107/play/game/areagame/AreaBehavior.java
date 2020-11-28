@@ -92,11 +92,11 @@ public abstract class AreaBehavior{
     	return behaviorMap.getRGB(r, c);
     }
     
-    protected int getHeight() {
+    public int getHeight() {
     	return height;
     }
     
-    protected int getWidth() {
+    public int getWidth() {
     	return width;
     }
     
