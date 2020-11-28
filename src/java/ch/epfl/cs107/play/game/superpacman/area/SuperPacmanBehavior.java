@@ -39,38 +39,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
             return NONE;
         }
     }
-    int height = getHeight();
-    int width = getWidth();
-    /**
-     *
-     * @param x coordinate
-     * @param y coordinate
-     * @return true if the cell at (x,y) is a wall
-     */
-        public boolean isWall(int x, int y){
-            if(x - 1 <= 0 || y-1 <= 0 || y+1 >= height || x+1 >= width){
-                return true;
-            }
-            return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
-        }
-    /**
-     * @param area - register walls as actors in the area they're in (ie level0)
-     */
-    protected void registerActors(Area area) {
-
-            int height = area.getHeight();
-            int width = area.getWidth();
-
-            for (int y = 0; y <= height; y++) {
-                for (int x = 0; x <= width; x++) {
-                    if (isWall(x, y)) {
-                        getNeighborhood(x, y);
-                        //registering new discrete coordinates that compose a parameter for a wall as actor
-                        area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
-                    }
-                }
-            }
-        }
+    
     /**
      * Default SuperPacmanBehavior Constructor
      *
@@ -83,10 +52,40 @@ public class SuperPacmanBehavior extends AreaBehavior {
         int width = getWidth();
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
+                // Generate a behavior for each cell. 
                 SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(height - 1 - y, x));
                 setCell(x, y, new SuperPacmanCell(x, y, color));
             }
         }
+    }
+    
+    /**
+     * Check wether the cell at x,y is wall. 
+     * 
+     * @param x coordinate
+     * @param y coordinate
+     * @return true if the cell at (x,y) is a wall
+     */
+    public boolean isWall(int x, int y){
+        if(x - 1 <= 0 || y-1 <= 0 || y+1 >= getHeight() || x+1 >= getWidth()){
+            return true;
+        }
+        return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
+    }
+    
+    /**
+     * Generate walls for the behavior. 
+     * 
+     * @param area The area containing the walls.  
+     */
+    protected void generateWalls(SuperPacmanArea area) {
+       for (int y = 0; y < getHeight(); y++) {
+           for (int x = 0; x < getWidth(); x++) {
+               if (isWall(x, y)) {
+                   area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y))); 
+                }
+           }
+       }
     }
     /**
      * @param x coordinate
@@ -95,7 +94,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
      */
     private boolean[][] getNeighborhood(int x, int y){
 
-        boolean[][] neighborhood = new boolean[2][2];
+        boolean[][] neighborhood = new boolean[3][3];
         //the cell at coordinates 1,1 (the center of the 3x3 array)
         // is true as we study its surroundings
         neighborhood[1][1] = true;
@@ -128,7 +127,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         public boolean isWall() {
-            return type == SuperPacmanCellType.WALL;
+            return type.equals(SuperPacmanCellType.WALL);
         }
 
         @Override
@@ -137,7 +136,8 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         protected boolean canEnter(Interactable entity) {
-            return entity.takeCellSpace();
+            return true; 
+            // return entity.takeCellSpace();
         }
 
         @Override

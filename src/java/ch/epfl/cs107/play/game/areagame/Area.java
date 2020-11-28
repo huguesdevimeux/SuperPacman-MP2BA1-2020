@@ -79,8 +79,13 @@ public abstract class Area implements Playable {
 
 		if(a instanceof Interactor)
 			errorHappen = !interactors.add((Interactor) a);
-		if(a instanceof Interactable)
+		if (a instanceof Interactable){
+			boolean canEnter = enterAreaCells(((Interactable) a), ((Interactable) a).getCurrentCells());
+			if (!canEnter) {
+				System.out.println("Actor " + a + " cannot enterAreaCells! Tried coordinates " + ((Interactable) a).getCurrentCells());
+			}
 			errorHappen = errorHappen || !enterAreaCells(((Interactable) a), ((Interactable) a).getCurrentCells());
+		}
 		errorHappen = errorHappen || !actors.add(a);
 		// errorHappen == true means that the grid or the Area are against the addition
 
