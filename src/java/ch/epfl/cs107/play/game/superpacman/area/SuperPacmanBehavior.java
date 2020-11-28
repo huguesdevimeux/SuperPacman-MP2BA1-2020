@@ -78,7 +78,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
      * 
      * @param area The area containing the walls.  
      */
-    public void generateWalls(SuperPacmanArea area) {
+    protected void generateWalls(SuperPacmanArea area) {
        for (int y = 0; y < getHeight(); y++) {
            for (int x = 0; x < getWidth(); x++) {
                if (isWall(x, y)) {
