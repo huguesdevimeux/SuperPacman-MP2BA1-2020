@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCell;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
@@ -19,12 +21,17 @@ public class SuperPacmanPlayer extends Player {
 
     private Sprite sprite;
     private Area currentArea;
-	private int movingSpeed; 
+    private int movingSpeed;
+    private Animation[] movingAnimations;
+    private Sprite[][] sprites;
 
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
+        movingSpeed = 6;
+        sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64, 
+                new Orientation[] { Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT });
+        movingAnimations = Animation.createAnimations(movingSpeed/2, sprites); 
         sprite = new Sprite("superpacman/bonus", 1.f, 1.f, this);
-        movingSpeed = 6; 
         this.currentArea = area;
     }
     
@@ -32,10 +39,17 @@ public class SuperPacmanPlayer extends Player {
     public void update(float deltaTime) {
         super.update(deltaTime);
         Keyboard keyboard = getOwnerArea().getKeyboard();
-        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
-        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
-        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
-        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT), deltaTime);
+        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP), deltaTime);
+        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT), deltaTime);
+        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN), deltaTime);
+        if (isDisplacementOccurs()) {
+            movingAnimations[getOrientation().ordinal()].update(deltaTime);
+        }
+        else {
+            movingAnimations[getOrientation().ordinal()].reset(); 
+        }
+
     }
     
     private void moveOrientate(Orientation orientation, Button b, float deltaTime) {
@@ -48,8 +62,6 @@ public class SuperPacmanPlayer extends Player {
         }
         if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
             move(movingSpeed);
-                move(movingSpeed); 
-            move(movingSpeed);
         }
     }
 
@@ -59,7 +71,8 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public void draw(Canvas canvas) {
-        sprite.draw(canvas);
+        movingAnimations[getOrientation().ordinal()].draw(canvas);
+        // sprite.draw(canvas);
     }
 
 
