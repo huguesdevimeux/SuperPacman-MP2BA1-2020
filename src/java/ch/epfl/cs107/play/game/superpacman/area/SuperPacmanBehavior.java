@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
-import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -60,36 +59,36 @@ public class SuperPacmanBehavior extends AreaBehavior {
     }
     
     /**
-     * Check wether the cell at x,y is wall. 
+     * Check whether the cell at x,y is wall.
      * 
      * @param x coordinate
      * @param y coordinate
      * @return true if the cell at (x,y) is a wall
      */
     public boolean isWall(int x, int y){
-        if(x - 1 <= 0 || y-1 <= 0 || y+1 >= getHeight() || x+1 >= getWidth()){
-            return true;
+       if(x - 1 < 0 || y-1 < 0 || y+1 > getHeight() || x+1 > getWidth()){
+           return true;
         }
         return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
     }
-    
+
     /**
      * Generate walls for the behavior. 
      * 
      * @param area The area containing the walls.  
      */
-    protected void generateWalls(SuperPacmanArea area) {
+    protected void registerActors(SuperPacmanArea area) {
        for (int y = 0; y < getHeight(); y++) {
            for (int x = 0; x < getWidth(); x++) {
-               if (isWall(x, y)) {
-                   area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y))); 
+               if (isWall(x,y)) {
+                   area.registerActor(new Wall(area, new DiscreteCoordinates(x,y), getNeighborhood(x, y)));
                 }
            }
        }
     }
     /**
-     * @param x coordinate
-     * @param y coordinate
+     * @param x coordinate width
+     * @param y coordinate height
      * @return whether the wall's surrounding cells are walls as well
      */
     private boolean[][] getNeighborhood(int x, int y){
@@ -99,14 +98,14 @@ public class SuperPacmanBehavior extends AreaBehavior {
         // is true as we study its surroundings
         neighborhood[1][1] = true;
 
-        neighborhood[0][0] = isWall(x - 1, y - 1);
-        neighborhood[2][2] = isWall(x+1, y+1);
+        neighborhood[0][0] = isWall(x-1,y+1);
+        neighborhood[2][2] = isWall(x+1,y-1);
         neighborhood[2][1] = isWall(x+1, y);
-        neighborhood[0][1] = isWall(x-1,y);
-        neighborhood[1][2] = isWall(x,y+1);
-        neighborhood[1][0] = isWall(x,y-1);
-        neighborhood[0][2] = isWall(x-1,y+1);
-        neighborhood[2][0] = isWall(x+1,y-1);
+        neighborhood[0][1] = isWall(x-1, y);
+        neighborhood[1][2] = isWall(x,y-1);
+        neighborhood[1][0] = isWall(x,y+1);
+        neighborhood[0][2] = isWall(x-1,y-1);
+        neighborhood[2][0] = isWall(x+1,y+1);
         return neighborhood;
     }
 
@@ -132,12 +131,11 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
         @Override
         protected boolean canLeave(Interactable entity) {
-            return false;
+            return true;
         }
 
         protected boolean canEnter(Interactable entity) {
-            return true; 
-            // return entity.takeCellSpace();
+            return !hasNonTraversableContent();
         }
 
         @Override

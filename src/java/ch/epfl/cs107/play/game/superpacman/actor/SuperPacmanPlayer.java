@@ -1,29 +1,28 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCell;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
+import java.util.Collections;
+import java.util.List;
+
 public class SuperPacmanPlayer extends Player {
 
     private Sprite sprite;
     private Area currentArea;
-	private int movingSpeed; 
+	private final int movingSpeed;
 
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
-        sprite = new Sprite("superpacman/cherry", 1.f, 1.f, this);
+        sprite = new Sprite("superpacman/bonus", 1.f, 1.f, this);
         movingSpeed = 6; 
 
         this.currentArea = area; 
@@ -31,30 +30,24 @@ public class SuperPacmanPlayer extends Player {
     
     @Override
     public void update(float deltaTime) {
-        Orientation desiredOrientation = null;
-       
-        Keyboard keyboard = currentArea.getKeyboard() ;
-        Button key = keyboard.get(Keyboard.UP) ;
-        if (key.isDown()) { desiredOrientation = Orientation.UP; }
-        key = keyboard.get(Keyboard.DOWN) ;
-        if (key.isDown()) { desiredOrientation = Orientation.DOWN; }
-        key = keyboard.get(Keyboard.LEFT) ;
-        if (key.isDown()) {desiredOrientation = Orientation.LEFT; }
-        key = keyboard.get(Keyboard.RIGHT) ;
-        if (key.isDown()) { desiredOrientation = Orientation.RIGHT;}
-        
-        if (desiredOrientation != null) {
-
-            List<DiscreteCoordinates> targetCell = Collections
-                    .singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));
-            if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
-                orientate(desiredOrientation);
+            super.update(deltaTime);
+            Keyboard keyboard = currentArea.getKeyboard();
+            moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+            moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
+            moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+            moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+    }
+    private void moveOrientate(Orientation orientation, Button b) {
+        if (b.isDown()) {
+            List<DiscreteCoordinates> targetCell = Collections.
+                    singletonList(getCurrentMainCellCoordinates().jump(orientation.toVector()));
+            if (getOrientation() != orientation){
+                orientate(orientation);
+            }
+            else if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
                 move(movingSpeed);
             }
-        }
-        super.update(deltaTime);
-
-    }
+        }}
 
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
@@ -92,7 +85,7 @@ public class SuperPacmanPlayer extends Player {
     @Override
     public boolean takeCellSpace() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override

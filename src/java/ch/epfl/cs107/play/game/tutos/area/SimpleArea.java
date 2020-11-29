@@ -17,7 +17,7 @@ abstract public class SimpleArea extends Area {
 	
 	@Override
 	public int getWidth() {
-		 Image   behaviorMap = window.getImage(ResourcePath.getBehaviors(getTitle()), null, false);
+		 Image behaviorMap = window.getImage(ResourcePath.getBehaviors(getTitle()), null, false);
 	     return  behaviorMap.getWidth();
 	}
 	
