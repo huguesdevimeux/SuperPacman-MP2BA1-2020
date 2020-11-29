@@ -23,37 +23,32 @@ public class SuperPacmanPlayer extends Player {
 
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
-        sprite = new Sprite("superpacman/cherry", 1.f, 1.f, this);
+        sprite = new Sprite("superpacman/bonus", 1.f, 1.f, this);
         movingSpeed = 6; 
-
-        this.currentArea = area; 
+        this.currentArea = area;
     }
     
     @Override
     public void update(float deltaTime) {
-        Orientation desiredOrientation = null;
-       
-        Keyboard keyboard = currentArea.getKeyboard() ;
-        Button key = keyboard.get(Keyboard.UP) ;
-        if (key.isDown()) { desiredOrientation = Orientation.UP; }
-        key = keyboard.get(Keyboard.DOWN) ;
-        if (key.isDown()) { desiredOrientation = Orientation.DOWN; }
-        key = keyboard.get(Keyboard.LEFT) ;
-        if (key.isDown()) {desiredOrientation = Orientation.LEFT; }
-        key = keyboard.get(Keyboard.RIGHT) ;
-        if (key.isDown()) { desiredOrientation = Orientation.RIGHT;}
-        
-        if (desiredOrientation != null) {
-
+        super.update(deltaTime);
+        Keyboard keyboard = getOwnerArea().getKeyboard();
+        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
+        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+    }
+    
+    private void moveOrientate(Orientation orientation, Button b) {
+        if (b.isDown()) {
             List<DiscreteCoordinates> targetCell = Collections
-                    .singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));
-            if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
-                orientate(desiredOrientation);
-                move(movingSpeed);
+                    .singletonList(getCurrentMainCellCoordinates().jump(orientation.toVector()));
+            if (getOrientation() != orientation){
+                orientate(orientation);
+            }
+            else if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
+                move(movingSpeed); 
             }
         }
-        super.update(deltaTime);
-
     }
 
     public List<DiscreteCoordinates> getCurrentCells() {
@@ -92,7 +87,7 @@ public class SuperPacmanPlayer extends Player {
     @Override
     public boolean takeCellSpace() {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
