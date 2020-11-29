@@ -38,16 +38,18 @@ public class SuperPacmanPlayer extends Player {
         moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
     }
     
-    private void moveOrientate(Orientation orientation, Button b) {
+    private void moveOrientate(Orientation orientation, Button b, float deltaTime) {
+        List<DiscreteCoordinates> targetCell = Collections
+                .singletonList(getCurrentMainCellCoordinates().jump(orientation.toVector()));
         if (b.isDown()) {
-            List<DiscreteCoordinates> targetCell = Collections
-                    .singletonList(getCurrentMainCellCoordinates().jump(orientation.toVector()));
-            if (getOrientation() != orientation){
+            if (getOrientation() != orientation) {
                 orientate(orientation);
             }
-            else if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
+        }
+        if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
+            move(movingSpeed);
                 move(movingSpeed); 
-            }
+            move(movingSpeed);
         }
     }
 
