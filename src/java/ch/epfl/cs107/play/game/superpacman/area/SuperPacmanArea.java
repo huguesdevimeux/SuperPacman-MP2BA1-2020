@@ -18,7 +18,7 @@ public abstract class SuperPacmanArea extends Area {
      * @param area
      */
     protected void configureWalls() {
-        associatedBehavior.generateWalls(this);
+        associatedBehavior.registerActors(this);
     }
     public final float getCameraScaleFactor() {
         return SuperPacman.CAMERA_SCALE_FACTOR;

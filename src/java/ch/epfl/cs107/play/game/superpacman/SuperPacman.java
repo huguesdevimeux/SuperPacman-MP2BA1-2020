@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman;
 
-import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
@@ -9,8 +8,6 @@ import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
-import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -38,10 +35,11 @@ public class SuperPacman extends RPG {
 
     private void createAreas() {
         addArea(new Level0());
-
+        addArea(new Level1());
+        addArea(new Level2());
     }
 
-    public boolean begin(Window window, FileSystem fileSystem){
+    public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
             createAreas();
@@ -51,18 +49,17 @@ public class SuperPacman extends RPG {
             player = new SuperPacmanPlayer(area, Orientation.DOWN, new DiscreteCoordinates(5, 5));
             initPlayer(player);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
 
-   @Override
-   public void end(){
-   }
+    @Override
+    public void end() {
+    }
 
-   protected void switchArea(){
+    protected void switchArea() {
 
-   }
+    }
 
     public String getTitle() {
         return "Super Pac-Man";
