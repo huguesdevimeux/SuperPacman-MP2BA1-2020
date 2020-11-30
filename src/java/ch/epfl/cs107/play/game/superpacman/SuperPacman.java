@@ -46,7 +46,7 @@ public class SuperPacman extends RPG {
             //the player will begin at level0, hence areaIndex = 0
             areaIndex = 0;
             Area area = setCurrentArea(areas[areaIndex], true); // TODO : cast? 
-            player = new SuperPacmanPlayer(area, Orientation.DOWN, new DiscreteCoordinates(5, 5));
+            player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(5, 5));
             initPlayer(player);
             return true;
         } else return false;
