@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
-import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
@@ -48,29 +47,28 @@ public class SuperPacmanBehavior extends AreaBehavior {
      */
     public SuperPacmanBehavior(Window window, String name) {
         super(window, name);
-        int height = getHeight();
-        int width = getWidth();
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
                 // Generate a behavior for each cell. 
-                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(height - 1 - y, x));
+                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(getHeight() - 1 - y, x));
                 setCell(x, y, new SuperPacmanCell(x, y, color));
             }
         }
     }
     
     /**
-     * Check wether the cell at x,y is wall. 
+     * Check whether the cell at x,y is wall.
      * 
      * @param x coordinate
      * @param y coordinate
      * @return true if the cell at (x,y) is a wall
      */
     public boolean isWall(int x, int y){
-        if(x - 1 <= 0 || y-1 <= 0 || y+1 >= getHeight() || x+1 >= getWidth()){
-            return true;
+        if(x >= 0 && y >= 0 && y < getHeight() && x < getWidth()){
+            return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
+        } else {
+            return false;
         }
-        return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
     }
     
     /**
@@ -78,7 +76,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
      * 
      * @param area The area containing the walls.  
      */
-    protected void generateWalls(SuperPacmanArea area) {
+    protected void registerActors(SuperPacmanArea area) {
        for (int y = 0; y < getHeight(); y++) {
            for (int x = 0; x < getWidth(); x++) {
                if (isWall(x, y)) {
@@ -98,15 +96,14 @@ public class SuperPacmanBehavior extends AreaBehavior {
         //the cell at coordinates 1,1 (the center of the 3x3 array)
         // is true as we study its surroundings
         neighborhood[1][1] = true;
-
-        neighborhood[0][0] = isWall(x - 1, y - 1);
-        neighborhood[2][2] = isWall(x+1, y+1);
+        neighborhood[0][0] = isWall(x-1, y+1);
+        neighborhood[2][2] = isWall(x+1, y-1);
         neighborhood[2][1] = isWall(x+1, y);
         neighborhood[0][1] = isWall(x-1,y);
-        neighborhood[1][2] = isWall(x,y+1);
-        neighborhood[1][0] = isWall(x,y-1);
-        neighborhood[0][2] = isWall(x-1,y+1);
-        neighborhood[2][0] = isWall(x+1,y-1);
+        neighborhood[1][2] = isWall(x,y-1);
+        neighborhood[1][0] = isWall(x,y+1);
+        neighborhood[0][2] = isWall(x-1,y-1);
+        neighborhood[2][0] = isWall(x+1,y+1);
         return neighborhood;
     }
 
@@ -153,5 +150,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         public void acceptInteraction(AreaInteractionVisitor v) {
 
         }
+
+
     }
 }
