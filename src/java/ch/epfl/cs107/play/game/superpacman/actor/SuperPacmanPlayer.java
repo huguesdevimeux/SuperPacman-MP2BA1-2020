@@ -1,24 +1,25 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.Collections;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCell;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-public class SuperPacmanPlayer extends Player {
+import java.util.Collections;
+import java.util.List;
 
+public class SuperPacmanPlayer extends Player {
     private Sprite sprite;
     private Area currentArea;
     private int movingSpeed;
@@ -34,7 +35,7 @@ public class SuperPacmanPlayer extends Player {
         sprite = new Sprite("superpacman/bonus", 1.f, 1.f, this);
         this.currentArea = area;
     }
-    
+
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
@@ -60,13 +61,17 @@ public class SuperPacmanPlayer extends Player {
                 orientate(orientation);
             }
         }
+        if (!(currentArea.canEnterAreaCells(this, targetCell)))
+            System.out.println("Maintenant bitch");
+        else System.out.println("et bah non");
         if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
             move(movingSpeed);
         }
     }
 
-    public List<DiscreteCoordinates> getCurrentCells() {
-        return Collections.singletonList(getCurrentMainCellCoordinates());
+    @Override
+    public void acceptInteraction(AreaInteractionVisitor v) {
+        v.interactWith(this);
     }
 
     @Override
@@ -75,7 +80,6 @@ public class SuperPacmanPlayer extends Player {
         // sprite.draw(canvas);
     }
 
-
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
         return null;
@@ -83,46 +87,51 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean wantsCellInteraction() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean wantsViewInteraction() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public void interactWith(Interactable other) {
-        // TODO Auto-generated method stub
+
 
     }
 
     @Override
+    public List<DiscreteCoordinates> getCurrentCells() {
+        return Collections.singletonList(getCurrentMainCellCoordinates());
+    }
+
+    @Override
     public boolean takeCellSpace() {
-        // TODO Auto-generated method stub
         return true;
     }
 
     @Override
     public boolean isCellInteractable() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean isViewInteractable() {
-        // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
-    @Override
-    public void acceptInteraction(AreaInteractionVisitor v) {
-        // TODO Auto-generated method stub
+    ////
+    ////
+    ////
+    ////
 
+    private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+
+        public void interactWith(Door door) {
+            setIsPassingADoor(door);
+            enterArea(currentArea, getCurrentMainCellCoordinates());
+        }
     }
-
-
 
 }
