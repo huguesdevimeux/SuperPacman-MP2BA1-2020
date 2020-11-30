@@ -138,7 +138,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
         @Override
         public boolean isCellInteractable() {
-            return false;
+            return true;
         }
 
         @Override

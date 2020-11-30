@@ -1,12 +1,16 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
+import ch.epfl.cs107.play.Play;
+import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.RPG;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
+import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
@@ -20,6 +24,7 @@ public class SuperPacmanPlayer extends Player {
     private Sprite sprite;
     private Area currentArea;
     private int movingSpeed;
+    private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
 
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
@@ -36,7 +41,6 @@ public class SuperPacmanPlayer extends Player {
         moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP));
         moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
         moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
-
     }
 
     private void moveOrientate(Orientation orientation, Button key) {
@@ -50,10 +54,9 @@ public class SuperPacmanPlayer extends Player {
             }
         }
     }
-
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        v.interactWith(this);
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
 
     @Override
@@ -75,18 +78,15 @@ public class SuperPacmanPlayer extends Player {
     public boolean wantsViewInteraction() {
         return false;
     }
-
     @Override
     public void interactWith(Interactable other) {
-
-
+        other.acceptInteraction(handler);
     }
 
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
-
     @Override
     public boolean takeCellSpace() {
         return true;
@@ -99,19 +99,13 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean isViewInteractable() {
-        return true;
+        return false;
     }
-
-    ////
-    ////
-    ////
-    ////
 
     private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 
         public void interactWith(Door door) {
-            setIsPassingADoor(door);
-            enterArea(currentArea, getCurrentMainCellCoordinates());
+        setIsPassingADoor(door);
         }
     }
 
