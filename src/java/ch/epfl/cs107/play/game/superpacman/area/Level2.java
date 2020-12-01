@@ -12,9 +12,10 @@ public class Level2 extends SuperPacmanArea{
    
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 
-    public String getTitle(){return "sperpacman/Level2";}
+    public String getTitle(){return "superpacman/Level2";}
 
     protected void createArea() {
+        super.createArea();
         //TODO - implement stuff if we have time
     }
     
