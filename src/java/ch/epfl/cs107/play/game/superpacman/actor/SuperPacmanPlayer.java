@@ -80,7 +80,7 @@ public class SuperPacmanPlayer extends Player {
     public boolean wantsViewInteraction() {
         return false;
     }
-    @Override
+   @Override
     public void interactWith(Interactable other) {
         other.acceptInteraction(handler);
     }
@@ -92,16 +92,16 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean takeCellSpace() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCellInteractable() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isViewInteractable() {
-        return false;
+        return true;
     }
 }

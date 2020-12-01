@@ -18,7 +18,7 @@ public class Level0 extends SuperPacmanArea {
     public void createArea() {
         Door door = new Door("superpacman/Level1", new DiscreteCoordinates(15,6), Logic.TRUE, this,
                 Orientation.UP, new DiscreteCoordinates(5,9), new DiscreteCoordinates(6,9) );
-        registerActor(door);
+        this.registerActor(door);
     }
 
     @Override

@@ -36,8 +36,7 @@ public abstract class SuperPacmanArea extends Area {
             setBehavior(associatedBehavior);
             this.configureWalls();
             return true;
-        } else
-            return false;
+        } else return false;
     }
     
     public abstract DiscreteCoordinates getSpawnLocation(); 
