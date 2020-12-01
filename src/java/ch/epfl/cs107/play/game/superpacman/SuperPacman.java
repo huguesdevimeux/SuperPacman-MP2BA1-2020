@@ -21,10 +21,10 @@ public class SuperPacman extends RPG {
     //areaIndex will denote the areas level0, level1, level2
     private int areaIndex;
     private SuperPacmanPlayer player;
-    private final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/ Level2"};
+    public final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/ Level2"};
 
     //initalising player using method from super class
-    @Override //je laisse?
+    @Override
     protected void initPlayer(Player player) {
         super.initPlayer(player);
     }

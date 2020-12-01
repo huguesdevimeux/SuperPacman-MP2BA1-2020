@@ -22,12 +22,14 @@ import java.util.List;
 public class SuperPacmanPlayer extends Player {
     private Area currentArea;
     private int movingSpeed;
+
+    private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
+
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
-
     private Orientation desiredOrientation;
     private List<DiscreteCoordinates> targetCell;
-
+  
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         movingSpeed = 6;
@@ -56,7 +58,6 @@ public class SuperPacmanPlayer extends Player {
             if (currentArea.canEnterAreaCells(this, targetCell)) {
                 orientate(desiredOrientation);
             }
-
             // move is only called when pacman is not moving in deplacement.
             move(movingSpeed);
         }
@@ -76,10 +77,15 @@ public class SuperPacmanPlayer extends Player {
         }
 
     }
+    private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+        public void interactWith(Door door) {
+            setIsPassingADoor(door);
+        }
+    }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        v.interactWith(this);
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
 
     @Override
@@ -101,11 +107,9 @@ public class SuperPacmanPlayer extends Player {
     public boolean wantsViewInteraction() {
         return false;
     }
-
-    @Override
+   @Override
     public void interactWith(Interactable other) {
-
-
+        other.acceptInteraction(handler);
     }
 
     @Override
@@ -115,30 +119,16 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean takeCellSpace() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isCellInteractable() {
-        return true;
+        return false;
     }
 
     @Override
     public boolean isViewInteractable() {
         return true;
     }
-
-    ////
-    ////
-    ////
-    ////
-
-    private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
-
-        public void interactWith(Door door) {
-            setIsPassingADoor(door);
-            enterArea(currentArea, getCurrentMainCellCoordinates());
-        }
-    }
-
 }

@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
@@ -147,10 +148,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         @Override
-        public void acceptInteraction(AreaInteractionVisitor v) {
-
+        public void acceptInteraction(AreaInteractionVisitor v) { 
         }
-
-
     }
 }
