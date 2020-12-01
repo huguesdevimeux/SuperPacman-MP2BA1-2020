@@ -1,16 +1,12 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import ch.epfl.cs107.play.Play;
-import ch.epfl.cs107.play.game.actor.Actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.rpg.RPG;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
-import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
@@ -54,6 +50,12 @@ public class SuperPacmanPlayer extends Player {
             }
         }
     }
+    private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+        public void interactWith(Door door) {
+            setIsPassingADoor(door);
+        }
+    }
+
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
         ((SuperPacmanInteractionVisitor)v).interactWith(this);
@@ -87,6 +89,7 @@ public class SuperPacmanPlayer extends Player {
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList(getCurrentMainCellCoordinates());
     }
+
     @Override
     public boolean takeCellSpace() {
         return true;
@@ -101,12 +104,4 @@ public class SuperPacmanPlayer extends Player {
     public boolean isViewInteractable() {
         return false;
     }
-
-    private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
-
-        public void interactWith(Door door) {
-        setIsPassingADoor(door);
-        }
-    }
-
 }
