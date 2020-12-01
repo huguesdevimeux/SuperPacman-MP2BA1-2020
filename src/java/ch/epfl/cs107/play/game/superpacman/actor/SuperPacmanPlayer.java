@@ -20,53 +20,61 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    private Sprite sprite;
     private Area currentArea;
     private int movingSpeed;
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
 
+    private Orientation desiredOrientation;
+    private List<DiscreteCoordinates> targetCell;
+
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         movingSpeed = 6;
+        this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64, 
                 new Orientation[] { Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT });
         movingAnimations = Animation.createAnimations(movingSpeed/2, sprites); 
-        sprite = new Sprite("superpacman/bonus", 1.f, 1.f, this);
         this.currentArea = area;
+        resetMotion();
     }
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
         Keyboard keyboard = getOwnerArea().getKeyboard();
-        moveOrientate(Orientation.LEFT, keyboard.get(Keyboard.LEFT), deltaTime);
-        moveOrientate(Orientation.UP, keyboard.get(Keyboard.UP), deltaTime);
-        moveOrientate(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT), deltaTime);
-        moveOrientate(Orientation.DOWN, keyboard.get(Keyboard.DOWN), deltaTime);
-        if (isDisplacementOccurs()) {
-            movingAnimations[getOrientation().ordinal()].update(deltaTime);
-        }
-        else {
-            movingAnimations[getOrientation().ordinal()].reset(); 
-        }
 
-    }
-    
-    private void moveOrientate(Orientation orientation, Button b, float deltaTime) {
-        List<DiscreteCoordinates> targetCell = Collections
-                .singletonList(getCurrentMainCellCoordinates().jump(orientation.toVector()));
-        if (b.isDown()) {
-            if (getOrientation() != orientation) {
-                orientate(orientation);
+        updateDesiredOrientation(Orientation.LEFT, keyboard.get(Keyboard.LEFT));
+        updateDesiredOrientation(Orientation.UP, keyboard.get(Keyboard.UP));
+        updateDesiredOrientation(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
+        updateDesiredOrientation(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+
+        // NOTE : As the name DOES NOT suggesti, isDisplacementOccurs return whether the player is in displacement between 
+        // two cells, not in displacement between point A to point B!
+        if (!isDisplacementOccurs()) {
+            movingAnimations[getOrientation().ordinal()].reset();
+            targetCell = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));
+            if (currentArea.canEnterAreaCells(this, targetCell)) {
+                orientate(desiredOrientation);
             }
-        }
-        if (!(currentArea.canEnterAreaCells(this, targetCell)))
-            System.out.println("Maintenant bitch");
-        else System.out.println("et bah non");
-        if (!(isDisplacementOccurs()) && currentArea.canEnterAreaCells(this, targetCell)) {
+
+            // move is only called when pacman is not moving in deplacement.
             move(movingSpeed);
         }
+        else movingAnimations[getOrientation().ordinal()].update(deltaTime);
+        super.update(deltaTime);
+    }
+    
+
+    /**
+     * Set the desired orientation if the corresponding key is pressed, and if the orientation needs to be updated. 
+     * @param desiredOrientation
+     * @param key
+     */
+    public void updateDesiredOrientation(Orientation requestedOrientation, Button key) {
+        if (key.isPressed() && requestedOrientation != getOrientation()) {
+            this.desiredOrientation = requestedOrientation;
+        }
+
     }
 
     @Override
@@ -77,7 +85,6 @@ public class SuperPacmanPlayer extends Player {
     @Override
     public void draw(Canvas canvas) {
         movingAnimations[getOrientation().ordinal()].draw(canvas);
-        // sprite.draw(canvas);
     }
 
     @Override
