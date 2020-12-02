@@ -16,6 +16,7 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
+import java.awt.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -58,7 +59,7 @@ public class SuperPacmanPlayer extends Player {
         if (!isDisplacementOccurs()) {
             movingAnimations[getOrientation().ordinal()].reset();
             targetCell = Collections.singletonList(getCurrentMainCellCoordinates().jump(desiredOrientation.toVector()));
-            if (currentArea.canEnterAreaCells(this, targetCell)) {
+            if (this.getOwnerArea().canEnterAreaCells(this, targetCell)) {
                 orientate(desiredOrientation);
             }
             // move is only called when pacman is not moving in deplacement.
@@ -67,7 +68,6 @@ public class SuperPacmanPlayer extends Player {
         else movingAnimations[getOrientation().ordinal()].update(deltaTime);
         super.update(deltaTime);
     }
-    
 
     /**
      * Set the desired orientation if the corresponding key is pressed, and if the orientation needs to be updated. 
@@ -78,7 +78,6 @@ public class SuperPacmanPlayer extends Player {
         if (key.isPressed() && requestedOrientation != getOrientation()) {
             this.desiredOrientation = requestedOrientation;
         }
-
     }
     private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
         public void interactWith(Door door) {
