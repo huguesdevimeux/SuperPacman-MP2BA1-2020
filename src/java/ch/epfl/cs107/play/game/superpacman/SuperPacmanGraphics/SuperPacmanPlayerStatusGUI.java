@@ -22,7 +22,8 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     private final float WIDTH_LIFE_UNIT = 1.0f;
 
 	private int amountLife = 0;
-	private int scoreDisplayed = -1;
+       // Set by default to -1 to easily debug.
+	private int scoreDisplayed = -1; 
 
     private static TextGraphics score;
     private static TextGraphics scoreTitle; 
