@@ -92,8 +92,9 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public void draw(Canvas canvas) {
-        statusDrawer.drawLifeBar(canvas, this, 3);
-        statusDrawer.drawScore(canvas, 38);
+        statusDrawer.setScore(0);
+        statusDrawer.setAmountLife(3);
+        statusDrawer.draw(canvas); 
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
 

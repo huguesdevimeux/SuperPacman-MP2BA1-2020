@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics;
 
 import java.awt.Color;
 
+import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.GraphicsEntity;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
@@ -14,11 +15,15 @@ import ch.epfl.cs107.play.window.Canvas;
 /**
  * Handle status graphics for superpacman entities.
  */
-public class SuperPacmanPlayerStatusGUI {
+public class SuperPacmanPlayerStatusGUI implements Graphics {
     // DEPTH determines the order of drawing. Low value means drawn in first. 
     private final float DEPTH = 0;
     private final float FONT_SIZE = 0.5f;
     private final float WIDTH_LIFE_UNIT = 1.0f;
+
+	private int amountLife = 0;
+       // Set by default to -1 to easily debug.
+	private int scoreDisplayed = -1; 
 
     private static TextGraphics score;
     private static TextGraphics scoreTitle; 
@@ -58,7 +63,7 @@ public class SuperPacmanPlayerStatusGUI {
      * @param amountLife  Life remaining (between 0 and maxNmberUnitsLifePlayer)
      * @param numberUnits
      */
-    public void drawLifeBar(Canvas canvas, SuperPacmanPlayer player, int amountLife) {
+    private void drawLifeBar(Canvas canvas, int amountLife) {
         int maxNmberUnitsLifePlayer = 5; // TODO : modularize it into a getter for player. (so it can be changed ;)
         for (int i = 0; i < maxNmberUnitsLifePlayer; i++) {
             if (i >= amountLife) drawLifeUnit(canvas, Color.GRAY, i);
@@ -71,7 +76,7 @@ public class SuperPacmanPlayerStatusGUI {
      * @param canvas
      * @param scoreToDisplay
      */
-    public void drawScore(Canvas canvas, int scoreToDisplay) {
+    private void drawScore(Canvas canvas, int scoreToDisplay) {
         scoreTitle = new TextGraphics(String.valueOf("Score :"), FONT_SIZE, Color.YELLOW);
         scoreTitle.setOutlineColor(Color.RED);
         scoreTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, -0.7f))); // TODo change this cf l.11
@@ -92,4 +97,19 @@ public class SuperPacmanPlayerStatusGUI {
         return canvas.getTransform().getOrigin()
                 .add(new Vector(- canvas.getScaledWidth() / 2, canvas.getScaledHeight() / 2));
     }
+
+    public void setAmountLife(int amountLife) {
+        this.amountLife = amountLife;
+
+    }
+
+    public void setScore(int score) {
+        this.scoreDisplayed = score;
+    }
+    
+	@Override
+    public void draw(Canvas canvas) {
+        drawLifeBar(canvas, this.amountLife);
+        drawScore(canvas, this.scoreDisplayed);		
+	}
 }
