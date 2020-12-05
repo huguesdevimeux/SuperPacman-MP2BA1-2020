@@ -9,7 +9,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCell;
+import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
@@ -26,6 +26,7 @@ public class SuperPacmanPlayer extends Player {
     private int movingSpeed;
 
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
+    private SuperPacmanPlayerStatusGUI statusDrawer;
 
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
@@ -34,6 +35,8 @@ public class SuperPacmanPlayer extends Player {
   
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
+        this.statusDrawer = new SuperPacmanPlayerStatusGUI(this); 
+
         movingSpeed = 6;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64, 
@@ -90,6 +93,9 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public void draw(Canvas canvas) {
+        statusDrawer.setScore(0);
+        statusDrawer.setAmountLife(3);
+        statusDrawer.draw(canvas); 
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
 
