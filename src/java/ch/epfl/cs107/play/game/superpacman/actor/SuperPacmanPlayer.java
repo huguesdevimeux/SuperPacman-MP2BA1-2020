@@ -95,6 +95,7 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
+        // Player has no fov. WARNING !
         return new ArrayList<DiscreteCoordinates>();
     }
 

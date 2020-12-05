@@ -85,15 +85,11 @@ public class SuperPacmanBehavior extends AreaBehavior {
                 if (isWall(x, y)) {
                     area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
                 }
-                // else if (((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.FREE_WITH_BLINKY) {
-                //     area.registerActor(new Blinky(area, Orientation.UP, new DiscreteCoordinates(x, y)));
-                // }
-
+                else if (((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.FREE_WITH_BLINKY) {
+                    area.registerActor(new Blinky(area, Orientation.UP, new DiscreteCoordinates(x, y)));
+                }
             }
         }
-       // Just for testing purpose. will be deleted.  
-       area.registerActor(new Blinky(area, Orientation.UP, new DiscreteCoordinates(1, 1))); 
-
     }
     /**
      * @param x coordinate
