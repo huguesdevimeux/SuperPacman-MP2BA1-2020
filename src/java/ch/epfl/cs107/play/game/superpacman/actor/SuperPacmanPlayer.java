@@ -17,6 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -94,7 +95,7 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
-        return null;
+        return new ArrayList<DiscreteCoordinates>();
     }
 
     @Override
@@ -106,9 +107,15 @@ public class SuperPacmanPlayer extends Player {
     public boolean wantsViewInteraction() {
         return false;
     }
+
    @Override
-    public void interactWith(Interactable other) {
-        other.acceptInteraction(handler);
+   public void interactWith(Interactable other) {
+        if (other instanceof Ghost) {
+            System.out.println("Being bullied by a fucking ghost");
+        }
+        else {
+            other.acceptInteraction(handler);
+        }
     }
 
     @Override
@@ -123,7 +130,7 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean isCellInteractable() {
-        return false;
+        return true;
     }
 
     @Override
