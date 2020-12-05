@@ -21,7 +21,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private static final int LENGTH_FOV = 2;
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
-    private DiscreteCoordinates refugeLocation;  
+    private DiscreteCoordinates refugeLocation;
+    private boolean isAfraid;   
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
 
@@ -30,8 +31,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         generateAfraidAnimations();
         generateNormalStateAnimation();
 
-        // By default, animations are normalState.
-        this.currentAnimations = normalStateAnimations;
+        // By default, The Ghost is not afraid.
+        setAfraidState();
     }
 
     protected abstract Orientation getNextOrientation();
@@ -61,11 +62,26 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         this.afraidAnimations = Animation.createAnimations(18 / 2, spritesAnimations);
 
     }
-    
 
+    /**
+     * Set state of the ghost to afraid, and update its animation accordingly.
+     */
+    private void setAfraidState() {
+        this.isAfraid = true;
+        this.currentAnimations = afraidAnimations;
+    }
+    
+    /**
+     * Set state of the ghost to normal, and update its animation accordingly.
+     */
+    private void setNormalState() {
+        this.isAfraid = false; 
+        this.currentAnimations = normalStateAnimations; 
+    }
+    
     protected void updateAfraidState() {
         // TODO put here a condition to set to scared state + add a variable.
-        // this.currentAnimations = afraidAnimations; 
+        // J'en sais rien en vrai c'est Luca qui le fera lmao
     }
 
     @Override
