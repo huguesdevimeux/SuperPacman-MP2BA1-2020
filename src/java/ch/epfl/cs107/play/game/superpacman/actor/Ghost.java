@@ -32,7 +32,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         generateNormalStateAnimation();
 
         // By default, The Ghost is not afraid.
-        setAfraidState();
+        setNormalState();
     }
 
     protected abstract Orientation getNextOrientation();
