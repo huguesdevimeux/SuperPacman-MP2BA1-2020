@@ -1,19 +1,22 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.actor.Gate;
+import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
 public abstract class SuperPacmanArea extends Area {
-
+    private Logic collected;
     private SuperPacmanBehavior associatedBehavior;
     /**
      * Configure the walls of the corresponding behavior. 
      * Might be overriden to do stuff to walls. 
-     * 
-     * @param area
+     *
      */
 
     public final float getCameraScaleFactor() {
@@ -37,5 +40,17 @@ public abstract class SuperPacmanArea extends Area {
         } else return false;
     }
     
-    public abstract DiscreteCoordinates getSpawnLocation(); 
+    public abstract DiscreteCoordinates getSpawnLocation();
+
+    //method to create gates depending on certain coordinates x and y and on the orientation
+    //check the handout to verify the the coordinates of the gates on each level - page 20
+    public void createGates(Orientation orientation, int x, int y) {
+        registerActor(new Gate((this), orientation, new DiscreteCoordinates(x,y), collected));
+    }
+
+    //same method as createGates but for keys instead of gates
+    public void createKeys(int x, int y){
+        registerActor(new Key(this, new DiscreteCoordinates(x,y)));
+    }
 }
+

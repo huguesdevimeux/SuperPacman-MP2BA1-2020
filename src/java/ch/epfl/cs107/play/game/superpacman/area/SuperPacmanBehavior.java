@@ -4,13 +4,17 @@ import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
+import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
+import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacmanBehavior extends AreaBehavior {
-
+    public Cherry cherry;
+    public Bonus bonus;
+    public Diamond diamond;
 
     public enum SuperPacmanCellType {
         NONE(0), // never used as real content
@@ -39,7 +43,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
             return NONE;
         }
     }
-    
+
     /**
      * Default SuperPacmanBehavior Constructor
      *
@@ -56,56 +60,81 @@ public class SuperPacmanBehavior extends AreaBehavior {
             }
         }
     }
-    
+
     /**
      * Check whether the cell at x,y is wall.
-     * 
+     *
      * @param x coordinate
      * @param y coordinate
      * @return true if the cell at (x,y) is a wall
      */
-    public boolean isWall(int x, int y){
-        if(x >= 0 && y >= 0 && y < getHeight() && x < getWidth()){
-            return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
+    public boolean isWall(int x, int y) {
+        if (x >= 0 && y >= 0 && y < getHeight() && x < getWidth()) {
+            return ((SuperPacmanCell) getCell(x, y)).type == SuperPacmanCellType.WALL;
         } else {
             return false;
         }
     }
-    
+
     /**
-     * Generate walls for the behavior. 
-     * 
-     * @param area The area containing the walls.  
+     * Generate walls for the behavior.
+     * Generate diamonds, cherries and bonuses(coins) automatically
+     * based on the cell type
+     *
+     * @param area The area containing the walls.
      */
     protected void registerActors(SuperPacmanArea area) {
-       for (int y = 0; y < getHeight(); y++) {
-           for (int x = 0; x < getWidth(); x++) {
-               if (isWall(x, y)) {
-                   area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y))); 
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                if (isWall(x, y)) {
+                    area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
+                } else {
+                    //registering the collectables automatically based on the cell types
+                    if (isDiamond(x, y)) area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));
+                    if (isCherry(x, y)) area.registerActor(new Cherry(area, new DiscreteCoordinates(x, y)));
+                    if (isBonus(x, y)) area.registerActor(new Bonus(area, new DiscreteCoordinates(x, y)));
                 }
-           }
-       }
+            }
+        }
     }
-    /**
+    /*
+     *method will evaluate if at coordinates x,y the cell surrounding
+     * cells of the wall are walls too
+     *
      * @param x coordinate
      * @param y coordinate
      * @return whether the wall's surrounding cells are walls as well
      */
-    private boolean[][] getNeighborhood(int x, int y){
+    private boolean[][] getNeighborhood(int x, int y) {
 
         boolean[][] neighborhood = new boolean[3][3];
         //the cell at coordinates 1,1 (the center of the 3x3 array)
         // is true as we study its surroundings
         neighborhood[1][1] = true;
-        neighborhood[0][0] = isWall(x-1, y+1);
-        neighborhood[2][2] = isWall(x+1, y-1);
-        neighborhood[2][1] = isWall(x+1, y);
-        neighborhood[0][1] = isWall(x-1,y);
-        neighborhood[1][2] = isWall(x,y-1);
-        neighborhood[1][0] = isWall(x,y+1);
-        neighborhood[0][2] = isWall(x-1,y-1);
-        neighborhood[2][0] = isWall(x+1,y+1);
+        neighborhood[0][0] = isWall(x - 1, y + 1);
+        neighborhood[2][2] = isWall(x + 1, y - 1);
+        neighborhood[2][1] = isWall(x + 1, y);
+        neighborhood[0][1] = isWall(x - 1, y);
+        neighborhood[1][2] = isWall(x, y - 1);
+        neighborhood[1][0] = isWall(x, y + 1);
+        neighborhood[0][2] = isWall(x - 1, y - 1);
+        neighborhood[2][0] = isWall(x + 1, y + 1);
         return neighborhood;
+    }
+
+    //method evaluates if at coordinates x,y, the cell type is cherry
+    public boolean isCherry(int x, int y) {
+        return ((SuperPacmanCell) getCell(x, y)).type == SuperPacmanCellType.FREE_WITH_CHERRY;
+    }
+
+    //method evaluates if at coordinates x,y, the cell type is diamond
+    public boolean isDiamond(int x, int y) {
+        return ((SuperPacmanCell) getCell(x, y)).type == SuperPacmanCellType.FREE_WITH_DIAMOND;
+    }
+
+    //method evaluates if at coordinates x,y, the cell type is bonus
+    public boolean isBonus(int x, int y) {
+        return ((SuperPacmanCell) getCell(x, y)).type == SuperPacmanCellType.FREE_WITH_BONUS;
     }
 
     public class SuperPacmanCell extends Cell {
@@ -134,7 +163,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         protected boolean canEnter(Interactable entity) {
-            return !hasNonTraversableContent(); 
+            return !hasNonTraversableContent();
         }
 
         @Override
@@ -149,6 +178,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
 
         @Override
         public void acceptInteraction(AreaInteractionVisitor v) {
+            v.interactWith(this);
         }
     }
 }
