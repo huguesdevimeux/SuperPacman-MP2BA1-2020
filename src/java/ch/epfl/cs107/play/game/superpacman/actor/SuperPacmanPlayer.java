@@ -84,6 +84,9 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
         }
+        public void interactWith(Ghost ghost) {
+            System.out.println("Getting bullied by a fuvking ghost!");
+        }
     }
 
     @Override
@@ -117,12 +120,7 @@ public class SuperPacmanPlayer extends Player {
 
    @Override
    public void interactWith(Interactable other) {
-        if (other instanceof Ghost) {
-            System.out.println("Being bullied by a fucking ghost");
-        }
-        else {
-            other.acceptInteraction(handler);
-        }
+        other.acceptInteraction(handler);
     }
 
     @Override

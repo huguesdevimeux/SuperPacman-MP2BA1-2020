@@ -13,18 +13,23 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     private static final int LENGTH_FOV = 2;
+    private final GhostHandler handler = new GhostHandler(); 
+
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
-    private DiscreteCoordinates refugeLocation;
-    private boolean isAfraid;   
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
+
+    private DiscreteCoordinates refugeLocation;
+    private boolean isAfraid;
+
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -114,6 +119,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         return false;
     }
 
+    // INTERACTIONS STUFF
+
     @Override
     public boolean isCellInteractable() {
         return true;
@@ -146,17 +153,23 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public boolean wantsViewInteraction() {
         return true;
     }
-
+    
+    /**
+     * Handle interactions for the ghost. 
+     */
+    private class GhostHandler implements SuperPacmanInteractionVisitor {
+        public void interactWith(SuperPacmanPlayer player) {
+            System.out.println("Je vois le player!");
+        }
+    }
     @Override
     public void interactWith(Interactable other) {
-        if (other instanceof SuperPacmanPlayer) {
-            System.out.println("Je vois le pacman ehe");
-        }
+        other.acceptInteraction(handler);
     }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        System.out.println("Ghost : Accepting interaction with " + v.toString());
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
     
 }
