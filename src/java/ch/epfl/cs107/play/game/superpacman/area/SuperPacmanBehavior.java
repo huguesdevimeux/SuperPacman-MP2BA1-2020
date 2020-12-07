@@ -71,7 +71,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         if(x >= 0 && y >= 0 && y < getHeight() && x < getWidth()){
             return ((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.WALL;
         } else {
-            return false;
+            return true;
         }
     }
     
