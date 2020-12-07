@@ -1,16 +1,15 @@
-package ch.epfl.cs107.play.game.superpacman.area;
+package ch.epfl.cs107.play.game.superpacman.behavior;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-public class SuperPacmanBehavior extends AreaBehavior {
-
+public abstract class SuperPacmanBehavior extends AreaBehavior {
 
     public enum SuperPacmanCellType {
         NONE(0), // never used as real content
@@ -48,13 +47,6 @@ public class SuperPacmanBehavior extends AreaBehavior {
      */
     public SuperPacmanBehavior(Window window, String name) {
         super(window, name);
-        for (int y = 0; y < getHeight(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                // Generate a behavior for each cell. 
-                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(getHeight() - 1 - y, x));
-                setCell(x, y, new SuperPacmanCell(x, y, color));
-            }
-        }
     }
     
     /**
@@ -77,7 +69,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
      * 
      * @param area The area containing the walls.  
      */
-    protected void registerActors(SuperPacmanArea area) {
+    public void registerActors(SuperPacmanArea area) {
        for (int y = 0; y < getHeight(); y++) {
            for (int x = 0; x < getWidth(); x++) {
                if (isWall(x, y)) {

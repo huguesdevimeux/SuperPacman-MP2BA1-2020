@@ -7,7 +7,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
-public class Level0 extends SuperPacmanArea {
+public class Level0 extends NonRandomArea {
 
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
 
