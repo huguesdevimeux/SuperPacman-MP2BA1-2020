@@ -35,10 +35,8 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     /**
      * Draw a single life unit in the bar (i.e, one little pacman) on the left top of the screen. 
      * @param canvas
-     * @param player
      * @param colorLife
      * @param unitPosition The position of the unit (ie first, second, etc..)
-     * @param offsetUnitLife
      */
     private void drawLifeUnit(Canvas canvas, Color colorLife, int unitPosition) {
 
@@ -59,9 +57,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
      * Draw all the life units in a row.
      * 
      * @param canvas
-     * @param player
      * @param amountLife  Life remaining (between 0 and maxNmberUnitsLifePlayer)
-     * @param numberUnits
      */
     private void drawLifeBar(Canvas canvas, int amountLife) {
         int maxNmberUnitsLifePlayer = 5; // TODO : modularize it into a getter for player. (so it can be changed ;)
