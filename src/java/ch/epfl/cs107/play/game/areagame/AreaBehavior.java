@@ -17,22 +17,40 @@ import ch.epfl.cs107.play.window.Window;
 public abstract class AreaBehavior{
 
     /// The behavior is an Image of size height x width
-    private final Image behaviorMap;
-    private final int width, height;
+    // NOTE : (modified by students) this is protected to allow a an overriden by a custon version of behavior.
+    protected final Image behaviorMap;
+    protected final int width, height;
     /// We will convert the image into an array of cells
-    private final Cell[][] cells;
+    protected final Cell[][] cells;
 
     /**
      * Default AreaBehavior Construcor
      * @param window (Window): graphic context, not null
      * @param name (String): name of the behavior image, not null
      */
-    public AreaBehavior(Window window, String name){
+    public AreaBehavior(Window window, String name) {
         // Load the image
         behaviorMap = window.getImage(ResourcePath.getBehaviors(name), null, false);
         // Get the corresponding dimension and init the array
         height = behaviorMap.getHeight();
         width = behaviorMap.getWidth();
+        cells = new Cell[width][height];
+    }
+    
+    /**
+     * [CREATED BY STUDENTS]
+     * Constructor to handle the case when no image behavior is provided (eg when rendering non-
+     * deterministic behavior). 
+     * @param window (Window): graphic context, not null
+     * @param height height of the desired behavior 
+     * @param width width of the desired bahaviormap
+     */
+    public AreaBehavior(Window window, int height, int width){
+        // We set the behaviorMap to null, as we won't need it.
+        behaviorMap = null; 
+        // Get the corresponding dimension and init the array
+        this.height = height;
+        this.width = width;
         cells = new Cell[width][height];
     }
 

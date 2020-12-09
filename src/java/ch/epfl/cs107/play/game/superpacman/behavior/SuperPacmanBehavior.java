@@ -48,6 +48,10 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
     public SuperPacmanBehavior(Window window, String name) {
         super(window, name);
     }
+
+    public SuperPacmanBehavior(Window window, int height, int width) {
+        super(window, height , width);
+    }
     
     /**
      * Check whether the cell at x,y is wall.
