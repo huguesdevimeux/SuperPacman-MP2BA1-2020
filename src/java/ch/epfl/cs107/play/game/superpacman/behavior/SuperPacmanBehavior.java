@@ -67,15 +67,13 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
     }
 
     public SuperPacmanBehavior(Window window, int height, int width) {
-        super(window, height , width);
-        for (int y = 0; y < getHeight(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                // Generate a behavior for each cell. 
-                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(getHeight() - 1 - y, x));
-                setCell(x, y, new SuperPacmanCell(x, y, color));
-            }
-        }
+        super(window, height, width);
+    }
 
+    /**
+     * Set the graph associated to the area. 
+     */
+    protected void setGraph() {
         associatedAreaGraph = new AreaGraph();
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
@@ -108,7 +106,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
      *
      * @param area The area containing the walls.
      */
-    protected void registerActors(SuperPacmanArea area) {
+    public void registerActors(SuperPacmanArea area) {
         Ghost addedGhost;
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {

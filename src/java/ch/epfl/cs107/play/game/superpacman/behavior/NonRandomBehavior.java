@@ -15,6 +15,7 @@ public class NonRandomBehavior extends SuperPacmanBehavior{
                 setCell(x, y, new SuperPacmanCell(x, y, color));
             }
         }
+        super.setGraph();
 	}
     
 }

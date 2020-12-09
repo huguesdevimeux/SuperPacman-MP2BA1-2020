@@ -29,7 +29,7 @@ public abstract class SuperPacmanArea extends Area {
 
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
-            associatedBehavior = new SuperPacmanBehavior(window, getTitle());
+            associatedBehavior = getBehaviorTypeNewInstance(window);
             setBehavior(associatedBehavior);
             this.createArea();
             associatedGraph = associatedBehavior.getGraph();
@@ -65,6 +65,8 @@ public abstract class SuperPacmanArea extends Area {
     public void createGates(Orientation orientation, int x, int y) {
         registerActor(new Gate((this), orientation, new DiscreteCoordinates(x,y), collected));
     }
+
+
     
     //same method as createGates but for keys instead of gates
     public void createKeys(int x, int y) {

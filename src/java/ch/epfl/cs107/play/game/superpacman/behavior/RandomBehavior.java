@@ -8,6 +8,7 @@ public class RandomBehavior extends SuperPacmanBehavior {
 
     public RandomBehavior(Window window, String name) {
         super(window, 19, 18);
+        System.out.println(1);
         RandomPacmanMap randomMaze = new RandomPacmanMap(getHeight(), getWidth()); 
         SuperPacmanCellType[][] randomBehavior = randomMaze.getBehavior();
 
@@ -18,6 +19,7 @@ public class RandomBehavior extends SuperPacmanBehavior {
                 setCell(x, y, new SuperPacmanCell(x, y, randomBehavior[x][y]));
             }
         }
+        super.setGraph();
     }
 
 }

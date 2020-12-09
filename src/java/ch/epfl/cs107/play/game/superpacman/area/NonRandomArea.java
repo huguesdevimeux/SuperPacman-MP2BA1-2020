@@ -10,6 +10,7 @@ public abstract class NonRandomArea extends SuperPacmanArea {
 
     @Override
     protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
+        // TODO : change this, this is disguting
         return new NonRandomBehavior(window, getTitle());
     }
     
