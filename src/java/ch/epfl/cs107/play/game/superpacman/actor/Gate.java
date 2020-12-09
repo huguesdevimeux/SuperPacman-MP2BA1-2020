@@ -5,13 +5,9 @@ import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RegionOfInterest;
-import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.signal.Signal;
 import ch.epfl.cs107.play.signal.logic.Logic;
-import ch.epfl.cs107.play.signal.logic.LogicGate;
 import ch.epfl.cs107.play.window.Audio;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -20,7 +16,7 @@ import java.util.List;
 
 public class Gate extends AreaEntity {
     private Sprite gate;
-    private Logic collected;
+    private Logic signal;
 
     /**
      * Gate constructor that will enable the creation of gates on the
@@ -30,9 +26,9 @@ public class Gate extends AreaEntity {
      * @param orientation (Orientation): Initial orientation of the entity in the Area. Not null
      * @param position    (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
-    public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic collected) {
+    public Gate(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
         super(area, orientation, position);
-        this.collected = collected;
+        this.signal = signal;
         if (orientation == Orientation.DOWN || orientation == Orientation.UP) {
             extractGates(0, 0, 64, 64);
         } else {
@@ -55,8 +51,8 @@ public class Gate extends AreaEntity {
     //thus if isOn is true
     @Override
     public void draw(Canvas canvas) {
-            gate.draw(canvas);
-        }
+        if (signal.isOn()) gate.draw(canvas);
+    }
 
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
@@ -66,7 +62,7 @@ public class Gate extends AreaEntity {
     //Actor occupies its principal cell so the method returns true
     @Override
     public boolean takeCellSpace() {
-        return true;
+        return signal.isOn();
     }
 
     @Override

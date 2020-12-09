@@ -9,17 +9,14 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -40,7 +37,7 @@ public class SuperPacmanPlayer extends Player {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
 
-        movingSpeed = 6;
+        movingSpeed = 2;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[]{Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
@@ -88,11 +85,13 @@ public class SuperPacmanPlayer extends Player {
 
         public void interactWith(Door door) {
             setIsPassingADoor(door);
+            SuperPacmanArea.totalNbDiamonds = 0;
         }
 
 
         //when the player will interact with the key, the actor key will disappear
         public void interactWith(Key key) {
+            key.isCollected();
             getOwnerArea().unregisterActor(key);
         }
 
@@ -102,6 +101,7 @@ public class SuperPacmanPlayer extends Player {
         //"eating" a diamond will increment the score by 10
         public void interactWith(Diamond diamond) {
             score += 10;
+            SuperPacmanArea.totalNbDiamonds--;
             getOwnerArea().unregisterActor(diamond);
         }
         //"eating" a cherry will increment the score by 200

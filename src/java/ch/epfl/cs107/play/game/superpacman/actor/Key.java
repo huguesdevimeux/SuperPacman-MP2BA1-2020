@@ -6,12 +6,12 @@ import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.Signal;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Canvas;
 
 public class Key extends CollectableAreaEntity implements Logic {
     private Sprite key;
+    public boolean isCollected;
     /**
      * Default AreaEntity constructor
      *
@@ -21,12 +21,11 @@ public class Key extends CollectableAreaEntity implements Logic {
     public Key(Area area, DiscreteCoordinates position) {
         super(area, position);
         key = new Sprite("superpacman/key", 1.f, 1.f, this);
+        isCollected = false;
     }
 
     public void draw(Canvas canvas) {
-        if(isOn()) {
             key.draw(canvas);
-        }
     }
 
     public void acceptInteraction(AreaInteractionVisitor v) {
@@ -36,26 +35,27 @@ public class Key extends CollectableAreaEntity implements Logic {
     //DONT MIND THE METHODS BELOW
     @Override
     public boolean isOn() {
-        return true;
+        return !isCollected;
     }
 
     @Override
     public boolean isOff() {
-        return false;
+        return isCollected;
     }
 
     @Override
     public float getIntensity() {
-        return 0;
+       if(isOn()) return 1;
+       else return 0;
     }
 
     @Override
     public float getIntensity(float t) {
         return 0;
     }
-    public boolean collected(){
-        return isOff();
 
+    public void isCollected(){
+        isCollected = true;
         }
     }
 

@@ -1,24 +1,17 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
-import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
-import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
-import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
-import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
-import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
-import ch.epfl.cs107.play.game.superpacman.actor.Wall;
+import ch.epfl.cs107.play.game.superpacman.actor.*;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SuperPacmanBehavior extends AreaBehavior {
     public Cherry cherry;
@@ -111,10 +104,14 @@ public class SuperPacmanBehavior extends AreaBehavior {
                     area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
                 }
                 //registering the collectables automatically based on the cell types
-                 else if (isDiamond(x, y)) {area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));}
+                 else if (isDiamond(x, y)) {area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));
+                   SuperPacmanArea.totalNbDiamonds++;
+                }
                  else if (isCherry(x, y)) {area.registerActor(new Cherry(area, new DiscreteCoordinates(x, y)));}
                  else if (isBonus(x, y)) {area.registerActor(new Bonus(area, new DiscreteCoordinates(x, y)));}
-                                              
+
+
+                 //i will modularise the following after this hardcore night
                 else if (((SuperPacmanCell) getCell(x, y)).type == SuperPacmanCellType.FREE_WITH_BLINKY) {
                     addedGhost = new Blinky(area, Orientation.UP, new DiscreteCoordinates(x, y));
                     area.registerActor(addedGhost);
@@ -133,7 +130,6 @@ public class SuperPacmanBehavior extends AreaBehavior {
             }
         }
     }
-
     /**     * @param x coordinate
      * @param y coordinate
      * @return whether the wall's surrounding cells are walls as well
