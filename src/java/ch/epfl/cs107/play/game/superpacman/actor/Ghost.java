@@ -19,20 +19,22 @@ import ch.epfl.cs107.play.window.Canvas;
 
 public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
-    private static final int LENGTH_FOV = 2;
-    private final GhostHandler handler = new GhostHandler(); 
+    private static final int LENGTH_FOV = 5;
+    private final GhostHandler handler = new GhostHandler();
+    private DiscreteCoordinates refugePosition;
 
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
 
-    private DiscreteCoordinates refugeLocation;
     private boolean isAfraid;
 
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
+        // The refuge is set to the inital position of the ghost.
+        this.refugePosition = position;
         generateAfraidAnimations();
         generateNormalStateAnimation();
 
@@ -44,13 +46,13 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     protected abstract String getTitle();
     
-    protected abstract int getSpeed(); 
-   
+    protected abstract int getSpeed();
+       
     private void generateNormalStateAnimation() {
         Sprite[][] sprites = RPGSprite.extractSprites(getTitle(), 2, 1, 1, this, 16, 16,
                 new Orientation[] { Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT });
         this.normalStateAnimations = Animation.createAnimations(18 / 2, sprites);
-    }
+        }
 
     
     /**
@@ -71,7 +73,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     /**
      * Set state of the ghost to afraid, and update its animation accordingly.
      */
-    private void setAfraidState() {
+    public void setAfraidState() {
         this.isAfraid = true;
         this.currentAnimations = afraidAnimations;
     }
@@ -79,33 +81,39 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     /**
      * Set state of the ghost to normal, and update its animation accordingly.
      */
-    private void setNormalState() {
+    public void setNormalState() {
         this.isAfraid = false; 
         this.currentAnimations = normalStateAnimations; 
     }
     
-    protected void updateAfraidState() {
-        // TODO put here a condition to set to scared state + add a variable.
-        // J'en sais rien en vrai c'est Luca qui le fera lmao
+    public boolean isAfraid() {
+        return isAfraid;
     }
+
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        updateAfraidState();
         if (isDisplacementOccurs()) {
             currentAnimations[getOrientation().ordinal()].update(deltaTime);
         }
         else {
             currentAnimations[getOrientation().ordinal()].reset();
-            orientate(getNextOrientation());
-            move(getSpeed());
+            Orientation nextOrientation = getNextOrientation();
+            // if the orientation is null, the ghost does not move. 
+            if (nextOrientation != null)
+                orientate(nextOrientation);
+                move(getSpeed());
         }
     }
 
     @Override
     public void draw(Canvas canvas) {
-        currentAnimations[getOrientation().ordinal()].draw(canvas); 
+        currentAnimations[getOrientation().ordinal()].draw(canvas);
+    }
+    
+    protected DiscreteCoordinates getRefugePosition() {
+        return this.refugePosition; 
     }
 
     @Override
@@ -162,6 +170,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
             System.out.println("Je vois le player!");
         }
     }
+
     @Override
     public void interactWith(Interactable other) {
         other.acceptInteraction(handler);
