@@ -18,6 +18,9 @@ import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
+
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -87,6 +90,7 @@ public class SuperPacmanPlayer extends Player {
             setIsPassingADoor(door);
         }
 
+
         //when the player will interact with the key, the actor key will disappear
         public void interactWith(Key key) {
             getOwnerArea().unregisterActor(key);
@@ -107,7 +111,9 @@ public class SuperPacmanPlayer extends Player {
         }
         //TODO -- why does compiler say interaction not implemented when this
         //method is not implemented
-        public void interactWith(Interactable other) {
+        public void interactWith(Interactable other) {}
+        public void interactWith(Ghost ghost) {
+            System.out.println("Getting bullied by a fuvking ghost!");
         }
     }
 
@@ -126,7 +132,8 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
-        return null;
+        // Player has no fov. WARNING !
+        return new ArrayList<DiscreteCoordinates>();
     }
 
     @Override
@@ -139,8 +146,8 @@ public class SuperPacmanPlayer extends Player {
         return false;
     }
 
-    @Override
-    public void interactWith(Interactable other) {
+   @Override
+   public void interactWith(Interactable other) {
         other.acceptInteraction(handler);
     }
 
@@ -156,7 +163,7 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean isCellInteractable() {
-        return false;
+        return true;
     }
 
     @Override
