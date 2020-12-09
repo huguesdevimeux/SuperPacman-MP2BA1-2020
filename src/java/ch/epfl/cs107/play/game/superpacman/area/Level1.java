@@ -19,11 +19,18 @@ public class Level1 extends NonRandomArea {
         Door door = new Door("superpacman/Level2", new DiscreteCoordinates(15,29), Logic.TRUE, this,
                 Orientation.DOWN, new DiscreteCoordinates(14,0), new DiscreteCoordinates(15,0));
         registerActor(door);
+        registerGates(Orientation.RIGHT, 14, 3);
+        registerGates(Orientation.RIGHT,15,3);
+    }
+
+    public void registerGates(Orientation orientation, int x, int y) {
+        super.createGates(orientation, x, y);
     }
 
     @Override
     public DiscreteCoordinates getSpawnLocation() {
-        return this.PLAYER_SPAWN_POSITION; 
+        return this.PLAYER_SPAWN_POSITION;
     }
+
 
 }

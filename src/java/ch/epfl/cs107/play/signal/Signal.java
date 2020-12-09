@@ -5,7 +5,7 @@ public interface Signal {
     /** Epsilon value to compare floating value*/
     float EPSILON = 1E-5f;
 
-    /**
+    /**i
      * Intensity getter for given time
      * @param t (float): the time at which we want the intensity
      * @return (float): signal intensity, usually between 0.0 and 1.0

@@ -177,4 +177,29 @@ public class RPGSprite extends Sprite {
 		}
 		return sprites;
 	}
+	/**
+	 * Given an image file, "cut" this image in several frames. 
+	 * @param name
+	 * @param nbFramesPerRow
+	 * @param nbColumns
+	 * @param width
+	 * @param height
+	 * @param parent
+	 * @param regionWidth
+	 * @param regionHeight
+	 * @param Anchor
+	 * @return
+	 */
+	public static Sprite[][] extractRawFrames(String name, int nbFramesPerRow, int nbColumns, float width, float height, Positionable parent, int regionWidth, int regionHeight) {
+
+		Sprite[][] sprites = new Sprite[nbColumns][nbFramesPerRow];
+		
+		for (int i = 0; i < nbFramesPerRow; i++) {
+			for (int j = 0; j < nbColumns; j++) {
+				sprites[j][i] = new RPGSprite(name, width, height, parent, new RegionOfInterest(i * regionWidth, regionHeight * j, regionWidth, regionHeight));
+			}
+		}
+		return sprites; 
+	}
 }
+
