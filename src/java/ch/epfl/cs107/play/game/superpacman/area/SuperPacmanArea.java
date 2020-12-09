@@ -54,8 +54,6 @@ public abstract class SuperPacmanArea extends Area {
         return this.associatedGraph.shortestPath(from, to);
     }
     
-    public abstract DiscreteCoordinates getSpawnLocation();
-
     //method to create gates depending on certain coordinates x and y and on the orientation
     //check the handout to verify the the coordinates of the gates on each level - page 20
     public void createGates(Orientation orientation, int x, int y) {
@@ -63,8 +61,9 @@ public abstract class SuperPacmanArea extends Area {
     }
 
     //same method as createGates but for keys instead of gates
-    public void createKeys(int x, int y){
-        registerActor(new Key(this, new DiscreteCoordinates(x,y)));
+    public void createKeys(int x, int y) {
+        registerActor(new Key(this, new DiscreteCoordinates(x, y)));
+    }
     
     /**
      * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.  

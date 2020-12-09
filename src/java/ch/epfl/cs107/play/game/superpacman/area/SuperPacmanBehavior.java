@@ -111,7 +111,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
                     area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
                 }
                 //registering the collectables automatically based on the cell types
-                 else if (isDiamond(x, y)) {{area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));}
+                 else if (isDiamond(x, y)) {area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));}
                  else if (isCherry(x, y)) {area.registerActor(new Cherry(area, new DiscreteCoordinates(x, y)));}
                  else if (isBonus(x, y)) {area.registerActor(new Bonus(area, new DiscreteCoordinates(x, y)));}
                                               
