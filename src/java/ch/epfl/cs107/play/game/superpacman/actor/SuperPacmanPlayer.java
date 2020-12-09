@@ -17,6 +17,7 @@ import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -83,6 +84,9 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
         }
+        public void interactWith(Ghost ghost) {
+            System.out.println("Getting bullied by a fuvking ghost!");
+        }
     }
 
     @Override
@@ -100,7 +104,8 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
-        return null;
+        // Player has no fov. WARNING !
+        return new ArrayList<DiscreteCoordinates>();
     }
 
     @Override
@@ -112,8 +117,9 @@ public class SuperPacmanPlayer extends Player {
     public boolean wantsViewInteraction() {
         return false;
     }
+
    @Override
-    public void interactWith(Interactable other) {
+   public void interactWith(Interactable other) {
         other.acceptInteraction(handler);
     }
 
@@ -129,7 +135,7 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public boolean isCellInteractable() {
-        return false;
+        return true;
     }
 
     @Override

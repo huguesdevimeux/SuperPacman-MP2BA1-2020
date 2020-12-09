@@ -1,9 +1,12 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
 import ch.epfl.cs107.play.game.superpacman.actor.Wall;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -78,13 +81,16 @@ public class SuperPacmanBehavior extends AreaBehavior {
      * @param area The area containing the walls.  
      */
     protected void registerActors(SuperPacmanArea area) {
-       for (int y = 0; y < getHeight(); y++) {
-           for (int x = 0; x < getWidth(); x++) {
-               if (isWall(x, y)) {
-                   area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y))); 
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                if (isWall(x, y)) {
+                    area.registerActor(new Wall(area, new DiscreteCoordinates(x, y), getNeighborhood(x, y)));
                 }
-           }
-       }
+                else if (((SuperPacmanCell)getCell(x,y)).type == SuperPacmanCellType.FREE_WITH_BLINKY) {
+                    area.registerActor(new Blinky(area, Orientation.UP, new DiscreteCoordinates(x, y)));
+                }
+            }
+        }
     }
     /**
      * @param x coordinate
