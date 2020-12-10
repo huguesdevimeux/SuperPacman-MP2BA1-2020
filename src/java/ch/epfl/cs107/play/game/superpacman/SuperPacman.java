@@ -22,7 +22,7 @@ public class SuperPacman extends RPG {
     //areaIndex will denote the areas level0, level1, level2
     private int areaIndex;
     private SuperPacmanPlayer player;
-    public final String[] areas = {"randomArea","superpacman/Level0", "superpacman/Level1", "superpacman/ Level2"};
+    public final String[] areas = {"randomAreaLevel1","superpacman/Level0", "superpacman/Level1", "superpacman/ Level2"};
 
     //initalising player using method from super class
     @Override
@@ -38,7 +38,11 @@ public class SuperPacman extends RPG {
         addArea(new Level0());
         addArea(new Level1());
         addArea(new Level2());
-        addArea(new RandomArea());
+        RandomArea randomArea2 = new RandomArea(2, "superpacman/Level0");
+        RandomArea randomarea1 = new RandomArea(1, randomArea2.getTitle());
+
+        addArea(randomarea1);
+        addArea(randomArea2);
     }
 
     public boolean begin(Window window, FileSystem fileSystem) {

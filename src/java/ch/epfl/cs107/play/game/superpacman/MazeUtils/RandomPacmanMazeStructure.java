@@ -21,23 +21,31 @@ public class RandomPacmanMazeStructure {
     private int height;
     private int width;
     private Random randomGenerator;
+    private SuperPacmanCellType fillingType;
+    private List<DiscreteCoordinates> emptyCells; 
     
     public RandomPacmanMazeStructure(int height, int width, Random randomGenerator) {
         assert (height % 2 == 1 && width % 2 == 1) : "Must be odd! ";
         this.height = height;
         this.width = width;
-        this.randomGenerator = randomGenerator; // TODO PUT here a seed
+        this.fillingType = SuperPacmanCellType.FREE_EMPTY;
+
+        this.randomGenerator = randomGenerator; 
         generatedMap = new SuperPacmanCellType[width][height]; // WARNING : it's x - y (to be consitent with the rest of the game)
 
         // We initalized the map with only walls; as the random walker will "break" walls to construct paths that will form the maze. 
         for (int row = 0; row < generatedMap.length; row++) {
             Arrays.fill(generatedMap[row], SuperPacmanCellType.WALL);
         }
-
         generateRandomMap(new DiscreteCoordinates(3, 3));
     }
 
-    /**
+	public List<DiscreteCoordinates> getFreeCells() {
+		return emptyCells;
+	}
+
+
+	/**
      * Get the random structure generated. 
      * @return 
      */
@@ -169,7 +177,8 @@ public class RandomPacmanMazeStructure {
     }
 
     private void cleanCell(DiscreteCoordinates toClean) {
-        generatedMap[toClean.x][toClean.y] = SuperPacmanCellType.FREE_EMPTY;
+        // When cleaning a cell (i.e removing th wall)
+        generatedMap[toClean.x][toClean.y] = this.fillingType;
     }
     
     /**
