@@ -243,7 +243,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
 
         @Override
         public void acceptInteraction(AreaInteractionVisitor v) {
-            v.interactWith(this);
+            // v.interactWith(this);
         }
     }
 }
