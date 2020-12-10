@@ -14,12 +14,18 @@ import java.util.List;
 import java.util.Queue;
 
 public abstract class SuperPacmanArea extends Area implements Logic {
-    private Logic signal;
+
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;
+    /*
+    instantiating the number of diamonds at 0
+    before launching the games nbDiamonds = 0
+    however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
+    thus recording the number of diamonds per level
+     */
     public static int totalNbDiamonds = 0;
 
-    public abstract DiscreteCoordinates getSpawnLocation();
+    public abstract DiscreteCoordinates getSpawnLocation();// TODO: delete? is never used
 
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
@@ -35,42 +41,36 @@ public abstract class SuperPacmanArea extends Area implements Logic {
     public final float getCameraScaleFactor() {
         return SuperPacman.CAMERA_SCALE_FACTOR;
     }
-    
+
     /**
-     * Create the area by adding it all actors called by begin method Note it set
-     * the Behavior as needed !
+     * Create the area by adding all actors called by begin method
+     * Note it set the Behavior as needed !
      */
     protected void createArea() {
         associatedBehavior.registerActors(this);
     }
-    
+
     /**
-     * Get the path under the form of a queue of Orientation between point from and to.  
-     * @param from
-     * @param to
-     * @return
+     * Get the path under the form of a queue of Orientation between point from and to.
      */
     public Queue<Orientation> shortestPath(DiscreteCoordinates from, DiscreteCoordinates to) {
         return this.associatedGraph.shortestPath(from, to);
     }
-    
+
     //method to create gates depending on certain coordinates x and y and on the orientation
     //check the handout to verify the the coordinates of the gates on each level - page 20
     public void createGates(Orientation orientation, int x, int y, Logic signal) {
-        registerActor(new Gate((this), orientation, new DiscreteCoordinates(x,y), signal));
+        registerActor(new Gate((this), orientation, new DiscreteCoordinates(x, y), signal));
     }
 
     /**
-     * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.  
-     * @param from
-     * @param to
-     * @return
+     * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.
      */
     public Queue<Orientation> shortestPath(DiscreteCoordinates from, DiscreteCoordinates to,
-            List<DiscreteCoordinates> toExclude) {
+                                           List<DiscreteCoordinates> toExclude) {
         return this.associatedGraph.shortestPath(from, to);
     }
-    
+
     public void scareGhosts() {
         associatedBehavior.scareGhosts();
     }

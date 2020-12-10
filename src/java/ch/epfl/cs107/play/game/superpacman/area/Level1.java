@@ -19,6 +19,7 @@ public class Level1 extends SuperPacmanArea {
         registerGates(Orientation.RIGHT,15,3,  this);
     }
 
+    //calling the super method of SuperpacmanArea to register gates as actors
     public void registerGates(Orientation orientation, int x, int y, Logic signal) {
         super.createGates(orientation, x, y, signal);
     }
@@ -28,6 +29,9 @@ public class Level1 extends SuperPacmanArea {
         return this.PLAYER_SPAWN_POSITION;
     }
 
+    /**
+     @return true if the number of the diamonds in Level1 is 0
+    */
     public boolean isOn(){
         return !(totalNbDiamonds == 0);
     }

@@ -20,6 +20,7 @@ public class Level0 extends SuperPacmanArea {
                 Orientation.UP, new DiscreteCoordinates(5, 9), new DiscreteCoordinates(6, 9));
         registerActor(door);
         registerActor(key0);
+        //the two gates of level0 use the key as signal
         registerGates(Orientation.RIGHT, 5, 8, key0);
         registerGates(Orientation.LEFT, 6, 8, key0);
     }
@@ -34,6 +35,7 @@ public class Level0 extends SuperPacmanArea {
         return this.PLAYER_SPAWN_POSITION;
     }
 
+    //in level 0 we don't put conditions on isOn and isOff
     @Override
     public boolean isOn() {
         return true;

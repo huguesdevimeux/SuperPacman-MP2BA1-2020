@@ -22,9 +22,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
-
     private boolean isAfraid;
-
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -40,16 +38,16 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     protected abstract Orientation getNextOrientation();
 
     protected abstract String getTitle();
-    
+
     protected abstract int getSpeed();
-       
+
     private void generateNormalStateAnimation() {
         Sprite[][] sprites = RPGSprite.extractSprites(getTitle(), 2, 1, 1, this, 16, 16,
                 new Orientation[] { Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT });
         this.normalStateAnimations = Animation.createAnimations(18 / 2, sprites);
         }
 
-    
+
     /**
      * Handle the generation of the animations of the pacman.
      */
@@ -72,33 +70,31 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         this.isAfraid = true;
         this.currentAnimations = afraidAnimations;
     }
-    
+
     /**
      * Set state of the ghost to normal, and update its animation accordingly.
      */
     public void setNormalState() {
-        this.isAfraid = false; 
-        this.currentAnimations = normalStateAnimations; 
+        this.isAfraid = false;
+        this.currentAnimations = normalStateAnimations;
     }
-    
+
     public boolean isAfraid() {
         return isAfraid;
     }
-
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
         if (isDisplacementOccurs()) {
             currentAnimations[getOrientation().ordinal()].update(deltaTime);
-        }
-        else {
+        } else {
             currentAnimations[getOrientation().ordinal()].reset();
             Orientation nextOrientation = getNextOrientation();
             // if the orientation is null, the ghost does not move. 
             if (nextOrientation != null)
                 orientate(nextOrientation);
-                move(getSpeed());
+            move(getSpeed());
         }
     }
 
@@ -106,9 +102,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public void draw(Canvas canvas) {
         currentAnimations[getOrientation().ordinal()].draw(canvas);
     }
-    
+
     protected DiscreteCoordinates getRefugePosition() {
-        return this.refugePosition; 
+        return this.refugePosition;
     }
 
     @Override
@@ -139,7 +135,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         List<DiscreteCoordinates> fov = new ArrayList<DiscreteCoordinates>();
         for (int x = - LENGTH_FOV; x < LENGTH_FOV; x++) {
             for (int y = -LENGTH_FOV; y < LENGTH_FOV; y++) {
-                fov.add(new DiscreteCoordinates(getCurrentMainCellCoordinates().x + x, 
+                fov.add(new DiscreteCoordinates(getCurrentMainCellCoordinates().x + x,
                         getCurrentMainCellCoordinates().y + y));
             }
         }
@@ -156,9 +152,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public boolean wantsViewInteraction() {
         return true;
     }
-    
+
     /**
-     * Handle interactions for the ghost. 
+     * Handle interactions for the ghost.
      */
     private class GhostHandler implements SuperPacmanInteractionVisitor {
         public void interactWith(SuperPacmanPlayer player) {
@@ -175,5 +171,5 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public void acceptInteraction(AreaInteractionVisitor v) {
         ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
-    
+
 }

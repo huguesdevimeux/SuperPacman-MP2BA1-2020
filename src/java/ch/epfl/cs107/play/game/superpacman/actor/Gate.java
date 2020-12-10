@@ -36,8 +36,7 @@ public class Gate extends AreaEntity {
         }
     }
 
-    //method that will "extract gates" from super class and will vary with
-    //orientation
+    //method that will "extract gates" and will vary with orientation
     public void extractGates(int x, int y, int w, int h) {
         gate = new Sprite("superpacman/gate", 1.f, 1.f,
                 this, new RegionOfInterest(x, y, w, h));
@@ -47,8 +46,9 @@ public class Gate extends AreaEntity {
     public void bip(Audio audio) {
     }
 
-    //the program will draw the gate only if the signal is activated
-    //thus if isOn is true
+     /**
+      @return true only if the signal is on
+     */
     @Override
     public void draw(Canvas canvas) {
         if (signal.isOn()) gate.draw(canvas);
@@ -59,12 +59,15 @@ public class Gate extends AreaEntity {
         return Collections.singletonList((getCurrentMainCellCoordinates()));
     }
 
-    //Actor occupies its principal cell so the method returns true
+    /**
+     @return true only if the signal is on
+     */
     @Override
     public boolean takeCellSpace() {
         return signal.isOn();
     }
 
+    //interactions are not taken into account so both types return false
     @Override
     public boolean isCellInteractable() {
         return false;

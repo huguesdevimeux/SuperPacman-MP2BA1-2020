@@ -39,9 +39,9 @@ public class Level2 extends SuperPacmanArea {
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);
         createGates(Orientation.DOWN, 24, 12, key2);
-        //dont know how to create a method to replace all this nastiness
     }
 
+    //calling method from SuperPacmanArea to register gates as actors
     public void createGates(Orientation orientation, int x, int y, Logic signal) {
         super.createGates(orientation, x, y, signal);
     }
@@ -51,6 +51,11 @@ public class Level2 extends SuperPacmanArea {
         return this.PLAYER_SPAWN_POSITION;
     }
 
+    /**
+     @return true if the number of the diamonds in Level2 is 0
+     method applies only to the gates at (14,3) and (15,3): they're the only ones
+     depending on the number of diamonds collected
+   */
     @Override
     public boolean isOn() {
         return !(totalNbDiamonds == 0);
