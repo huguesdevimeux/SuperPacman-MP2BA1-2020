@@ -17,13 +17,14 @@ public abstract class SuperPacmanArea extends Area implements Logic {
 
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;
+
     /*
-    instantiating the number of diamonds at 0
-    before launching the games nbDiamonds = 0
-    however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
-    thus recording the number of diamonds per level
-     */
-    public static int totalNbDiamonds = 0;
+        instantiating the number of diamonds at 0
+        before launching the games nbDiamonds = 0
+        however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
+        thus recording the number of diamonds per level
+         */
+    private static int totalNbDiamonds = 0;
 
     public abstract DiscreteCoordinates getSpawnLocation();// TODO: delete? is never used
 
@@ -78,8 +79,19 @@ public abstract class SuperPacmanArea extends Area implements Logic {
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
     }
-    public static void setTotalNbDiamonds(){
+
+    public void increaseTotalNbDiamonds(){
         totalNbDiamonds++;
+    }
+    public void decreaseTotalNbDiamonds(){
+        totalNbDiamonds--;
+    }
+    public int reset(){
+        return totalNbDiamonds = 0;
+    }
+
+    public boolean totalNbDiamondsIsNull(){
+        return totalNbDiamonds == 0;
     }
 }
 

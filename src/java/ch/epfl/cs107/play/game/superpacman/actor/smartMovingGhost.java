@@ -202,8 +202,6 @@ public abstract class smartMovingGhost extends Ghost {
                 memorizePlayer(player);
         }
     }
-
-    // TODO : put this in super, with a getHandler
     @Override
     public void interactWith(Interactable other) {
         other.acceptInteraction(handler);

@@ -91,7 +91,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
                 //registering the collectables automatically based on the cell types
                 if (isDiamond(x, y)) {
                     area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));
-                    SuperPacmanArea.setTotalNbDiamonds();
+                    area.increaseTotalNbDiamonds();
                 }
                 if (isCherry(x, y)) {
                     area.registerActor(new Cherry(area, new DiscreteCoordinates(x, y)));
@@ -246,8 +246,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
 
         @Override
-        public void acceptInteraction(AreaInteractionVisitor v) {
-            v.interactWith(this);
-        }
+        public void acceptInteraction(AreaInteractionVisitor v) { }
+
     }
 }

@@ -30,7 +30,7 @@ public class SuperPacmanPlayer extends Player {
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
-    private int amountLife = 3;
+    private int amountLife = 5;
 
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
@@ -89,7 +89,7 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
-            SuperPacmanArea.totalNbDiamonds = 0;
+            ((SuperPacmanArea) getOwnerArea()).reset();
         }
 
         //when the player will interact with the key, the actor key will disappear
@@ -109,7 +109,7 @@ public class SuperPacmanPlayer extends Player {
             score += 10;
             //when interacting with a diamond
             //logically the total number of diamonds decreases
-            SuperPacmanArea.totalNbDiamonds--;
+            ((SuperPacmanArea) getOwnerArea()).decreaseTotalNbDiamonds();
             getOwnerArea().unregisterActor(diamond);
         }
 
@@ -127,10 +127,6 @@ public class SuperPacmanPlayer extends Player {
                 pacmanIsEaten();
                 amountLife --;
                 if(amountLife == 0) endGame();
-
-                //to not have any cases with bugs (the player can't move anymore)
-                //the ghost will return to its refuge position, once it eats the player
-                //TODO tell me if i should not implement this
                 ghost.returnToRefugePosition();
             }
         }
