@@ -4,7 +4,6 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
@@ -12,9 +11,8 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Cherry extends CollectableAreaEntity {
     private Sprite cherry;
     /**
-     * Default AreaEntity constructor
-     *
-     * @param area     (Area): Owner area. Not null
+     * Default Cherry constructor
+     * @param area     (Area): Owner area
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
     public Cherry(Area area, DiscreteCoordinates position) {

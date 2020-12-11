@@ -9,24 +9,20 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.rpg.actor.Sign;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
 
-
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    private Area currentArea;
-    private int movingSpeed;
+    private final int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
@@ -40,12 +36,11 @@ public class SuperPacmanPlayer extends Player {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
 
-        movingSpeed = 6;
+        movingSpeed = 5;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[]{Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
         movingAnimations = Animation.createAnimations(movingSpeed / 2, sprites);
-        this.currentArea = area;
         resetMotion();
     }
 
@@ -88,20 +83,27 @@ public class SuperPacmanPlayer extends Player {
 
         public void interactWith(Door door) {
             setIsPassingADoor(door);
+            //when interacting with a door, the total nb of diamonds will be sent back to 0
+            SuperPacmanArea.totalNbDiamonds = 0;
         }
-
 
         //when the player will interact with the key, the actor key will disappear
         public void interactWith(Key key) {
+            key.isCollected();
             getOwnerArea().unregisterActor(key);
         }
 
         public void interactWith(Bonus bonus) {
+            //when interacting with the coin - the ghosts get scared
+            ((SuperPacmanArea)getOwnerArea()).scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
         public void interactWith(Diamond diamond) {
             score += 10;
+            //when interacting with a diamond
+            //logically the total number of diamonds decreases
+            SuperPacmanArea.totalNbDiamonds--;
             getOwnerArea().unregisterActor(diamond);
         }
         //"eating" a cherry will increment the score by 200
@@ -109,13 +111,10 @@ public class SuperPacmanPlayer extends Player {
             score += 200;
             getOwnerArea().unregisterActor(cherry);
         }
-        //TODO -- why does compiler say interaction not implemented when this
-        //method is not implemented
-        public void interactWith(Interactable other) {}
         public void interactWith(Ghost ghost) {
-            System.out.println("Getting bullied by a fuvking ghost!");
+            System.out.println("suck on this");
+            }
         }
-    }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
