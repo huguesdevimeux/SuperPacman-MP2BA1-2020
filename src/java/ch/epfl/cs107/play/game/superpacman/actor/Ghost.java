@@ -115,7 +115,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public static void setAfraidTime() {
         /*afraid time is a very large time
         as the time gap between every delta time in update() is very small and at each update,
-        afraidTime decreases by 1 --- 800 thus allows for the afraid state of the ghosts to last 6-8 seconds
+        afraidTime decreases by 1 --- 900 thus allows for the afraid state of the ghosts to last 8-10 seconds
          */
         afraidTime = 900;
     }
