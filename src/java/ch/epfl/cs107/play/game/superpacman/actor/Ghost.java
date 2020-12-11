@@ -131,8 +131,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         return false;
     }
 
-    // INTERACTIONS STUFF
-
     @Override
     public boolean isCellInteractable() {
         return true;
@@ -170,12 +168,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
      * Handle interactions for the ghost.
      */
     protected class GhostHandler implements SuperPacmanInteractionVisitor {
-        public boolean cont = false;
-
         public void interactWith(SuperPacmanPlayer player) {
-          //  cont = true;
-           System.out.println("Je vois le player!");
-           //HP.setAmountLife(SuperPacmanPlayerStatusGUI.amountLife - 1);
         }
     }
 

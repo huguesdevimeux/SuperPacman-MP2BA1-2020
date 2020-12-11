@@ -194,7 +194,7 @@ public abstract class smartMovingGhost extends Ghost {
         updateFollowingPath();
         super.update(deltaTime);
     }
-    
+
     private class smartMovingGhostHandler extends GhostHandler implements SuperPacmanInteractionVisitor {
         public void interactWith(SuperPacmanPlayer player) {
             super.interactWith(player);

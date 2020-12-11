@@ -26,10 +26,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    private final int movingSpeed;
+    private int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
+    private int amountLife = 3;
 
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
@@ -124,18 +125,17 @@ public class SuperPacmanPlayer extends Player {
                 score += 500;
             }else {
                 pacmanIsEaten();
+                amountLife --;
+                if(amountLife == 0) endGame();
+
                 //to not have any cases with bugs (the player can't move anymore)
                 //the ghost will return to its refuge position, once it eats the player
-
                 //TODO tell me if i should not implement this
                 ghost.returnToRefugePosition();
             }
         }
-
         @Override
-        public void interactWith(Interactable other) {
-
-        }
+        public void interactWith(Interactable other) {}
     }
 
     public void pacmanIsEaten(){
@@ -165,10 +165,16 @@ public class SuperPacmanPlayer extends Player {
     @Override
     public void draw(Canvas canvas) {
         statusDrawer.setScore(score);
-        statusDrawer.setAmountLife(3);
+        statusDrawer.setAmountLife(amountLife);
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
+
+    public void endGame(){
+        //TODO ----- COMPLETE
+        System.exit(0);
+    }
+
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
