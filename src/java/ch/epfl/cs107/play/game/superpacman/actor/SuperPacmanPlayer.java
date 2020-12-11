@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
@@ -22,10 +23,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    private final int movingSpeed;
+    private int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
+    private int amountLife = 5;
 
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
@@ -64,7 +66,7 @@ public class SuperPacmanPlayer extends Player {
             // move is only called when pacman is not moving in deplacement.
             move(movingSpeed);
         } else movingAnimations[getOrientation().ordinal()].update(deltaTime);
-        super.update(deltaTime);
+            super.update(deltaTime);
     }
 
     /**
@@ -84,7 +86,7 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
-            SuperPacmanArea.totalNbDiamonds = 0;
+            ((SuperPacmanArea) getOwnerArea()).reset();
         }
 
         //when the player will interact with the key, the actor key will disappear
@@ -95,7 +97,8 @@ public class SuperPacmanPlayer extends Player {
 
         public void interactWith(Bonus bonus) {
             //when interacting with the coin - the ghosts get scared
-            ((SuperPacmanArea)getOwnerArea()).scareGhosts();
+            ((SuperPacmanArea) getOwnerArea()).scareGhosts();
+            Ghost.setAfraidTime();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
@@ -103,31 +106,72 @@ public class SuperPacmanPlayer extends Player {
             score += 10;
             //when interacting with a diamond
             //logically the total number of diamonds decreases
-            SuperPacmanArea.totalNbDiamonds--;
+            ((SuperPacmanArea) getOwnerArea()).decreaseTotalNbDiamonds();
             getOwnerArea().unregisterActor(diamond);
         }
+
         //"eating" a cherry will increment the score by 200
         public void interactWith(Cherry cherry) {
             score += 200;
             getOwnerArea().unregisterActor(cherry);
         }
+
         public void interactWith(Ghost ghost) {
-            System.out.println("suck on this");
+            if (ghost.isAfraid()) {
+                ghost.returnToRefugePosition();
+                score += 500;
+            }else {
+                pacmanIsEaten();
+                amountLife --;
+                if(amountLife == 0) endGame();
+                ghost.returnToRefugePosition();
             }
         }
+        @Override
+        public void interactWith(Interactable other) {}
+    }
+
+    public DiscreteCoordinates getSpawnLocation(){
+        return ((SuperPacmanArea)getOwnerArea()).getSpawnLocation();
+    }
+
+    public void pacmanIsEaten(){
+        getOwnerArea().leaveAreaCells(this, getCurrentCells());
+        if(SuperPacman.areaIndex == 0){
+            setCurrentPosition(getSpawnLocation().toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+        if(SuperPacman.areaIndex == 1) {
+            setCurrentPosition(getSpawnLocation().toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+        if(SuperPacman.areaIndex == 2) {
+            setCurrentPosition(getSpawnLocation().toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+    }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((SuperPacmanInteractionVisitor) v).interactWith(this);
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
 
     @Override
     public void draw(Canvas canvas) {
         statusDrawer.setScore(score);
-        statusDrawer.setAmountLife(3);
+        statusDrawer.setAmountLife(amountLife);
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
+
+    public void endGame(){
+        //TODO ----- COMPLETE
+        System.exit(0);
+    }
+
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {

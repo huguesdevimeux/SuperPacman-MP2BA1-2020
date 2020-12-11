@@ -1,19 +1,19 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Path;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
+import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.window.Canvas;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
-import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 
 public abstract class smartMovingGhost extends Ghost {
 
@@ -194,16 +194,14 @@ public abstract class smartMovingGhost extends Ghost {
         updateFollowingPath();
         super.update(deltaTime);
     }
-    
-    private class smartMovingGhostHandler implements SuperPacmanInteractionVisitor {
+
+    private class smartMovingGhostHandler extends GhostHandler implements SuperPacmanInteractionVisitor {
         public void interactWith(SuperPacmanPlayer player) {
-            // Memorize the player, if not already done.
+            super.interactWith(player);
             if (getMemorizedPlayer() == null || getMemorizedPlayer() != player)
                 memorizePlayer(player);
         }
     }
-
-    // TODO : put this in super, with a getHandler
     @Override
     public void interactWith(Interactable other) {
         other.acceptInteraction(handler);

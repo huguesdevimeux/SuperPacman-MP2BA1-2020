@@ -1,9 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics;
 
-import java.awt.Color;
-
 import ch.epfl.cs107.play.game.actor.Graphics;
-import ch.epfl.cs107.play.game.actor.GraphicsEntity;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
@@ -11,6 +8,8 @@ import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.awt.*;
 
 /**
  * Handle status graphics for superpacman entities.
@@ -21,7 +20,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     private final float FONT_SIZE = 0.5f;
     private final float WIDTH_LIFE_UNIT = 1.0f;
 
-	private int amountLife = 0;
+	public static int amountLife = 0;
        // Set by default to -1 to easily debug.
 	private int scoreDisplayed = -1; 
 
