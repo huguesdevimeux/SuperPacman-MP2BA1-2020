@@ -11,9 +11,6 @@ import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
-import ch.epfl.cs107.play.game.superpacman.area.Level0;
-import ch.epfl.cs107.play.game.superpacman.area.Level1;
-import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -134,20 +131,24 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Interactable other) {}
     }
 
+    public DiscreteCoordinates getSpawnLocation(){
+        return ((SuperPacmanArea)getOwnerArea()).getSpawnLocation();
+    }
+
     public void pacmanIsEaten(){
         getOwnerArea().leaveAreaCells(this, getCurrentCells());
         if(SuperPacman.areaIndex == 0){
-            setCurrentPosition(Level0.PLAYER_SPAWN_POSITION.toVector());
+            setCurrentPosition(getSpawnLocation().toVector());
             getOwnerArea().enterAreaCells(this, getCurrentCells());
             resetMotion();
         }
         if(SuperPacman.areaIndex == 1) {
-            setCurrentPosition(Level1.PLAYER_SPAWN_POSITION.toVector());
+            setCurrentPosition(getSpawnLocation().toVector());
             getOwnerArea().enterAreaCells(this, getCurrentCells());
             resetMotion();
         }
         if(SuperPacman.areaIndex == 2) {
-            setCurrentPosition(Level2.PLAYER_SPAWN_POSITION.toVector());
+            setCurrentPosition(getSpawnLocation().toVector());
             getOwnerArea().enterAreaCells(this, getCurrentCells());
             resetMotion();
         }
