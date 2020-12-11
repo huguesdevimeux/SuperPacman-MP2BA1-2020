@@ -9,7 +9,11 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
+import ch.epfl.cs107.play.game.superpacman.area.Level0;
+import ch.epfl.cs107.play.game.superpacman.area.Level1;
+import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -64,7 +68,7 @@ public class SuperPacmanPlayer extends Player {
             // move is only called when pacman is not moving in deplacement.
             move(movingSpeed);
         } else movingAnimations[getOrientation().ordinal()].update(deltaTime);
-        super.update(deltaTime);
+            super.update(deltaTime);
     }
 
     /**
@@ -95,7 +99,8 @@ public class SuperPacmanPlayer extends Player {
 
         public void interactWith(Bonus bonus) {
             //when interacting with the coin - the ghosts get scared
-            ((SuperPacmanArea)getOwnerArea()).scareGhosts();
+            ((SuperPacmanArea) getOwnerArea()).scareGhosts();
+            Ghost.setAfraidTime();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
@@ -106,19 +111,55 @@ public class SuperPacmanPlayer extends Player {
             SuperPacmanArea.totalNbDiamonds--;
             getOwnerArea().unregisterActor(diamond);
         }
+
         //"eating" a cherry will increment the score by 200
         public void interactWith(Cherry cherry) {
             score += 200;
             getOwnerArea().unregisterActor(cherry);
         }
+
         public void interactWith(Ghost ghost) {
-            System.out.println("suck on this");
+            if (ghost.isAfraid()) {
+                ghost.returnToRefugePosition();
+                score += 500;
+            }else {
+                pacmanIsEaten();
+                //to not have any cases with bugs (the player can't move anymore)
+                //the ghost will return to its refuge position, once it eats the player
+
+                //TODO tell me if i should not implement this
+                ghost.returnToRefugePosition();
             }
         }
 
+        @Override
+        public void interactWith(Interactable other) {
+
+        }
+    }
+
+    public void pacmanIsEaten(){
+        getOwnerArea().leaveAreaCells(this, getCurrentCells());
+        if(SuperPacman.areaIndex == 0){
+            setCurrentPosition(Level0.PLAYER_SPAWN_POSITION.toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+        if(SuperPacman.areaIndex == 1) {
+            setCurrentPosition(Level1.PLAYER_SPAWN_POSITION.toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+        if(SuperPacman.areaIndex == 2) {
+            setCurrentPosition(Level2.PLAYER_SPAWN_POSITION.toVector());
+            getOwnerArea().enterAreaCells(this, getCurrentCells());
+            resetMotion();
+        }
+    }
+
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((SuperPacmanInteractionVisitor) v).interactWith(this);
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
 
     @Override

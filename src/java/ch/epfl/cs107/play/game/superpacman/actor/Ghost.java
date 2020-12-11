@@ -15,7 +15,7 @@ import java.util.List;
 public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     private static final int LENGTH_FOV = 5;
-    private final GhostHandler handler = new GhostHandler();
+    private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
 
     protected Sprite sprite;
@@ -23,6 +23,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
     private boolean isAfraid;
+    private static int afraidTime;
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -43,9 +44,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     private void generateNormalStateAnimation() {
         Sprite[][] sprites = RPGSprite.extractSprites(getTitle(), 2, 1, 1, this, 16, 16,
-                new Orientation[] { Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT });
+                new Orientation[]{Orientation.UP, Orientation.RIGHT, Orientation.DOWN, Orientation.LEFT});
         this.normalStateAnimations = Animation.createAnimations(18 / 2, sprites);
-        }
+    }
 
 
     /**
@@ -96,6 +97,10 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
                 orientate(nextOrientation);
             move(getSpeed());
         }
+        afraidTime--;
+        if (afraidTime <= 0) {
+            setNormalState();
+        }
     }
 
     @Override
@@ -105,6 +110,14 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     protected DiscreteCoordinates getRefugePosition() {
         return this.refugePosition;
+    }
+
+    public static void setAfraidTime() {
+        /*afraid time is a very large time
+        as the time gap between every delta time in update() is very small and at each update,
+        afraidTime decreases by 1 --- 800 thus allows for the afraid state of the ghosts to last 6-8 seconds
+         */
+        afraidTime = 900;
     }
 
     @Override
@@ -133,7 +146,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
         List<DiscreteCoordinates> fov = new ArrayList<DiscreteCoordinates>();
-        for (int x = - LENGTH_FOV; x < LENGTH_FOV; x++) {
+        for (int x = -LENGTH_FOV; x < LENGTH_FOV; x++) {
             for (int y = -LENGTH_FOV; y < LENGTH_FOV; y++) {
                 fov.add(new DiscreteCoordinates(getCurrentMainCellCoordinates().x + x,
                         getCurrentMainCellCoordinates().y + y));
@@ -156,10 +169,21 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     /**
      * Handle interactions for the ghost.
      */
-    private class GhostHandler implements SuperPacmanInteractionVisitor {
+    protected class GhostHandler implements SuperPacmanInteractionVisitor {
+        public boolean cont = false;
+
         public void interactWith(SuperPacmanPlayer player) {
-            System.out.println("Je vois le player!");
+          //  cont = true;
+           System.out.println("Je vois le player!");
+           //HP.setAmountLife(SuperPacmanPlayerStatusGUI.amountLife - 1);
         }
+    }
+
+    public void returnToRefugePosition(){
+        getOwnerArea().leaveAreaCells(this, getCurrentCells());
+        setCurrentPosition(getRefugePosition().toVector());
+        getOwnerArea().enterAreaCells(this, getCurrentCells());
+        resetMotion();
     }
 
     @Override
@@ -169,7 +193,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((SuperPacmanInteractionVisitor)v).interactWith(this);
+        ((SuperPacmanInteractionVisitor) v).interactWith(this);
     }
 
 }

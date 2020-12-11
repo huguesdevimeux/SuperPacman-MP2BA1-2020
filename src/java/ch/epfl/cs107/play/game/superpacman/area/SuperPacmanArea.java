@@ -78,5 +78,8 @@ public abstract class SuperPacmanArea extends Area implements Logic {
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
     }
+    public static void setTotalNbDiamonds(){
+        totalNbDiamonds++;
+    }
 }
 

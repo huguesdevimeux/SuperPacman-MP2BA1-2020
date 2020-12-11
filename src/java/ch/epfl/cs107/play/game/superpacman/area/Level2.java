@@ -1,19 +1,20 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Level2 extends SuperPacmanArea {
-    public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
+    public static final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 
     private Key key1 = new Key(this, new DiscreteCoordinates(3,16));
     private Key key2 = new Key(this, new DiscreteCoordinates(26, 16));
     private Key key3 = new Key(this, new DiscreteCoordinates(2,8));
     private Key key4 = new Key(this, new DiscreteCoordinates(27,8));
-    private And key3_4 = new And(key3, key4);
+    public Logic key3_4 = new And(key3, key4);
 
     public String getTitle() {
         return "superpacman/Level2";
@@ -21,6 +22,7 @@ public class Level2 extends SuperPacmanArea {
 
     protected void createArea() {
         super.createArea();
+        SuperPacman.areaIndex++;
         registerActor(key1);
         registerActor(key2);
         registerActor(key3);
@@ -31,10 +33,10 @@ public class Level2 extends SuperPacmanArea {
         createGates(Orientation.RIGHT, 21, 14, key2);
         createGates(Orientation.RIGHT, 21, 10, key2);
         createGates(Orientation.RIGHT, 21, 8, key2);
-        createGates(Orientation.RIGHT, 10,2, key3_4);
-        createGates(Orientation.RIGHT,19,2, key3_4);
-        createGates(Orientation.RIGHT,12,8, key3_4);
-        createGates(Orientation.RIGHT,17,8, key3_4);
+        createGates(Orientation.RIGHT, 10,2, (key4));
+        createGates(Orientation.RIGHT,19,2, new And(key3, key4));
+        createGates(Orientation.RIGHT,12,8, new And(key3, key4));
+        createGates(Orientation.RIGHT,17,8, new And(key3, key4));
         createGates(Orientation.RIGHT, 14,3, this);
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);
@@ -50,7 +52,6 @@ public class Level2 extends SuperPacmanArea {
     public DiscreteCoordinates getSpawnLocation() {
         return this.PLAYER_SPAWN_POSITION;
     }
-
     /**
      @return true if the number of the diamonds in Level2 is 0
      method applies only to the gates at (14,3) and (15,3): they're the only ones
@@ -60,12 +61,10 @@ public class Level2 extends SuperPacmanArea {
     public boolean isOn() {
         return !(totalNbDiamonds == 0);
     }
-
     @Override
     public boolean isOff() {
         return false;
     }
-
     @Override
     public float getIntensity() {
         return 0;

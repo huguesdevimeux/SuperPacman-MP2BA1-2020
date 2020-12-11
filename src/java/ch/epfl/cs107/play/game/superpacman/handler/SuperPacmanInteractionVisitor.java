@@ -20,9 +20,11 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     }
     default void interactWith(Ghost ghost) {
     }
-    default void interactWith(Interactable other){
-    }
 
+    //without this method here -- error messages appear in ghostHandler
+    @Override
+    default void interactWith(Interactable other) {
+    }
 }
 
 
