@@ -172,11 +172,15 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         }
     }
 
-    public void returnToRefugePosition(){
-        getOwnerArea().leaveAreaCells(this, getCurrentCells());
+    private void returnToRefugePosition(){
+        getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();
+    }
+
+    public void resetGhost() {
+        returnToRefugePosition();
     }
 
     @Override
