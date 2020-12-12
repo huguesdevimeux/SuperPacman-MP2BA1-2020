@@ -4,6 +4,7 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.*;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
@@ -17,7 +18,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private static final int LENGTH_FOV = 5;
     private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
-
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
@@ -175,11 +175,14 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         }
     }
 
-    public void returnToRefugePosition(){
+    public void returnToRefugePosition() {
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();
+    }
+    public void allGhostsReturnToRefugePosition() {
+        for (Ghost ghost : SuperPacmanBehavior.ghostsInGrid) ghost.returnToRefugePosition();
     }
 
     @Override

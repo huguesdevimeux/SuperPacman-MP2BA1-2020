@@ -14,9 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SuperPacmanBehavior extends AreaBehavior {
-    public Cherry cherry;
-    public Bonus bonus;
-    public Diamond diamond;
 
     public enum SuperPacmanCellType {
         NONE(0), // never used as real content
@@ -46,7 +43,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
     }
     private AreaGraph associatedAreaGraph;
-    private List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
+    public static List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
 
     /**
      * Default SuperPacmanBehavior Constructor
