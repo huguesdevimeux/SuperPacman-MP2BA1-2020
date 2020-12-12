@@ -26,8 +26,7 @@ public class SuperPacmanPlayer extends Player {
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
-    private int amountLife = SuperPacmanPlayerStatusGUI.amountLife;
-
+    private int amountLife = 5;
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
     private Orientation desiredOrientation;

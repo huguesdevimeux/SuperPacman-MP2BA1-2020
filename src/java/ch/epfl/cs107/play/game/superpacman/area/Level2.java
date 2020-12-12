@@ -13,7 +13,7 @@ public class Level2 extends SuperPacmanArea {
     private Key key2 = new Key(this, new DiscreteCoordinates(26, 16));
     private Key key3 = new Key(this, new DiscreteCoordinates(2,8));
     private Key key4 = new Key(this, new DiscreteCoordinates(27,8));
-    public Logic key3_4 = new And(key3, key4);
+    private Logic key3_4 = new And(key3, key4);
 
     public String getTitle() {
         return "superpacman/Level2";
@@ -32,9 +32,9 @@ public class Level2 extends SuperPacmanArea {
         createGates(Orientation.RIGHT, 21, 10, key2);
         createGates(Orientation.RIGHT, 21, 8, key2);
         createGates(Orientation.RIGHT, 10,2, (key4));
-        createGates(Orientation.RIGHT,19,2, new And(key3, key4));
-        createGates(Orientation.RIGHT,12,8, new And(key3, key4));
-        createGates(Orientation.RIGHT,17,8, new And(key3, key4));
+        createGates(Orientation.RIGHT,19,2, key3_4);
+        createGates(Orientation.RIGHT,12,8, key3_4);
+        createGates(Orientation.RIGHT,17,8, key3_4);
         createGates(Orientation.RIGHT, 14,3, this);
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);

@@ -19,13 +19,12 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     private final float DEPTH = 0;
     private final float FONT_SIZE = 0.5f;
     private final float WIDTH_LIFE_UNIT = 1.0f;
-
-	public static int amountLife = 5;
+	private int amountLife;
        // Set by default to -1 to easily debug.
 	private int scoreDisplayed = -1; 
 
-    private static TextGraphics score;
-    private static TextGraphics scoreTitle; 
+    private TextGraphics score;
+    private TextGraphics scoreTitle;
 
     public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {
         assert (player.getClass() == SuperPacmanPlayer.class); 
