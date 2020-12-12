@@ -28,25 +28,20 @@ public class Level2 extends NonRandomArea {
         registerActor(key2);
         registerActor(key3);
         registerActor(key4);
-        createGates(Orientation.RIGHT, 8, 14, key1);
-        createGates(Orientation.RIGHT, 8, 10, key1);
-        createGates(Orientation.RIGHT, 8, 8, key1);
-        createGates(Orientation.RIGHT, 21, 14, key2);
-        createGates(Orientation.RIGHT, 21, 10, key2);
-        createGates(Orientation.RIGHT, 21, 8, key2);
-        createGates(Orientation.RIGHT, 10,2, (key4));
-        createGates(Orientation.RIGHT,19,2, new And(key3, key4));
-        createGates(Orientation.RIGHT,12,8, new And(key3, key4));
-        createGates(Orientation.RIGHT,17,8, new And(key3, key4));
-        createGates(Orientation.RIGHT, 14,3, this);
-        createGates(Orientation.RIGHT,15,3, this);
-        createGates(Orientation.DOWN, 5,12, key1);
-        createGates(Orientation.DOWN, 24, 12, key2);
-    }
-
-    //calling method from SuperPacmanArea to register gates as actors
-    public void createGates(Orientation orientation, int x, int y, Logic signal) {
-        super.createGates(orientation, x, y, signal);
+        super.createGate(Orientation.RIGHT, 8, 14, key1);
+        super.createGate(Orientation.RIGHT, 8, 10, key1);
+        super.createGate(Orientation.RIGHT, 8, 8, key1);
+        super.createGate(Orientation.RIGHT, 21, 14, key2);
+        super.createGate(Orientation.RIGHT, 21, 10, key2);
+        super.createGate(Orientation.RIGHT, 21, 8, key2);
+        super.createGate(Orientation.RIGHT, 10,2, (key4));
+        super.createGate(Orientation.RIGHT,19,2, new And(key3, key4));
+        super.createGate(Orientation.RIGHT,12,8, new And(key3, key4));
+        super.createGate(Orientation.RIGHT,17,8, new And(key3, key4));
+        super.createGate(Orientation.RIGHT, 14,3, this);
+        super.createGate(Orientation.RIGHT,15,3, this);
+        super.createGate(Orientation.DOWN, 5,12, key1);
+        super.createGate(Orientation.DOWN, 24, 12, key2);
     }
 
     @Override

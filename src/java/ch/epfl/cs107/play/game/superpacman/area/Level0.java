@@ -21,13 +21,8 @@ public class Level0 extends NonRandomArea {
         registerActor(door);
         registerActor(key0);
         //the two gates of level0 use the key as signal
-        registerGates(Orientation.RIGHT, 5, 8, key0);
-        registerGates(Orientation.LEFT, 6, 8, key0);
-    }
-
-    //call the method from SuperpacmanArea to register gates as actors
-    public void registerGates(Orientation orientation, int x, int y, Logic signal) {
-        super.createGates(orientation, x, y, signal);
+        super.createGate(Orientation.RIGHT, 5, 8, key0);
+        super.createGate(Orientation.LEFT, 6, 8, key0);
     }
 
     @Override

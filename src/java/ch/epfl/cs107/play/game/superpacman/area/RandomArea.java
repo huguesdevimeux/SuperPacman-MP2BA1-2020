@@ -12,7 +12,8 @@ public class RandomArea extends SuperPacmanArea {
 
 	private int indexOfArea;
 	private String nextArea;
-	private RandomBehavior associatedBehavior; 
+	private RandomBehavior associatedBehavior;
+	private float RATIO_BONUSES_TO_COLLECT = 0.90f; 
 	
 	public RandomArea(int indexOfArea, String nextArea) {
 		super();
@@ -43,17 +44,22 @@ public class RandomArea extends SuperPacmanArea {
 	
 	@Override
 	protected void createArea() {
-		// TODO Auto-generated method stub
 		super.createArea();
 		for (DiscreteCoordinates pCoordinates : associatedBehavior.getDoorsPosition()) {
 			this.registerActor(new Door(nextArea, new DiscreteCoordinates(2, 2), Logic.TRUE, this,
-					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y), new DiscreteCoordinates(6, 9)));
+					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y),
+					new DiscreteCoordinates(6, 9)));
+			// We create gate on top of the doors. 
+			createGate(Orientation.LEFT, pCoordinates.x, pCoordinates.y, this);		
 		}
 	}
 
+	/**
+	 * The next level will be open if enough diamonds are collected. 
+	 */
 	@Override
 	public boolean isOn() {
-		return false;
+		return !(getCurrentDiamonds() < getOriginalNumberDiamonds() * RATIO_BONUSES_TO_COLLECT);
 	}
 
 	@Override

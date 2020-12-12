@@ -66,7 +66,7 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 
     //method to create gates depending on certain coordinates x and y and on the orientation
     //check the handout to verify the the coordinates of the gates on each level - page 20
-    public void createGates(Orientation orientation, int x, int y, Logic signal) {
+    public void createGate(Orientation orientation, int x, int y, Logic signal) {
         registerActor(new Gate((this), orientation, new DiscreteCoordinates(x, y), signal));
     }
 
