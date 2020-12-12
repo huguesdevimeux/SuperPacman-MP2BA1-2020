@@ -1,5 +1,8 @@
 package ch.epfl.cs107.play.game.superpacman.behavior;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.Cell;

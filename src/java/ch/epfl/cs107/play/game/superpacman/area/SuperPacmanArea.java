@@ -1,5 +1,8 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.List;
+import java.util.Queue;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
@@ -11,7 +14,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
-public abstract class SuperPacmanArea extends Area {
+public abstract class SuperPacmanArea extends Area implements Logic{
 
 
     public abstract DiscreteCoordinates getSpawnLocation();

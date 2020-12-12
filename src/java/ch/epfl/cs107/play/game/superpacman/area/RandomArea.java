@@ -50,4 +50,22 @@ public class RandomArea extends SuperPacmanArea {
 					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y), new DiscreteCoordinates(6, 9)));
 		}
 	}
+
+	@Override
+	public boolean isOn() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean isOff() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public float getIntensity() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
