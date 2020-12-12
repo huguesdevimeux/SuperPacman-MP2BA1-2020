@@ -65,7 +65,8 @@ public abstract class SuperPacmanArea extends Area implements Logic {
     }
 
     /**
-     * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.
+     * Get the path under the form of a queue of Orientation between point from and to,
+     * while excluding a set of point from being part of the path.
      */
     public Queue<Orientation> shortestPath(DiscreteCoordinates from, DiscreteCoordinates to,
                                            List<DiscreteCoordinates> toExclude) {

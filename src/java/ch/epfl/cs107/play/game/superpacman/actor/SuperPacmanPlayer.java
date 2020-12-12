@@ -104,7 +104,6 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Bonus bonus) {
             //when interacting with the coin - the ghosts get scared
             ((SuperPacmanArea) getOwnerArea()).scareGhosts();
-            Ghost.setAfraidTime();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
