@@ -16,7 +16,6 @@ public class SuperPacman extends RPG {
 
     //adding these two constants to use later on
     public final static float CAMERA_SCALE_FACTOR = 15.f;
-    public final static float STEP = 0.05f; //TODO -- never used : delete?
     private SuperPacmanPlayer player;
 
     //initalising player using method from super class

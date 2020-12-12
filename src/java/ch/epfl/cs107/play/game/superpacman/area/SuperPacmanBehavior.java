@@ -44,10 +44,6 @@ public class SuperPacmanBehavior extends AreaBehavior {
     }
     private AreaGraph associatedAreaGraph;
     private List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
-
-    public List<Ghost> getGhostsInGrid(){
-        return ghostsInGrid;
-    }
     /**
      * Default SuperPacmanBehavior Constructor
      *
@@ -154,6 +150,11 @@ public class SuperPacmanBehavior extends AreaBehavior {
     public void scareGhosts() {
         for (Ghost ghost : ghostsInGrid) {
             ghost.setAfraidState();
+        }
+    }
+    public void sendGhostsToRefugePosition(){
+        for(Ghost ghost : ghostsInGrid){
+            ghost.returnToRefugePosition();
         }
     }
     /**
