@@ -1,4 +1,7 @@
-package ch.epfl.cs107.play.game.superpacman.area;
+package ch.epfl.cs107.play.game.superpacman.behavior;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
@@ -6,14 +9,19 @@ import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.actor.*;
+import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
+import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
+import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
+import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.superpacman.actor.Inky;
+import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
+import ch.epfl.cs107.play.game.superpacman.actor.Wall;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SuperPacmanBehavior extends AreaBehavior {
+public abstract class SuperPacmanBehavior extends AreaBehavior {
     public Cherry cherry;
     public Bonus bonus;
     public Diamond diamond;
@@ -57,14 +65,16 @@ public class SuperPacmanBehavior extends AreaBehavior {
      */
     public SuperPacmanBehavior(Window window, String name) {
         super(window, name);
-        for (int y = 0; y < getHeight(); y++) {
-            for (int x = 0; x < getWidth(); x++) {
-                // Generate a behavior for each cell. 
-                SuperPacmanCellType color = SuperPacmanCellType.toType(getRGB(getHeight() - 1 - y, x));
-                setCell(x, y, new SuperPacmanCell(x, y, color));
-            }
-        }
+    }
 
+    public SuperPacmanBehavior(Window window, int height, int width) {
+        super(window, height, width);
+    }
+
+    /**
+     * Set the graph associated to the area. 
+     */
+    protected void setGraph() {
         associatedAreaGraph = new AreaGraph();
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
@@ -81,7 +91,7 @@ public class SuperPacmanBehavior extends AreaBehavior {
      * based on the cell type
      * @param area grid of the level.
      */
-    protected void registerActors(SuperPacmanArea area) {
+    public void registerActors(SuperPacmanArea area) {
         Ghost addedGhost;
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {

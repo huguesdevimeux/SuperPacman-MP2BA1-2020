@@ -1,23 +1,30 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import java.util.List;
+import java.util.Queue;
+
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior;
 import ch.epfl.cs107.play.game.superpacman.actor.Gate;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
 
-import java.util.List;
-import java.util.Queue;
+public abstract class SuperPacmanArea extends Area implements Logic{
 
-public abstract class SuperPacmanArea extends Area implements Logic {
 
+    public abstract DiscreteCoordinates getSpawnLocation();
+
+    protected abstract SuperPacmanBehavior getBehaviorTypeNewInstance(Window window); 
+
+    private Logic collected;
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;
-
+    
     /*
         instantiating the number of diamonds at 0
         before launching the games nbDiamonds = 0
@@ -26,11 +33,9 @@ public abstract class SuperPacmanArea extends Area implements Logic {
          */
     private static int totalNbDiamonds = 0;
 
-    public abstract DiscreteCoordinates getSpawnLocation();// TODO: delete? is never used
-
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
-            associatedBehavior = new SuperPacmanBehavior(window, getTitle());
+            associatedBehavior = getBehaviorTypeNewInstance(window);
             setBehavior(associatedBehavior);
             this.createArea();
             associatedGraph = associatedBehavior.getGraph();

@@ -12,7 +12,7 @@ import java.util.List;
 public class CollectableAreaEntity extends AreaEntity {
     /**
      * Default AreaEntity constructor
-     *  @param area        (Area): Owner area. Not null
+     * @param area        (Area): Owner area. Not null
      * @param position    (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
     public CollectableAreaEntity(Area area, DiscreteCoordinates position) {

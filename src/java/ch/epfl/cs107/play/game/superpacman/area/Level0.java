@@ -6,8 +6,8 @@ import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
-public class Level0 extends SuperPacmanArea {
-    private Key key0 = new Key(this, new DiscreteCoordinates(3, 4));
+public class Level0 extends NonRandomArea {
+    private Key key0 = new Key(this, new DiscreteCoordinates(3,4));
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
 
     public String getTitle() {

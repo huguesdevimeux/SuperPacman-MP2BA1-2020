@@ -7,7 +7,8 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
-public class Level2 extends SuperPacmanArea {
+public class Level2 extends NonRandomArea {
+   
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 
     private Key key1 = new Key(this, new DiscreteCoordinates(3,16));
