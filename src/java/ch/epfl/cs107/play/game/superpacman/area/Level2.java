@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
+import ch.epfl.cs107.play.game.superpacman.actor.Skeebo;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -39,6 +40,11 @@ public class Level2 extends SuperPacmanArea {
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);
         createGates(Orientation.DOWN, 24, 12, key2);
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(19,13)));
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(5,26)));
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(7, 26)));
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(22, 26)));
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(24, 26 )));
     }
 
     //calling method from SuperPacmanArea to register gates as actors

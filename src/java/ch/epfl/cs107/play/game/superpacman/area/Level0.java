@@ -3,6 +3,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
+import ch.epfl.cs107.play.game.superpacman.actor.Skeebo;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -23,6 +24,7 @@ public class Level0 extends SuperPacmanArea {
         //the two gates of level0 use the key as signal
         registerGates(Orientation.RIGHT, 5, 8, key0);
         registerGates(Orientation.LEFT, 6, 8, key0);
+        this.registerActor(new Skeebo(this, new DiscreteCoordinates(10, 8)));
     }
 
     //call the method from SuperpacmanArea to register gates as actors

@@ -35,7 +35,7 @@ public class SuperPacmanPlayer extends Player {
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
-        movingSpeed = 5;
+        movingSpeed = 6;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
                 new Orientation[]{Orientation.DOWN, Orientation.LEFT, Orientation.UP, Orientation.RIGHT});
@@ -78,7 +78,7 @@ public class SuperPacmanPlayer extends Player {
     }
 
     public void resetSpeed(){
-        movingSpeed = 5;
+        movingSpeed = 6;
     }
     public void increaseSpeedAndScareGhosts(){
         movingSpeed = 4;
@@ -130,6 +130,11 @@ public class SuperPacmanPlayer extends Player {
                 ((SuperPacmanArea)getOwnerArea()).allGhostsReturnToRefugePosition();
                 if(amountLife == 0) endGame();
             }
+        }
+        public void interactWith(Skeebo skeebo){
+            amountLife++;
+            resetSpeed();
+            getOwnerArea().unregisterActor(skeebo);
         }
         @Override
         public void interactWith(Interactable other) {}

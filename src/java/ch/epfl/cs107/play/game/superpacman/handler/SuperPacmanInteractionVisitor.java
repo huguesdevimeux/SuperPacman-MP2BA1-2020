@@ -1,6 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman.handler;
 
-import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.rpg.handler.RPGInteractionVisitor;
 import ch.epfl.cs107.play.game.superpacman.actor.*;
 
@@ -20,11 +19,11 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     }
     default void interactWith(Ghost ghost) {
     }
+    //added interaction with Skeebo (added character)
+    default void interactWith(Skeebo skeebo){
 
-    //without this method here -- error messages appear in ghostHandler
-    @Override
-    default void interactWith(Interactable other) {
     }
+
 }
 
 
