@@ -52,7 +52,7 @@ public class SuperPacman extends RPG {
             //the player will begin at level0, hence areaIndex = 0
             areaIndex = 0;
             // Area area = setCurrentArea(areas[areaIndex], true); // TODO : cast? 
-            Area area = setCurrentArea(areas[areaIndex], true); 
+            Area area = setCurrentArea("superpacman/Level0", true); 
             player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(5, 5)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;

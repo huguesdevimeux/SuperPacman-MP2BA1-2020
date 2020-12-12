@@ -36,7 +36,7 @@ public class Level1 extends NonRandomArea {
      @return true if the number of the diamonds in Level1 is 0
     */
     public boolean isOn(){
-        return !(this.totalNbDiamondsIsNull());
+        return !(getCurrentDiamonds() == 0);
     }
 
     @Override

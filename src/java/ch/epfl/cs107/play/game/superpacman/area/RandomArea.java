@@ -53,19 +53,16 @@ public class RandomArea extends SuperPacmanArea {
 
 	@Override
 	public boolean isOn() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isOff() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public float getIntensity() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 }

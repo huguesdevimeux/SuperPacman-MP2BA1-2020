@@ -86,7 +86,7 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
-            ((SuperPacmanArea) getOwnerArea()).reset();
+            ((SuperPacmanArea) getOwnerArea()).setCurrentDiamonds(0);
         }
 
         //when the player will interact with the key, the actor key will disappear
@@ -106,7 +106,7 @@ public class SuperPacmanPlayer extends Player {
             score += 10;
             //when interacting with a diamond
             //logically the total number of diamonds decreases
-            ((SuperPacmanArea) getOwnerArea()).decreaseTotalNbDiamonds();
+            ((SuperPacmanArea) getOwnerArea()).decreaseCurrentDiamonds();
             getOwnerArea().unregisterActor(diamond);
         }
 

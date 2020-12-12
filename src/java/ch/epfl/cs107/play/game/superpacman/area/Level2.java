@@ -60,7 +60,7 @@ public class Level2 extends NonRandomArea {
    */
     @Override
     public boolean isOn() {
-        return !((this.totalNbDiamondsIsNull()));
+        return !(getCurrentDiamonds() == 0);
     }
     @Override
     public boolean isOff() {
