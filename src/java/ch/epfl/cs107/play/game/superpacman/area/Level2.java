@@ -1,7 +1,6 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
@@ -22,7 +21,6 @@ public class Level2 extends SuperPacmanArea {
 
     protected void createArea() {
         super.createArea();
-        SuperPacman.areaIndex++;
         registerActor(key1);
         registerActor(key2);
         registerActor(key3);

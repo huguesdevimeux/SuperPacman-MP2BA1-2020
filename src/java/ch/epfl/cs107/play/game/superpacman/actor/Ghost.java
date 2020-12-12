@@ -100,6 +100,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         afraidTime--;
         if (afraidTime <= 0) {
             setNormalState();
+            //we reset the player's speed once the ghost's aren't scared anymore
+            SuperPacmanPlayer.resetSpeed();
         }
     }
 
@@ -118,6 +120,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         afraidTime decreases by 1 --- 900 thus allows for the afraid state of the ghosts to last 8-10 seconds
          */
         afraidTime = 900;
+        //we also increase the player's moving speed temporarily while the ghosts are afraid
+        SuperPacmanPlayer.increaseSpeed();
     }
 
     @Override
@@ -127,7 +131,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     @Override
     public boolean takeCellSpace() {
-        // One can walk on a ghost (?).
         return false;
     }
 
@@ -173,7 +176,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     }
 
     public void returnToRefugePosition(){
-        getOwnerArea().leaveAreaCells(this, getCurrentCells());
+        getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();

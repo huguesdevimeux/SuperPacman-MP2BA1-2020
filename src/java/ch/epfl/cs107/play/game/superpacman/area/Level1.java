@@ -2,7 +2,6 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
@@ -14,7 +13,6 @@ public class Level1 extends SuperPacmanArea {
 
     protected void createArea() {
         super.createArea();
-        SuperPacman.areaIndex++;
         registerActor(new Door("superpacman/Level2", new DiscreteCoordinates(15,29), Logic.TRUE, this,
                 Orientation.DOWN, new DiscreteCoordinates(14,0), new DiscreteCoordinates(15,0)));
         registerGates(Orientation.RIGHT, 14, 3,this);

@@ -9,7 +9,6 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
@@ -23,11 +22,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    private int movingSpeed;
+    public static int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
-    private int amountLife = 5;
+    private int amountLife = SuperPacmanPlayerStatusGUI.amountLife;
 
     private Animation[] movingAnimations;
     private Sprite[][] sprites;
@@ -37,7 +36,6 @@ public class SuperPacmanPlayer extends Player {
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
-
         movingSpeed = 5;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -45,7 +43,6 @@ public class SuperPacmanPlayer extends Player {
         movingAnimations = Animation.createAnimations(movingSpeed / 2, sprites);
         resetMotion();
     }
-
     @Override
     public void update(float deltaTime) {
         Keyboard keyboard = getOwnerArea().getKeyboard();
@@ -81,12 +78,21 @@ public class SuperPacmanPlayer extends Player {
         }
     }
 
+    public static void resetSpeed(){
+        movingSpeed = 5;
+    }
+    public static void increaseSpeed(){
+        movingSpeed = 4;
+    }
+
     private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
 
         public void interactWith(Door door) {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
-            ((SuperPacmanArea) getOwnerArea()).reset();
+            ((SuperPacmanArea) getOwnerArea()).resetNbDiamondsToNull();
+            //when passing from a level to another, we reset the ghost's speed to
+            resetSpeed();
         }
 
         //when the player will interact with the key, the actor key will disappear
@@ -109,7 +115,6 @@ public class SuperPacmanPlayer extends Player {
             ((SuperPacmanArea) getOwnerArea()).decreaseTotalNbDiamonds();
             getOwnerArea().unregisterActor(diamond);
         }
-
         //"eating" a cherry will increment the score by 200
         public void interactWith(Cherry cherry) {
             score += 200;
@@ -120,9 +125,9 @@ public class SuperPacmanPlayer extends Player {
             if (ghost.isAfraid()) {
                 ghost.returnToRefugePosition();
                 score += 500;
-            }else {
+            }else{
                 pacmanIsEaten();
-                amountLife --;
+                amountLife--;
                 if(amountLife == 0) endGame();
                 ghost.returnToRefugePosition();
             }
@@ -137,22 +142,10 @@ public class SuperPacmanPlayer extends Player {
 
     public void pacmanIsEaten(){
         getOwnerArea().leaveAreaCells(this, getCurrentCells());
-        if(SuperPacman.areaIndex == 0){
             setCurrentPosition(getSpawnLocation().toVector());
             getOwnerArea().enterAreaCells(this, getCurrentCells());
             resetMotion();
         }
-        if(SuperPacman.areaIndex == 1) {
-            setCurrentPosition(getSpawnLocation().toVector());
-            getOwnerArea().enterAreaCells(this, getCurrentCells());
-            resetMotion();
-        }
-        if(SuperPacman.areaIndex == 2) {
-            setCurrentPosition(getSpawnLocation().toVector());
-            getOwnerArea().enterAreaCells(this, getCurrentCells());
-            resetMotion();
-        }
-    }
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
@@ -171,8 +164,7 @@ public class SuperPacmanPlayer extends Player {
         //TODO ----- COMPLETE
         System.exit(0);
     }
-
-
+    
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
         // Player has no fov. WARNING !

@@ -24,7 +24,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
         however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
         thus recording the number of diamonds per level
          */
-    private static int totalNbDiamonds = 0;
+    private int totalNbDiamonds = 0;
 
     public abstract DiscreteCoordinates getSpawnLocation();// TODO: delete? is never used
 
@@ -86,12 +86,9 @@ public abstract class SuperPacmanArea extends Area implements Logic {
     public void decreaseTotalNbDiamonds(){
         totalNbDiamonds--;
     }
-    public int reset(){
+    public int resetNbDiamondsToNull(){
         return totalNbDiamonds = 0;
     }
-
-    public boolean totalNbDiamondsIsNull(){
-        return totalNbDiamonds == 0;
-    }
+    public boolean totalNbDiamondsIsNull(){return totalNbDiamonds == 0;}
 }
 

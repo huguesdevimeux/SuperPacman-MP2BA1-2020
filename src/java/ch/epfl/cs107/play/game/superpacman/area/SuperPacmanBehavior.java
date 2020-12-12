@@ -45,7 +45,6 @@ public class SuperPacmanBehavior extends AreaBehavior {
             return NONE;
         }
     }
-
     private AreaGraph associatedAreaGraph;
     private List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
 

@@ -16,12 +16,8 @@ public class SuperPacman extends RPG {
 
     //adding these two constants to use later on
     public final static float CAMERA_SCALE_FACTOR = 15.f;
-    public final static float STEP = 0.05f;
-
-    //areaIndex will denote the areas level0, level1, level2
-    public static int areaIndex;
+    public final static float STEP = 0.05f; //TODO -- never used : delete?
     private SuperPacmanPlayer player;
-    public final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
 
     //initalising player using method from super class
     @Override
@@ -40,12 +36,9 @@ public class SuperPacman extends RPG {
     }
 
     public boolean begin(Window window, FileSystem fileSystem) {
-
         if (super.begin(window, fileSystem)) {
             createAreas();
-            //the player will begin at level0, hence areaIndex = 0
-            areaIndex = 0;
-            Area area = setCurrentArea(areas[areaIndex], true); // TODO : cast? 
+            Area area = setCurrentArea("superpacman/Level0", true); // TODO : cast?
             player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;
@@ -54,7 +47,7 @@ public class SuperPacman extends RPG {
 
     @Override
     public void end() {}
-    protected void switchArea() {}
+    protected void switchArea() {} ///TODO -- never used : delete?
 
     public String getTitle() {
         return "Super Pac-Man";
