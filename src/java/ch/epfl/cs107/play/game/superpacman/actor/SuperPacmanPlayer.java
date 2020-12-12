@@ -22,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
-    public static int movingSpeed;
+    public int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private int score = 0;
@@ -78,11 +78,12 @@ public class SuperPacmanPlayer extends Player {
         }
     }
 
-    public static void resetSpeed(){
+    public void resetSpeed(){
         movingSpeed = 5;
     }
-    public static void increaseSpeed(){
+    public void increaseSpeedAndScareGhosts(){
         movingSpeed = 4;
+        ((SuperPacmanArea) getOwnerArea()).scareGhosts();
     }
 
     private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
@@ -102,8 +103,9 @@ public class SuperPacmanPlayer extends Player {
         }
 
         public void interactWith(Bonus bonus) {
+            increaseSpeedAndScareGhosts();
             //when interacting with the coin - the ghosts get scared
-            ((SuperPacmanArea) getOwnerArea()).scareGhosts();
+           ((SuperPacmanArea) getOwnerArea()).scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10

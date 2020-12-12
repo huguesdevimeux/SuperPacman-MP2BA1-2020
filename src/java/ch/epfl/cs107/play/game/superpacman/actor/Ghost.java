@@ -22,7 +22,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
     private boolean isAfraid;
-    private static int afraidTime;
+    private int afraidTime;
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -100,8 +100,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         afraidTime--;
         if (afraidTime <= 0) {
             setNormalState();
-            //we reset the player's speed once the ghost's aren't scared anymore
-            SuperPacmanPlayer.resetSpeed();
         }
     }
 
@@ -117,11 +115,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
      private void setAfraidTime() {
         /*afraid time is a very large time
         as the time gap between every delta time in update() is very small and at each update,
-        afraidTime decreases by 1 --- 900 thus allows for the afraid state of the ghosts to last 8-10 seconds
+        afraidTime decreases by 1 --- 230 thus allows for the afraid state of the ghosts to last 8-10 seconds
          */
-        afraidTime = 900;
-        //we also increase the player's moving speed temporarily while the ghosts are afraid
-        SuperPacmanPlayer.increaseSpeed();
+        afraidTime = 230;
     }
 
     @Override
