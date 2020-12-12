@@ -43,8 +43,11 @@ public class SuperPacmanBehavior extends AreaBehavior {
         }
     }
     private AreaGraph associatedAreaGraph;
-    public static List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
+    private List<Ghost> ghostsInGrid = new ArrayList<Ghost>();
 
+    public List<Ghost> getGhostsInGrid(){
+        return ghostsInGrid;
+    }
     /**
      * Default SuperPacmanBehavior Constructor
      *

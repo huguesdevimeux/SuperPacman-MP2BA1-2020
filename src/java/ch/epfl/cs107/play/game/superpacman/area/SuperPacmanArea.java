@@ -5,6 +5,7 @@ import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.actor.Gate;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -77,6 +78,9 @@ public abstract class SuperPacmanArea extends Area implements Logic {
         associatedBehavior.scareGhosts();
     }
 
+    public void allGhostsReturnToRefugePosition() {
+        for (Ghost ghost : associatedBehavior.getGhostsInGrid()) ghost.returnToRefugePosition();
+    }
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
     }

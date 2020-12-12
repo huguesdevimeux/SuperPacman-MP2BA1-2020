@@ -128,7 +128,7 @@ public class SuperPacmanPlayer extends Player {
                 pacmanIsEaten();
                 amountLife--;
                 if(amountLife == 0) endGame();
-                ghost.allGhostsReturnToRefugePosition();
+                ((SuperPacmanArea)getOwnerArea()).allGhostsReturnToRefugePosition();
             }
         }
         @Override
