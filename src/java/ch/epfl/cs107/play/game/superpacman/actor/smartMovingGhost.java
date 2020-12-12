@@ -44,6 +44,10 @@ public abstract class smartMovingGhost extends Ghost {
         this.memorizedPlayer = player;
     }
 
+    protected void forgetPlayer() {
+        this.memorizedPlayer = null; 
+    }
+
     protected SuperPacmanPlayer getMemorizedPlayer() {
         return this.memorizedPlayer;
     }
@@ -55,8 +59,14 @@ public abstract class smartMovingGhost extends Ghost {
     }
     @Override
     public void setNormalState() {
-        this.targetPos = null; 
+        this.targetPos = null;
         super.setNormalState();
+    }
+    
+    @Override
+    public void resetGhost() {
+        super.resetGhost();
+        forgetPlayer();
     }
     
     /**
