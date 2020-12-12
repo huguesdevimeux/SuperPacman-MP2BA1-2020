@@ -20,9 +20,9 @@ public class SuperPacman extends RPG {
     public final static float STEP = 0.05f;
 
     //areaIndex will denote the areas level0, level1, level2
-    private int areaIndex;
+    public static int areaIndex;
     private SuperPacmanPlayer player;
-    public final String[] areas = {"randomAreaLevel1","superpacman/Level0", "superpacman/Level1", "superpacman/ Level2"};
+    public final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
 
     //initalising player using method from super class
     @Override
@@ -59,14 +59,9 @@ public class SuperPacman extends RPG {
         } else return false;
     }
 
-
     @Override
-    public void end() {
-    }
-
-    protected void switchArea() {
-
-    }
+    public void end() {}
+    protected void switchArea() {}
 
     public String getTitle() {
         return "Super Pac-Man";

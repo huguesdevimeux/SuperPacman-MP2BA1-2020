@@ -13,9 +13,7 @@ public class CollectableAreaEntity extends AreaEntity {
     /**
      * Default AreaEntity constructor
      * @param area        (Area): Owner area. Not null
-     * @param orientation (Orientation): Initial orientation of the entity in the Area. Not null
      * @param position    (DiscreteCoordinate): Initial position of the entity in the Area. Not null
-     * @param bonus
      */
     public CollectableAreaEntity(Area area, DiscreteCoordinates position) {
         super(area, Orientation.DOWN, position);
