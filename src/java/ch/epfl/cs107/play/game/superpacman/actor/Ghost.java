@@ -23,7 +23,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private Animation[] afraidAnimations;
     private Animation[] currentAnimations;
     private boolean isAfraid;
-    private static int afraidTime;
+    private int afraidTime;
 
     public Ghost(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -70,6 +70,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     public void setAfraidState() {
         this.isAfraid = true;
         this.currentAnimations = afraidAnimations;
+        setAfraidTime();
     }
 
     /**
@@ -112,12 +113,12 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         return this.refugePosition;
     }
 
-    public static void setAfraidTime() {
+    private void setAfraidTime() {
         /*afraid time is a very large time
         as the time gap between every delta time in update() is very small and at each update,
-        afraidTime decreases by 1 --- 900 thus allows for the afraid state of the ghosts to last 8-10 seconds
+        afraidTime decreases by 1 --- 230 thus allows for the afraid state of the ghosts to last 8-10 seconds
          */
-        afraidTime = 900;
+        afraidTime = 230;
     }
 
     @Override
@@ -127,7 +128,6 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     @Override
     public boolean takeCellSpace() {
-        // One can walk on a ghost (?).
         return false;
     }
 
@@ -172,7 +172,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         }
     }
 
-    private void returnToRefugePosition(){
+    public void returnToRefugePosition(){
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());

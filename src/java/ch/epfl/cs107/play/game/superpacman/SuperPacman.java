@@ -15,32 +15,24 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacman extends RPG {
 
-    //adding these two constants to use later on
+    //adding this constants to use later on
     public final static float CAMERA_SCALE_FACTOR = 30.f;
-    public final static float STEP = 0.05f;
-
-    //areaIndex will denote the areas level0, level1, level2
-    public static int areaIndex;
     private SuperPacmanPlayer player;
-    public final String[] areas = {"superpacman/Level0", "superpacman/Level1", "superpacman/Level2"};
 
     //initalising player using method from super class
     @Override
     protected void initPlayer(Player player) {
         super.initPlayer(player);
     }
-
     public void update(float deltaTime) {
         super.update(deltaTime);
     }
-
     private void createAreas() {
         addArea(new Level0());
         addArea(new Level1());
         addArea(new Level2());
-        RandomArea randomArea2 = new RandomArea(2, "superpacman/Level0");
+        RandomArea randomArea2 = new RandomArea(2, "superpacman/Level0"); //is normal that nextArea is level0??
         RandomArea randomarea1 = new RandomArea(1, randomArea2.getTitle());
-
         addArea(randomarea1);
         addArea(randomArea2);
     }
@@ -49,11 +41,8 @@ public class SuperPacman extends RPG {
 
         if (super.begin(window, fileSystem)) {
             createAreas();
-            //the player will begin at level0, hence areaIndex = 0
-            areaIndex = 0;
-            // Area area = setCurrentArea(areas[areaIndex], true); // TODO : cast? 
-            Area area = setCurrentArea(areas[areaIndex], true); 
-            player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(5, 5)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
+            Area area = setCurrentArea("superpacman/Level0", true);
+            player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;
         } else return false;

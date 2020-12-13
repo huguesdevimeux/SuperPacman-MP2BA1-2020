@@ -3,7 +3,6 @@ package ch.epfl.cs107.play.game.superpacman.actor;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Path;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -11,7 +10,6 @@ import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.window.Canvas;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
@@ -192,10 +190,6 @@ public abstract class smartMovingGhost extends Ghost {
     // FOR DEBUG PURPOSES ! 
     @Override
     public void draw(Canvas canvas) {
-        if (followingPath != null) {
-            Path debugFollowingPath = new Path(this.getPosition(), new LinkedList<Orientation>(followingPath));
-            debugFollowingPath.draw(canvas);
-        }
         super.draw(canvas);
     }
 
