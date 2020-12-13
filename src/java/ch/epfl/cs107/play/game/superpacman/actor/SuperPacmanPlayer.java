@@ -132,7 +132,7 @@ public class SuperPacmanPlayer extends Player {
             }
         }
         public void interactWith(Skeebo skeebo){
-            amountLife++;
+            if(amountLife < 5)amountLife++;
             resetSpeed();
             getOwnerArea().unregisterActor(skeebo);
         }

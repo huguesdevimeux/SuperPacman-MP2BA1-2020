@@ -11,7 +11,7 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Skeebo extends CollectableAreaEntity {
     private Sprite skeebo;
     /**
-     * Default Skeebo constructor
+     * Default AreaEntity constructor
      *
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
