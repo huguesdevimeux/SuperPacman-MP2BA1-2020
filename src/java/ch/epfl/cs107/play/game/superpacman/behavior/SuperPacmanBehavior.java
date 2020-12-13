@@ -1,30 +1,19 @@
 package ch.epfl.cs107.play.game.superpacman.behavior;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.Cell;
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.superpacman.actor.Bonus;
-import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
-import ch.epfl.cs107.play.game.superpacman.actor.Diamond;
-import ch.epfl.cs107.play.game.superpacman.actor.Blinky;
-import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
-import ch.epfl.cs107.play.game.superpacman.actor.Inky;
-import ch.epfl.cs107.play.game.superpacman.actor.Pinky;
-import ch.epfl.cs107.play.game.superpacman.actor.Wall;
+import ch.epfl.cs107.play.game.superpacman.actor.*;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class SuperPacmanBehavior extends AreaBehavior {
-    public Cherry cherry;
-    public Bonus bonus;
-    public Diamond diamond;
 
     public enum SuperPacmanCellType {
         NONE(0), // never used as real content
@@ -168,6 +157,11 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
     public void scareGhosts() {
         for (Ghost ghost : ghostsInGrid) {
             ghost.setAfraidState();
+        }
+    }
+    public void resetAllGhosts(){
+        for(Ghost ghost : ghostsInGrid){
+            ghost.resetGhost();
         }
     }
     /**

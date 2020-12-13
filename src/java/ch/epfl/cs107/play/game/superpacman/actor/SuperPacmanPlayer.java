@@ -9,7 +9,6 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
@@ -37,7 +36,6 @@ public class SuperPacmanPlayer extends Player {
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
-
         movingSpeed = 5;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -69,6 +67,21 @@ public class SuperPacmanPlayer extends Player {
             super.update(deltaTime);
     }
 
+    //method will be used when entering a new level or when player eats a Jamila
+    public void resetSpeed(){
+        movingSpeed = 5;
+    }
+
+    /*
+    method will be used when player eats a coin
+    it will increase the speed but not temporarily
+    and eating a Jamila, will reset speed but will increase health
+    making the game more dynamic
+    */
+    public void increaseSpeedAndScareGhosts(){
+        movingSpeed = 4;
+        ((SuperPacmanArea)getOwnerArea()).scareGhosts();
+    }
     /**
      * Set the desired orientation if the corresponding key is pressed, and if the orientation needs to be updated.
      *
@@ -87,6 +100,8 @@ public class SuperPacmanPlayer extends Player {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
             ((SuperPacmanArea) getOwnerArea()).setCurrentDiamonds(0);
+            //when entering a new level, we reset the speed to 5
+            resetSpeed();
         }
 
         //when the player will interact with the key, the actor key will disappear
@@ -96,9 +111,8 @@ public class SuperPacmanPlayer extends Player {
         }
 
         public void interactWith(Bonus bonus) {
-            //when interacting with the coin - the ghosts get scared
-            ((SuperPacmanArea) getOwnerArea()).scareGhosts();
-            Ghost.setAfraidTime();
+            //when interacting with the coin - the ghosts get scared and speed increases
+            increaseSpeedAndScareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
@@ -124,7 +138,7 @@ public class SuperPacmanPlayer extends Player {
                 pacmanIsEaten();
                 amountLife --;
                 if(amountLife == 0) endGame();
-                ghost.resetGhost();
+                ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
             }
         }
         @Override
@@ -136,22 +150,11 @@ public class SuperPacmanPlayer extends Player {
     }
 
     public void pacmanIsEaten(){
-        getOwnerArea().leaveAreaCells(this, getCurrentCells());
-        if(SuperPacman.areaIndex == 0){
-            setCurrentPosition(getSpawnLocation().toVector());
-            getOwnerArea().enterAreaCells(this, getCurrentCells());
-            resetMotion();
-        }
-        if(SuperPacman.areaIndex == 1) {
-            setCurrentPosition(getSpawnLocation().toVector());
-            getOwnerArea().enterAreaCells(this, getCurrentCells());
-            resetMotion();
-        }
-        if(SuperPacman.areaIndex == 2) {
-            setCurrentPosition(getSpawnLocation().toVector());
-            getOwnerArea().enterAreaCells(this, getCurrentCells());
-            resetMotion();
-        }
+        getOwnerArea().leaveAreaCells(this, getEnteredCells());
+        setCurrentPosition(getSpawnLocation().toVector());
+        getOwnerArea().enterAreaCells(this, getCurrentCells());
+        resetMotion();
+
     }
 
     @Override

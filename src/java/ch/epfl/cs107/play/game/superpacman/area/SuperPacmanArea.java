@@ -1,18 +1,17 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
-import java.util.List;
-import java.util.Queue;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
-import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior;
 import ch.epfl.cs107.play.game.superpacman.actor.Gate;
+import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
+import java.util.List;
+import java.util.Queue;
 
 public abstract class SuperPacmanArea extends Area implements Logic{
 
@@ -82,6 +81,9 @@ public abstract class SuperPacmanArea extends Area implements Logic{
         associatedBehavior.scareGhosts();
     }
 
+    public void resetAllGhosts(){
+        associatedBehavior.resetAllGhosts();
+    }
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
     }

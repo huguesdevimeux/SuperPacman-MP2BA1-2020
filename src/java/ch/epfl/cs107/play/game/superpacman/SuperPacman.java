@@ -17,14 +17,9 @@ import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacman extends RPG {
 
-    //adding these two constants to use later on
+    //adding this constants to use later on
     public final static float CAMERA_SCALE_FACTOR = 30.f;
-    public final static float STEP = 0.05f;
-
-    //areaIndex will denote the areas level0, level1, level2
-    public static int areaIndex;
     private SuperPacmanPlayer player;
-    public final String[] areas = { "superpacman/Level0", "superpacman/Level1", "superpacman/Level2" };
     // Infinite game mode means that there is always a new map after the current (procedurally generated).
     private boolean proceduralGamemode = true;
     private int infiniteLevel = 0;
@@ -34,7 +29,6 @@ public class SuperPacman extends RPG {
     protected void initPlayer(Player player) {
         super.initPlayer(player);
     }
-
     public void update(float deltaTime) {
         // RandomArea is a signal that is on when the player can go to the next area. 
         if (proceduralGamemode && ((RandomArea) getCurrentArea()).isOn() && infiniteLevel == ((RandomArea) getCurrentArea()).getLevel()) {
@@ -72,9 +66,7 @@ public class SuperPacman extends RPG {
                 addArea(new RandomArea(0));
                 startingArea = setCurrentArea("randomAreaLevel0", true);
             }
-            //the player will begin at level0, hence areaIndex = 0
-            areaIndex = 0;
-            player = new SuperPacmanPlayer(startingArea, Orientation.UP, new DiscreteCoordinates(5, 5)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
+            player = new SuperPacmanPlayer(startingArea, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;
         } else return false;
