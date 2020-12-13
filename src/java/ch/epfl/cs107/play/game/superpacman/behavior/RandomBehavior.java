@@ -11,9 +11,12 @@ public class RandomBehavior extends SuperPacmanBehavior {
 
     private RandomPacmanMap randomMazeGenerated;
 
-    public RandomBehavior(Window window) {
-        super(window, 19, 18);
-        randomMazeGenerated = new RandomPacmanMap(getHeight(), getWidth());
+    public RandomBehavior(Window window, int height, int width) {
+        super(window, height, width);
+        // Requirements of the algorithm used. See implementation of RandomPacmanMap for more information. 
+        assert (height % 2 == 1) : "Height must be odd";
+        assert (width % 4 == 2): "Width must be a sum of two odd numbers";
+        randomMazeGenerated = new RandomPacmanMap(height, width);
         SuperPacmanCellType[][] randomBehavior = randomMazeGenerated.getBehavior();
 
         // Set each cells according to the random behavior map generated.

@@ -44,7 +44,7 @@ public class RandomArea extends SuperPacmanArea {
 
 	@Override
 	protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
-		associatedBehavior = new RandomBehavior(window) ;
+		associatedBehavior = new RandomBehavior(window, 19, 18) ;		
 		return associatedBehavior; 
 	}
 	
