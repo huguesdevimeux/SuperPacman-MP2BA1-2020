@@ -11,9 +11,9 @@ public class RandomBehavior extends SuperPacmanBehavior {
 
     private RandomPacmanMap randomMazeGenerated;
 
-    public RandomBehavior(Window window, String name, String nextArea) {
+    public RandomBehavior(Window window) {
         super(window, 19, 18);
-        randomMazeGenerated = new RandomPacmanMap(getHeight(), getWidth(), nextArea);
+        randomMazeGenerated = new RandomPacmanMap(getHeight(), getWidth());
         SuperPacmanCellType[][] randomBehavior = randomMazeGenerated.getBehavior();
 
         // Set each cells according to the random behavior map generated.

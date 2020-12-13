@@ -21,7 +21,7 @@ public class RandomPacmanMap {
     private List<DiscreteCoordinates> freeCells;
     private List<DiscreteCoordinates> doorsPositions; 
 
-    public RandomPacmanMap(int height, int width, String nextArea) {
+    public RandomPacmanMap(int height, int width) {
         assert (height % 2 == 1) : "Height must be odd";
         assert (width % 4 == 2): "Width must be a sum of two odd numbers";
         totalHeight = height;

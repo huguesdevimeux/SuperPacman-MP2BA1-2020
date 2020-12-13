@@ -10,26 +10,31 @@ import ch.epfl.cs107.play.window.Window;
 
 public class RandomArea extends SuperPacmanArea {
 
-	private int indexOfArea;
-	private String nextArea;
+	private int levelOfTheArea;
 	private RandomBehavior associatedBehavior;
 	// this determines how many diamonds must be collected before the next gate is opened. 
-	private float RATIO_DIAMONDS_TO_COLLECT = 0.70f; 
+	private float RATIO_DIAMONDS_TO_COLLECT = 0.99f; 
 	
-	public RandomArea(int indexOfArea, String nextArea) {
+	public RandomArea(int indexOfArea) {
 		super();
-		this.indexOfArea = indexOfArea;
-		this.nextArea = nextArea;
+		this.levelOfTheArea = indexOfArea;
 	}
 
-	public int getIndexOfArea() {
-		return indexOfArea;
+	public int getLevel() {
+		return levelOfTheArea;
 	}
-
 
 	@Override
 	public String getTitle() {
-		return "randomAreaLevel" + indexOfArea;
+		return "randomAreaLevel" + levelOfTheArea;
+	}
+
+	/**
+	 * Get the title of the next area that will be played after the current one. (basically a level more).	
+	 * @return
+	 */
+	public String getTitleNextArea() {
+		return "randomAreaLevel" + (levelOfTheArea + 1); 
 	}
 
 	@Override
@@ -39,7 +44,7 @@ public class RandomArea extends SuperPacmanArea {
 
 	@Override
 	protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
-		associatedBehavior = new RandomBehavior(window, getTitle(), this.nextArea);
+		associatedBehavior = new RandomBehavior(window) ;
 		return associatedBehavior; 
 	}
 	
@@ -47,7 +52,7 @@ public class RandomArea extends SuperPacmanArea {
 	protected void createArea() {
 		super.createArea();
 		for (DiscreteCoordinates pCoordinates : associatedBehavior.getDoorsPosition()) {
-			this.registerActor(new Door(nextArea, new DiscreteCoordinates(2, 2), Logic.TRUE, this,
+			this.registerActor(new Door(getTitleNextArea(), new DiscreteCoordinates(2, 2), Logic.TRUE, this,
 					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y),
 					new DiscreteCoordinates(6, 9)));
 			// We create gate on top of the doors. 
