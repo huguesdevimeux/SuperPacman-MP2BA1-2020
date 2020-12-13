@@ -9,12 +9,10 @@ import ch.epfl.cs107.play.math.RandomGenerator;
  * Blinky is characterised by its random moves.
  */
 public class Blinky extends Ghost {
-    private int movingSpeed = 18; 
-    
+
     public Blinky(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
     }
-
     /**
      * Blinky moves randomly
      */
@@ -29,8 +27,11 @@ public class Blinky extends Ghost {
         return "superpacman/ghost.blinky";
     }
 
+    //returns moving speed in Ghost class
     @Override
     protected int getSpeed() {
+        //once blinky is afraid, we increase its speed
+        if(isAfraid())increaseMovingSpeed();
         return movingSpeed;
     }
     
