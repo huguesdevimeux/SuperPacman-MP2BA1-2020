@@ -13,7 +13,6 @@ public class Blinky extends Ghost {
     public Blinky(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
     }
-
     /**
      * Blinky moves randomly
      */
@@ -21,11 +20,6 @@ public class Blinky extends Ghost {
         // there is 4 orientations. 
         int randomInt = RandomGenerator.getInstance().nextInt(4);
         return Orientation.fromInt(randomInt);
-    }
-
-    //once blinky is afraid, we increase its speed
-    public void increaseSpeedIfAfraid(){
-        if(isAfraid()) increaseMovingSpeed();
     }
 
     @Override
@@ -36,6 +30,8 @@ public class Blinky extends Ghost {
     //returns moving speed in Ghost class
     @Override
     protected int getSpeed() {
+        //once blinky is afraid, we increase its speed
+        if(isAfraid())increaseMovingSpeed();
         return movingSpeed;
     }
     

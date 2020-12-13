@@ -156,7 +156,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
             ghost.setAfraidState();
         }
     }
-    public void sendGhostsToRefugePosition(){
+    public void resetAllGhosts(){
         for(Ghost ghost : ghostsInGrid){
             ghost.resetGhost();
         }

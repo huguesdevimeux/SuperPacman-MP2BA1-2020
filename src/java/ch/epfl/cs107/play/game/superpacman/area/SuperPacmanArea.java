@@ -81,7 +81,7 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     }
 
     public void resetAllGhosts(){
-        associatedBehavior.sendGhostsToRefugePosition();
+        associatedBehavior.resetAllGhosts();
     }
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
