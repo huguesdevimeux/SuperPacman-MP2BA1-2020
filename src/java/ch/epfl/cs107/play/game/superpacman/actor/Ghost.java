@@ -17,7 +17,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private static final int LENGTH_FOV = 5;
     private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
-
+    public final int GHOST_SCORE = 500;
     protected int movingSpeed = 15;
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;

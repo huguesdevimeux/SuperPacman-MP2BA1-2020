@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.window.Window;
 public class SuperPacman extends RPG {
 
     //adding this constants to use later on
-    public final static float CAMERA_SCALE_FACTOR = 30.f;
+    public final static float CAMERA_SCALE_FACTOR = 20.f;
     private SuperPacmanPlayer player;
 
     //initalising player using method from super class

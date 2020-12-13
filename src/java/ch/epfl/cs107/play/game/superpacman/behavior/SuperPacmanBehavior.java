@@ -138,7 +138,6 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
         neighborhood[2][0] = isWall(x + 1, y + 1);
         return neighborhood;
     }
-
     /**
      * Get the graph associated with the behavior.
      *

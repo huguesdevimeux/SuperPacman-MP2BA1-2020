@@ -21,6 +21,7 @@ public interface SuperPacmanInteractionVisitor extends RPGInteractionVisitor {
     }
     default void interactWith(Jamila jamila) {
     }
+    default void interactWith(ManBall manBall){}
 }
 
 

@@ -17,12 +17,8 @@ import java.util.Queue;
 
 public abstract class SuperPacmanArea extends Area implements Logic{
 
-
     public abstract DiscreteCoordinates getSpawnLocation();
-
-    protected abstract SuperPacmanBehavior getBehaviorTypeNewInstance(Window window); 
-
-    private Logic collected;
+    protected abstract SuperPacmanBehavior getBehaviorTypeNewInstance(Window window);
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;
     
@@ -43,6 +39,11 @@ public abstract class SuperPacmanArea extends Area implements Logic{
             return true;
         } else
             return false;
+    }
+
+    public void endGame(){
+        //TODO ----- COMPLETE
+        System.exit(0);
     }
 
     public final float getCameraScaleFactor() {
@@ -74,8 +75,8 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     register jamila as actor
     side note : we must register Jamila manually as its celltype is the same as the coins
      */
-    public void createJamila(int x, int y){
-        registerActor(new Jamila(this, new DiscreteCoordinates( x,y)));
+    public void createJamila(int x, int y, Logic signal){
+        registerActor(new Jamila(this, Orientation.RIGHT, new DiscreteCoordinates(x,y), signal));
     }
     /**
      * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.

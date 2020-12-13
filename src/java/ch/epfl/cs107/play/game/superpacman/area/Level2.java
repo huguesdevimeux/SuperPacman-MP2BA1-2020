@@ -2,14 +2,19 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
+import ch.epfl.cs107.play.game.superpacman.actor.ManBall;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
 import ch.epfl.cs107.play.signal.logic.Logic;
 
 public class Level2 extends NonRandomArea {
-   
+
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
 
+    private ManBall manBall1 = new ManBall(this, new DiscreteCoordinates(28, 3));
+    private ManBall manBall2 = new ManBall(this, new DiscreteCoordinates(1, 1));
+    private ManBall manBall3 = new ManBall(this, new DiscreteCoordinates(1, 28));
+    private ManBall manBall4 = new ManBall(this, new DiscreteCoordinates(28, 28));
     private Key key1 = new Key(this, new DiscreteCoordinates(3,16));
     private Key key2 = new Key(this, new DiscreteCoordinates(26, 16));
     private Key key3 = new Key(this, new DiscreteCoordinates(2,8));
@@ -32,10 +37,10 @@ public class Level2 extends NonRandomArea {
         createGates(Orientation.RIGHT, 21, 14, key2);
         createGates(Orientation.RIGHT, 21, 10, key2);
         createGates(Orientation.RIGHT, 21, 8, key2);
-        createGates(Orientation.RIGHT, 10,2, (key4));
-        createGates(Orientation.RIGHT,19,2, new And(key3, key4));
-        createGates(Orientation.RIGHT,12,8, new And(key3, key4));
-        createGates(Orientation.RIGHT,17,8, new And(key3, key4));
+        createGates(Orientation.RIGHT, 10,2, key3_4);
+        createGates(Orientation.RIGHT,19,2, key3_4);
+        createGates(Orientation.RIGHT,12,8, key3_4);
+        createGates(Orientation.RIGHT,17,8, key3_4);
         createGates(Orientation.RIGHT, 14,3, this);
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);
@@ -48,13 +53,17 @@ public class Level2 extends NonRandomArea {
        super.createGates(orientation, x, y, signal);
     }
     public void createFlockOfJamilas(){
-        createJamila(19,13);
-        createJamila(5,26);
-        createJamila(7, 26);
-        createJamila(22,26);
-        createJamila(24, 26);
-        createJamila(12,1);
-        createJamila(10, 13);
+
+        registerActor(manBall1);
+        registerActor(manBall2);
+        registerActor(manBall3);
+        registerActor(manBall4);
+        createJamila(19,13, manBall1);
+        createJamila(5,26, manBall2);
+        createJamila(7, 26, manBall4);
+        createJamila(22,26, manBall1);
+        createJamila(24, 26, manBall3);
+        createJamila(12,1, manBall4);
     }
 
     @Override

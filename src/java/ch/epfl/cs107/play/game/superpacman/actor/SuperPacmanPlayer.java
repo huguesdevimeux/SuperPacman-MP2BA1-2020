@@ -133,11 +133,11 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Ghost ghost) {
             if (ghost.isAfraid()) {
                 ghost.resetGhost();
-                score += 500;
+                score += ghost.GHOST_SCORE;
             }else {
                 pacmanIsEaten();
-                amountLife --;
-                if(amountLife == 0) endGame();
+                amountLife--;
+                if(amountLife == 0) ((SuperPacmanArea)getOwnerArea()).endGame();
                 ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
             }
         }
@@ -146,12 +146,19 @@ public class SuperPacmanPlayer extends Player {
         -increase health (if it is strictly under maximum health (5))
         -reset the player's speed which had previously been increased
         -reset the ghost's speed which had previously been increased
+        but BE CAREFUL - you must interact with a manball in order to eat a Jamila and
+        Jamila occupies its cell space so be strategic ;)
          */
         public void interactWith(Jamila jamila) {
             if(amountLife < 5)amountLife++;
             resetSpeed();
             ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
             getOwnerArea().unregisterActor(jamila);
+        }
+
+        public void interactWith(ManBall manBall) {
+            manBall.setCollected();
+            getOwnerArea().unregisterActor(manBall);
         }
 
         @Override
@@ -182,12 +189,6 @@ public class SuperPacmanPlayer extends Player {
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
-
-    public void endGame(){
-        //TODO ----- COMPLETE
-        System.exit(0);
-    }
-
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {
