@@ -18,6 +18,7 @@ import java.util.Queue;
 public abstract class SuperPacmanArea extends Area implements Logic{
 
     public abstract DiscreteCoordinates getSpawnLocation();
+    public abstract DiscreteCoordinates getTeleportLocation();
     protected abstract SuperPacmanBehavior getBehaviorTypeNewInstance(Window window);
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;

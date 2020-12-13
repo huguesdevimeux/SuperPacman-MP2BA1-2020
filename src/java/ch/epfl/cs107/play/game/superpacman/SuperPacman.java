@@ -16,7 +16,7 @@ import ch.epfl.cs107.play.window.Window;
 public class SuperPacman extends RPG {
 
     //adding this constants to use later on
-    public final static float CAMERA_SCALE_FACTOR = 20.f;
+    public final static float CAMERA_SCALE_FACTOR = 15.f;
     private SuperPacmanPlayer player;
 
     //initalising player using method from super class
@@ -41,7 +41,7 @@ public class SuperPacman extends RPG {
 
         if (super.begin(window, fileSystem)) {
             createAreas();
-            Area area = setCurrentArea("superpacman/Level0", true);
+            Area area = setCurrentArea("superpacman/Level1", true);
             player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;

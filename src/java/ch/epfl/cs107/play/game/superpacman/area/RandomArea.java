@@ -36,6 +36,12 @@ public class RandomArea extends SuperPacmanArea {
 	}
 
 	@Override
+	public DiscreteCoordinates getTeleportLocation() {
+		//To implement in random levels? (must be here bc abstract)
+		return null;
+	}
+
+	@Override
 	protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
 		associatedBehavior = new RandomBehavior(window, getTitle(), this.nextArea);
 		return associatedBehavior; 

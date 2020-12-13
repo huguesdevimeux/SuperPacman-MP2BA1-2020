@@ -146,7 +146,7 @@ public class SuperPacmanPlayer extends Player {
         -increase health (if it is strictly under maximum health (5))
         -reset the player's speed which had previously been increased
         -reset the ghost's speed which had previously been increased
-        but BE CAREFUL - you must interact with a manball in order to eat a Jamila and
+        but BE CAREFUL - you must interact with a strawberry in order to eat a Jamila and
         Jamila occupies its cell space so be strategic ;)
          */
         public void interactWith(Jamila jamila) {
@@ -156,9 +156,17 @@ public class SuperPacmanPlayer extends Player {
             getOwnerArea().unregisterActor(jamila);
         }
 
-        public void interactWith(ManBall manBall) {
-            manBall.setCollected();
-            getOwnerArea().unregisterActor(manBall);
+        public void interactWith(Strawberry strawberry) {
+            strawberry.setCollected();
+            getOwnerArea().unregisterActor(strawberry);
+        }
+
+        /*
+        the shadow actor will enable the player to teleport somewhere on the map
+         */
+        public void interactWith(Portal portal){
+            teleportPacman();
+            getOwnerArea().unregisterActor(portal);
         }
 
         @Override
@@ -168,13 +176,21 @@ public class SuperPacmanPlayer extends Player {
     public DiscreteCoordinates getSpawnLocation(){
         return ((SuperPacmanArea)getOwnerArea()).getSpawnLocation();
     }
+    public DiscreteCoordinates getTeleportLocation(){
+        return ((SuperPacmanArea)getOwnerArea()).getTeleportLocation();
+    }
 
     public void pacmanIsEaten(){
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getSpawnLocation().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();
-
+    }
+    public void teleportPacman(){
+        getOwnerArea().leaveAreaCells(this, getEnteredCells());
+        setCurrentPosition((getTeleportLocation().toVector()));
+        getOwnerArea().enterAreaCells(this, getCurrentCells());
+        resetMotion();
     }
 
     @Override

@@ -13,8 +13,8 @@ import ch.epfl.cs107.play.window.Canvas;
 this class' purpose is uniquely to be a signal for Jamila
 it's pretty cool having pokeballs being signals in certain levels
  */
-public class ManBall extends CollectableAreaEntity implements Logic {
-    private Sprite manBall;
+public class Strawberry extends CollectableAreaEntity implements Logic {
+    private Sprite strawberry;
     private boolean isCollected;
     /**
      * Default AreaEntity constructor
@@ -22,14 +22,14 @@ public class ManBall extends CollectableAreaEntity implements Logic {
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
-    public ManBall(Area area, DiscreteCoordinates position) {
+    public Strawberry(Area area, DiscreteCoordinates position) {
         super(area, position);
-        manBall = new Sprite("superpacman/Manball", 1.f,1.f,this);
+        strawberry = new Sprite("superpacman/strawberry", 1.f,1.f,this);
         isCollected = false;
     }
 
     public void draw(Canvas canvas){
-        manBall.draw(canvas);
+        strawberry.draw(canvas);
     }
 
     @Override
