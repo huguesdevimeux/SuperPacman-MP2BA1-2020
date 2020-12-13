@@ -23,6 +23,12 @@ public class Level0 extends NonRandomArea {
         //the two gates of level0 use the key as signal
         registerGates(Orientation.RIGHT, 5, 8, key0);
         registerGates(Orientation.LEFT, 6, 8, key0);
+        /*
+        we will create an actor jamila just for the taste
+        in level0, it will have no impact except decrease
+        the player's speed if he eats the coin beforehand
+         */
+        createJamila(10,8);
     }
 
     //call the method from SuperpacmanArea to register gates as actors

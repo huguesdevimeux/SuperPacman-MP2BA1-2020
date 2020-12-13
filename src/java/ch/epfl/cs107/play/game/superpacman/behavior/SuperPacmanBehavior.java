@@ -161,6 +161,12 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
             ghost.resetGhost();
         }
     }
+
+    public void resetGhostSpeed(){
+        for(Ghost ghost : ghostsInGrid){
+            ghost.resetGhostSpeed();
+        }
+    }
     /**
      * Set the state of all the ghosts within the grid to normal.
      */

@@ -18,7 +18,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
 
-    protected int movingSpeed = 18;
+    protected int movingSpeed = 15;
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
@@ -51,7 +51,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     //once the player eats a coin, the ghost's speed will increase (not temporarily)
     //and will reset once the player eats a Jamila
-    protected void increaseMovingSpeed(){movingSpeed = 10;}
+    protected void increaseMovingSpeed(){movingSpeed = 7;}
 
     /**
      * Handle the generation of the animations of the pacman.
@@ -123,6 +123,10 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         afraidTime decreases by 1 --- 230 thus allows for the afraid state of the ghosts to last 8-10 seconds
          */
         afraidTime = 230;
+    }
+
+    public void resetGhostSpeed(){
+        movingSpeed = 15;
     }
 
     @Override

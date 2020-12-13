@@ -141,6 +141,19 @@ public class SuperPacmanPlayer extends Player {
                 ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
             }
         }
+        /*
+        interacting with the actor jamila (Aka a blue dot) will :
+        -increase health (if it is strictly under maximum health (5))
+        -reset the player's speed which had previously been increased
+        -reset the ghost's speed which had previously been increased
+         */
+        public void interactWith(Jamila jamila) {
+            if(amountLife < 5)amountLife++;
+            resetSpeed();
+            ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
+            getOwnerArea().unregisterActor(jamila);
+        }
+
         @Override
         public void interactWith(Interactable other) {}
     }

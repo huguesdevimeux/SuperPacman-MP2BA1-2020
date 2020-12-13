@@ -40,11 +40,21 @@ public class Level2 extends NonRandomArea {
         createGates(Orientation.RIGHT,15,3, this);
         createGates(Orientation.DOWN, 5,12, key1);
         createGates(Orientation.DOWN, 24, 12, key2);
+        createFlockOfJamilas();
     }
-
+//TODO!! DELETE THE METHOD BELOW, IT'S USELESS- wait to see what hugues did in his PR
     //calling method from SuperPacmanArea to register gates as actors
     public void createGates(Orientation orientation, int x, int y, Logic signal) {
-        super.createGates(orientation, x, y, signal);
+       super.createGates(orientation, x, y, signal);
+    }
+    public void createFlockOfJamilas(){
+        createJamila(19,13);
+        createJamila(5,26);
+        createJamila(7, 26);
+        createJamila(22,26);
+        createJamila(24, 26);
+        createJamila(12,1);
+        createJamila(10, 13);
     }
 
     @Override

@@ -18,11 +18,20 @@ public class Level1 extends NonRandomArea {
                 Orientation.DOWN, new DiscreteCoordinates(14,0), new DiscreteCoordinates(15,0)));
         registerGates(Orientation.RIGHT, 14, 3,this);
         registerGates(Orientation.RIGHT,15,3,  this);
+        createFlockOfJamilas();
     }
 
     //calling the super method of SuperpacmanArea to register gates as actors
     public void registerGates(Orientation orientation, int x, int y, Logic signal) {
         super.createGates(orientation, x, y, signal);
+    }
+
+    public void createFlockOfJamilas(){
+        createJamila(1,28);
+        createJamila(28, 17);
+        createJamila(20, 8);
+        createJamila(7, 17);
+        createJamila(28,28);
     }
 
     @Override
