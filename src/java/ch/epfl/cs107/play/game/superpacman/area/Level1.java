@@ -16,13 +16,8 @@ public class Level1 extends NonRandomArea {
         super.createArea();
         registerActor(new Door("superpacman/Level2", new DiscreteCoordinates(15,29), Logic.TRUE, this,
                 Orientation.DOWN, new DiscreteCoordinates(14,0), new DiscreteCoordinates(15,0)));
-        registerGates(Orientation.RIGHT, 14, 3,this);
-        registerGates(Orientation.RIGHT,15,3,  this);
-    }
-
-    //calling the super method of SuperpacmanArea to register gates as actors
-    public void registerGates(Orientation orientation, int x, int y, Logic signal) {
-        super.createGates(orientation, x, y, signal);
+        super.createGate(Orientation.RIGHT, 14, 3,this);
+        super.createGate(Orientation.RIGHT,15,3,  this);
     }
 
     @Override
@@ -34,7 +29,7 @@ public class Level1 extends NonRandomArea {
      @return true if the number of the diamonds in Level1 is 0
     */
     public boolean isOn(){
-        return !(this.totalNbDiamondsIsNull());
+        return !(getCurrentDiamonds() == 0);
     }
 
     @Override

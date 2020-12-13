@@ -82,6 +82,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
      */
     public void registerActors(SuperPacmanArea area) {
         Ghost addedGhost;
+        int totalDiamonds = 0 ; 
         for (int y = 0; y < getHeight(); y++) {
             for (int x = 0; x < getWidth(); x++) {
                 if (isWall(x, y)) {
@@ -90,7 +91,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
                 //registering the collectables automatically based on the cell types
                 if (isDiamond(x, y)) {
                     area.registerActor(new Diamond(area, new DiscreteCoordinates(x, y)));
-                    area.increaseTotalNbDiamonds();
+                    totalDiamonds++; //area.increaseCurrentDiamonds();
                 }
                 if (isCherry(x, y)) {
                     area.registerActor(new Cherry(area, new DiscreteCoordinates(x, y)));
@@ -115,6 +116,8 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
                 }
             }
         }
+
+        area.setCurrentDiamonds(totalDiamonds);
     }
 
     /**
