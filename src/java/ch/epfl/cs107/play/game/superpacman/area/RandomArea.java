@@ -13,7 +13,8 @@ public class RandomArea extends SuperPacmanArea {
 	private int indexOfArea;
 	private String nextArea;
 	private RandomBehavior associatedBehavior;
-	private float RATIO_BONUSES_TO_COLLECT = 0.90f; 
+	// this determines how many diamonds must be collected before the next gate is opened. 
+	private float RATIO_DIAMONDS_TO_COLLECT = 0.70f; 
 	
 	public RandomArea(int indexOfArea, String nextArea) {
 		super();
@@ -59,7 +60,7 @@ public class RandomArea extends SuperPacmanArea {
 	 */
 	@Override
 	public boolean isOn() {
-		return !(getCurrentDiamonds() < getOriginalNumberDiamonds() * RATIO_BONUSES_TO_COLLECT);
+		return !(getCurrentDiamonds() < getOriginalNumberDiamonds() * RATIO_DIAMONDS_TO_COLLECT);
 	}
 
 	@Override
