@@ -5,9 +5,7 @@ import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 public class Pinky extends smartMovingGhost {
-
-    private int movingSpeed = 18;
-    private final int MIN_AFRAID_DISTANCE = 5;  
+    private final int MIN_AFRAID_DISTANCE = 5;
 
     public Pinky(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
@@ -16,20 +14,20 @@ public class Pinky extends smartMovingGhost {
     @Override
     protected void updateFollowingPath() {
         if (isAfraid()) {
+            //once the ghost is afraid, we increase its speed
+            increaseMovingSpeed();
             if (!hasReachedTargetPos())
-                return; 
+                return;
             if (getMemorizedPlayer() != null) {
                 DiscreteCoordinates candidatePos = getRandomReachablePositionAvoidingRadius(getMemorizedPlayer().getCurrentCells().get(0), MIN_AFRAID_DISTANCE);
                 // if it is null, it means no random espace position has been found. We the don't touch the following path, which will cause the ghost to not move.
                 if (candidatePos != null) {
                     setFollowingPathToTarget(candidatePos);
                 }
-            }
-            else {
+            } else {
                 setFollowingPathToTarget(getRandomReachablePosition());
             }
-        }
-        else if (getMemorizedPlayer() == null) {
+        } else if (getMemorizedPlayer() == null) {
             if (hasReachedTargetPos())
                 setFollowingPathToTarget(getRandomReachablePosition());
         }
@@ -39,15 +37,14 @@ public class Pinky extends smartMovingGhost {
             setFollowingPathToTarget(getRandomReachablePosition());
         }
     }
-
     @Override
     protected String getTitle() {
         return "superpacman/ghost.pinky";
     }
-
+    //returns moving speed in Ghost class
     @Override
     protected int getSpeed() {
         return movingSpeed;
     }
-   
+
 }

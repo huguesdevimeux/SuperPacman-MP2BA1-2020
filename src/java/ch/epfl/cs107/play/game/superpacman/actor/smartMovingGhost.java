@@ -19,7 +19,6 @@ public abstract class smartMovingGhost extends Ghost {
     private DiscreteCoordinates targetPos;
     private Queue<Orientation> followingPath;
     private smartMovingGhostHandler handler = new smartMovingGhostHandler();
-
     /**
      * Update the following path according to the ghost type rules.
      */
