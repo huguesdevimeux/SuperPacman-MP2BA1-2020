@@ -78,8 +78,11 @@ public class SuperPacmanPlayer extends Player {
     and eating a Jamila, will reset speed but will increase health
     making the game more dynamic
     */
-    public void increaseSpeedAndScareGhosts(){
+    public void increaseSpeed(){
         movingSpeed = 4;
+    }
+
+    public void scareGhosts(){
         ((SuperPacmanArea)getOwnerArea()).scareGhosts();
     }
     /**
@@ -112,7 +115,7 @@ public class SuperPacmanPlayer extends Player {
 
         public void interactWith(Bonus bonus) {
             //when interacting with the coin - the ghosts get scared and speed increases
-            increaseSpeedAndScareGhosts();
+            scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
@@ -154,7 +157,8 @@ public class SuperPacmanPlayer extends Player {
             ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
             getOwnerArea().unregisterActor(jamila);
         }
-
+        //eating a straberry will increase speed and allow access to Jamilas to then increase health
+        //and reset the player's and the ghosts' speed
         public void interactWith(Strawberry strawberry) {
             strawberry.setCollected();
             getOwnerArea().unregisterActor(strawberry);
