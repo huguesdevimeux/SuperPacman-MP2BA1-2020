@@ -67,11 +67,11 @@ public class RandomPacmanMap {
      */
     private void connectTwoSides() {
         int offset = this.randomGenerator.nextInt(3) + 2;
-        for (int i = 1; i < generatedMap.length; i++) {
+        for (int i = 1; i < totalHeight; i++) {
             if (offset-- <= 0) {
-                if (generatedMap[(totalHeight / 2) - 1 - 1][i] != SuperPacmanCellType.WALL
-                        && generatedMap[(totalHeight / 2) - 1 + 1][i] != SuperPacmanCellType.WALL) {
-                    generatedMap[(totalHeight / 2) - 1][i] = SuperPacmanCellType.FREE_EMPTY;
+                if (generatedMap[(totalWidth / 2) - 1 - 1][i] != SuperPacmanCellType.WALL
+                        && generatedMap[(totalWidth / 2) - 1 + 1][i] != SuperPacmanCellType.WALL) {
+                    generatedMap[(totalWidth / 2) - 1][i] = SuperPacmanCellType.FREE_EMPTY;
                 }
                 offset = this.randomGenerator.nextInt(3) + 2;
             }
@@ -106,15 +106,15 @@ public class RandomPacmanMap {
 
 	private List<DiscreteCoordinates> generateDoorsPositions() {
         List <DiscreteCoordinates> cos = new ArrayList<DiscreteCoordinates>();
-        int xPosDoor = (int) Math.ceil(totalHeight / 2.0) - 2;
-        int xPosDoor2 = (int) Math.ceil(totalHeight / 2.0) - 1;
+        int xPosDoor = (int) Math.ceil(totalWidth / 2.0) - 2;
+        int xPosDoor2 = (int) Math.ceil(totalWidth / 2.0) - 1;
 
-        generatedMap[xPosDoor][totalWidth] = SuperPacmanCellType.FREE_EMPTY;
-        cos.add(new DiscreteCoordinates(xPosDoor, totalWidth)); 
-        generatedMap[xPosDoor2][totalWidth] = SuperPacmanCellType.FREE_EMPTY;
-        cos.add(new DiscreteCoordinates(xPosDoor2, totalWidth)); 
-        generatedMap[xPosDoor][totalWidth - 1] = SuperPacmanCellType.FREE_EMPTY;
-        generatedMap[xPosDoor2][totalWidth - 1] = SuperPacmanCellType.FREE_EMPTY;
+        generatedMap[xPosDoor][totalHeight - 1] = SuperPacmanCellType.FREE_EMPTY;
+        cos.add(new DiscreteCoordinates(xPosDoor, totalHeight - 1)); 
+        generatedMap[xPosDoor2][totalHeight - 1] = SuperPacmanCellType.FREE_EMPTY;
+        cos.add(new DiscreteCoordinates(xPosDoor2, totalHeight - 1)); 
+        generatedMap[xPosDoor][totalHeight - 2] = SuperPacmanCellType.FREE_EMPTY;
+        generatedMap[xPosDoor2][totalHeight - 2] = SuperPacmanCellType.FREE_EMPTY;
         
         return cos; 
 	}
