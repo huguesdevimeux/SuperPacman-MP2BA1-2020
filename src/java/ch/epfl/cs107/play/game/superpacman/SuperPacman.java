@@ -41,7 +41,7 @@ public class SuperPacman extends RPG {
 
         if (super.begin(window, fileSystem)) {
             createAreas();
-            Area area = setCurrentArea("superpacman/Level1", true);
+            Area area = setCurrentArea("superpacman/Level0", true);
             player = new SuperPacmanPlayer(area, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
             initPlayer(player);
             return true;

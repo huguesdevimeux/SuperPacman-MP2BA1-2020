@@ -136,7 +136,6 @@ public class SuperPacmanPlayer extends Player {
                 score += ghost.GHOST_SCORE;
             }else {
                 pacmanIsEaten();
-                amountLife--;
                 if(amountLife == 0) ((SuperPacmanArea)getOwnerArea()).endGame();
                 ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
             }
@@ -181,6 +180,7 @@ public class SuperPacmanPlayer extends Player {
     }
 
     public void pacmanIsEaten(){
+        amountLife--;
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getSpawnLocation().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());

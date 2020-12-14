@@ -51,7 +51,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     //once the player eats a coin, the ghost's speed will increase (not temporarily)
     //and will reset once the player eats a Jamila
-    protected void increaseMovingSpeed(){movingSpeed = 7;}
+    protected void increaseMovingSpeed(){movingSpeed = 10;}
 
     /**
      * Handle the generation of the animations of the pacman.

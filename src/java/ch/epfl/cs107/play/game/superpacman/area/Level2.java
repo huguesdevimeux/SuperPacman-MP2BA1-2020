@@ -52,6 +52,10 @@ public class Level2 extends NonRandomArea {
         createGates(Orientation.DOWN, 5,12, key1);
         createGates(Orientation.DOWN, 24, 12, key2);
         createFlockOfJamilas();
+        createPortal(12,19);
+        createPortal(1,3);
+        createPortal(1,15);
+        createPortal(28,12);
     }
 //TODO!! DELETE THE METHOD BELOW, IT'S USELESS- wait to see what hugues did in his PR
     //calling method from SuperPacmanArea to register gates as actors
@@ -59,15 +63,14 @@ public class Level2 extends NonRandomArea {
        super.createGates(orientation, x, y, signal);
     }
     public void createFlockOfJamilas(){
-
         registerActor(strawberry1);
         registerActor(strawberry2);
         registerActor(strawberry3);
         registerActor(strawberry4);
         createJamila(19,13, strawberry1);
-        createJamila(5,26, strawberry2);
+        createJamila(5,26, strawberry3);
         createJamila(7, 26, strawberry4);
-        createJamila(22,26, strawberry1);
+        createJamila(22,26, strawberry4);
         createJamila(24, 26, strawberry3);
         createJamila(12,1, strawberry4);
     }

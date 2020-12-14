@@ -6,7 +6,8 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 /*
 this ghost will appear in Level2 only
-this ghost is brave, it doesn't get afraid so it constantly torments the player in Level2
+this ghost is brave, it doesn't get afraid and doesn't have a refuge
+ so it constantly torments the player in Level2
 */
 public class Spooky extends smartMovingGhost {
 
@@ -37,6 +38,6 @@ public class Spooky extends smartMovingGhost {
     //this ghost will go at constant speed and will constantly chase the player
     @Override
     protected int getSpeed() {
-        return 10;
+        return 12;
     }
 }
