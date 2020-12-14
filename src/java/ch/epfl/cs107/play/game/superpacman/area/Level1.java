@@ -42,7 +42,7 @@ public class Level1 extends NonRandomArea {
  /*
     we must register strawberry as an actor manually for Jamila to use it as a signal
     side note : you must interact with a strawberry before being able to interact with a Jamila
-    AND be careful - some balls allow access to Jamilas that are on the other side of the map
+    AND be careful - some strawberries allow access to Jamilas that are on the other side of the map
      */
         registerActor(strawberry1);
         registerActor(strawberry2);

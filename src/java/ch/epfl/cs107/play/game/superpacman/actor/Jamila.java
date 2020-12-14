@@ -26,7 +26,7 @@ public class Jamila extends AreaEntity {
     public Jamila(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
         super(area, orientation, position);
         this.signal = signal;
-        Jamila = new Sprite("superpacman/star", 1.f, 1.f, this);
+        Jamila = new Sprite("superpacman/heart", 1.f, 1.f, this);
     }
     public void draw(Canvas canvas){
         Jamila.draw(canvas);

@@ -12,7 +12,7 @@ public class Level0 extends NonRandomArea {
     private Key key0 = new Key(this, new DiscreteCoordinates(3,4));
     //registering this new actor to become familiar with
     private Strawberry strawberry0 = new Strawberry(this, new DiscreteCoordinates(1,8));
-    //registering this actor to experience its ability
+    //registering this actor to experience what it does
     private Portal portal = new Portal(this, new DiscreteCoordinates(1,1));
 
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);

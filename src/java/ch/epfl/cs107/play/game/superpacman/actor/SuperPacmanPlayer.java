@@ -162,7 +162,7 @@ public class SuperPacmanPlayer extends Player {
         }
 
         /*
-        the shadow actor will enable the player to teleport somewhere on the map
+        the portal actor will enable the player to teleport somewhere on the map
          */
         public void interactWith(Portal portal){
             teleportPacman();

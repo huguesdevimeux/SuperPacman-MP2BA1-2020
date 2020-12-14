@@ -38,7 +38,7 @@ public class Strawberry extends CollectableAreaEntity implements Logic {
     }
 
     /**
-     * @return true only if the manBall is not collected
+     * @return true only if the strawberry is not collected
      */
     @Override
     public boolean isOn() {
