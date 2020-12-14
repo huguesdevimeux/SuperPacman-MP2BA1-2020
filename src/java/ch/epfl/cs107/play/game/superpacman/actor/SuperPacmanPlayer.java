@@ -114,7 +114,7 @@ public class SuperPacmanPlayer extends Player {
         }
 
         public void interactWith(Bonus bonus) {
-            //when interacting with the coin - the ghosts get scared and speed increases
+            //when interacting with the coin - the ghosts get scared
             scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
@@ -160,6 +160,7 @@ public class SuperPacmanPlayer extends Player {
         //eating a straberry will increase speed and allow access to Jamilas to then increase health
         //and reset the player's and the ghosts' speed
         public void interactWith(Strawberry strawberry) {
+            increaseSpeed();
             strawberry.setCollected();
             getOwnerArea().unregisterActor(strawberry);
         }

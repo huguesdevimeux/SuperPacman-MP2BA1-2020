@@ -54,7 +54,7 @@ public class Level2 extends NonRandomArea {
         createFlockOfJamilas();
         createPortal(12,19);
         createPortal(1,3);
-        createPortal(1,15);
+        createPortal(1,22);
         createPortal(28,12);
     }
 //TODO!! DELETE THE METHOD BELOW, IT'S USELESS- wait to see what hugues did in his PR
@@ -72,7 +72,7 @@ public class Level2 extends NonRandomArea {
         createJamila(7, 26, strawberry4);
         createJamila(22,26, strawberry4);
         createJamila(24, 26, strawberry3);
-        createJamila(12,1, strawberry4);
+        createJamila(6,2, strawberry4);
     }
 
     @Override

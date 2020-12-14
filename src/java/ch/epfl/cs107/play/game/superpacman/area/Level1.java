@@ -26,7 +26,7 @@ public class Level1 extends NonRandomArea {
                 Orientation.DOWN, new DiscreteCoordinates(14, 0), new DiscreteCoordinates(15, 0)));
         registerGates(Orientation.RIGHT, 14, 3, this);
         registerGates(Orientation.RIGHT, 15, 3, this);
-        createPortal(28, 27);
+        createPortal(28, 19);
         createPortal(7, 3);
         createPortal(13, 21);
         createPortal(16, 21);
