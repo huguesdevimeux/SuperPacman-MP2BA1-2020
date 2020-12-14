@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
  */
 public class RandomPacmanMap {
 
+	private static final int SAFE_ZONE_GHOST_SPAWN = 5;
 	private SuperPacmanCellType[][] generatedMap;
     private int totalHeight;
     private int totalWidth;
@@ -87,8 +88,7 @@ public class RandomPacmanMap {
                         generatedMap[x][y] = SuperPacmanCellType.FREE_WITH_BONUS;
                     } else {
                         double decision = randomGenerator.nextDouble();
-                        System.out.println(spawnRateGhosts);
-                        if (decision < spawnRateGhosts)
+                        if (decision < spawnRateGhosts && (x > SAFE_ZONE_GHOST_SPAWN || y > SAFE_ZONE_GHOST_SPAWN))
                             generatedMap[x][y] = getRandomTypeOfGhost();
                         else if (decision > 0.9f)
                             generatedMap[x][y] = SuperPacmanCellType.FREE_WITH_CHERRY;
@@ -101,7 +101,9 @@ public class RandomPacmanMap {
         }
     }
     
-
+    /**
+     * Doors position are where, well, doors are placed. We need to prepare the terrain before, by removing the walls and ensuring that they won't be obstrued. 
+     */
 	private List<DiscreteCoordinates> generateDoorsPositions() {
         List <DiscreteCoordinates> cos = new ArrayList<DiscreteCoordinates>();
         int xPosDoor = (int) Math.ceil(totalWidth / 2.0) - 2;
@@ -131,12 +133,8 @@ public class RandomPacmanMap {
         }
         return count >= 3;
     }
-    
-    private boolean isWall(DiscreteCoordinates position) {
-        return generatedMap[position.x][position.y] == SuperPacmanCellType.WALL;
-    }
 
-    //TODO : Faire une interface !
+
     /** 
     * Given a position, return all the neibhors WITHIN the grid.
      * @param position

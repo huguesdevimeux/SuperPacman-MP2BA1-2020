@@ -56,7 +56,7 @@ public class RandomArea extends SuperPacmanArea {
 	protected void createArea() {
 		super.createArea();
 		for (DiscreteCoordinates pCoordinates : associatedBehavior.getDoorsPosition()) {
-			this.registerActor(new Door(getTitleNextArea(), new DiscreteCoordinates(2, 2), Logic.TRUE, this,
+			this.registerActor(new Door(getTitleNextArea(), this.getSpawnLocation(), Logic.TRUE, this,
 					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y),
 					new DiscreteCoordinates(6, 9)));
 			// We create gate on top of the doors. 
