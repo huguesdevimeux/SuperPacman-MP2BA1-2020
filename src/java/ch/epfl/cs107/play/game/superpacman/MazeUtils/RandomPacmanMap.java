@@ -12,22 +12,19 @@ import ch.epfl.cs107.play.math.DiscreteCoordinates;
  */
 public class RandomPacmanMap {
 
-    private static final double TRESHOLD_RANDOM_GHOST_SPAWN = 0.98f;
 	private SuperPacmanCellType[][] generatedMap;
     private int totalHeight;
     private int totalWidth;
     private Random randomGenerator;
-	private List<DiscreteCoordinates> deadEnds;
-    private List<DiscreteCoordinates> freeCells;
-    private List<DiscreteCoordinates> doorsPositions; 
+    private List<DiscreteCoordinates> doorsPositions;
+	private double spawnRateGhosts; 
 
-    public RandomPacmanMap(int height, int width) {
-        assert (height % 2 == 1) : "Height must be odd";
+    public RandomPacmanMap(int height, int width, double spawnRateGhosts) {
+		assert (height % 2 == 1) : "Height must be odd";
         assert (width % 4 == 2): "Width must be a sum of two odd numbers";
         totalHeight = height;
         totalWidth = width;
-        // this.deadEnds = new ArrayList<DiscreteCoordinates>();
-        // this.freeCells = new ArrayList<DiscreteCoordinates>();
+        this.spawnRateGhosts = spawnRateGhosts;
         generatedMap = new SuperPacmanCellType[totalWidth][totalHeight]; // x - y 
         randomGenerator = new Random();
         
@@ -90,7 +87,8 @@ public class RandomPacmanMap {
                         generatedMap[x][y] = SuperPacmanCellType.FREE_WITH_BONUS;
                     } else {
                         double decision = randomGenerator.nextDouble();
-                        if (decision > TRESHOLD_RANDOM_GHOST_SPAWN)
+                        System.out.println(spawnRateGhosts);
+                        if (decision < spawnRateGhosts)
                             generatedMap[x][y] = getRandomTypeOfGhost();
                         else if (decision > 0.9f)
                             generatedMap[x][y] = SuperPacmanCellType.FREE_WITH_CHERRY;
