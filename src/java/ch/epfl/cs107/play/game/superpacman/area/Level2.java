@@ -2,6 +2,7 @@ package ch.epfl.cs107.play.game.superpacman.area;
 
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.actor.Key;
+import ch.epfl.cs107.play.game.superpacman.actor.Spooky;
 import ch.epfl.cs107.play.game.superpacman.actor.Strawberry;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.And;
@@ -12,6 +13,9 @@ public class Level2 extends NonRandomArea {
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(15, 29);
     public final DiscreteCoordinates TELEPORT_LOCATION = new DiscreteCoordinates(3, 26);
 
+    //we manually register spooky as he only lives in level2
+    //and there is only one occurence of spooky
+    private Spooky spooky = new Spooky(this, Orientation.UP, new DiscreteCoordinates(15,15));
     private Strawberry strawberry1 = new Strawberry(this, new DiscreteCoordinates(28, 3));
     private Strawberry strawberry2 = new Strawberry(this, new DiscreteCoordinates(1, 1));
     private Strawberry strawberry3 = new Strawberry(this, new DiscreteCoordinates(1, 28));
@@ -28,6 +32,7 @@ public class Level2 extends NonRandomArea {
 
     protected void createArea() {
         super.createArea();
+        registerActor(spooky);
         registerActor(key1);
         registerActor(key2);
         registerActor(key3);
