@@ -1,10 +1,12 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
@@ -14,22 +16,31 @@ import java.util.Collections;
 import java.util.List;
 
 public class Jamila extends AreaEntity {
-    private Sprite Jamila;
     private Logic signal;
+    Sprite[] sprites = RPGSprite.extractSprites("superpacman/heart", 4, 1.f, 1.f,
+            this, 16, 16);
+    Animation Jamila = new Animation(2, sprites, true);
+
     /**
      * Default Jamila constructor
+     *
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
-     * side note : we are using the ressource bonus but in no case are we using it in its intended use
-     * we are "customising" its actual use
+     *                 side note : we are using the ressource bonus but in no case are we using it in its intended use
+     *                 we are "customising" its actual use
      */
     public Jamila(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
         super(area, orientation, position);
         this.signal = signal;
-        Jamila = new Sprite("superpacman/heart", 1.f, 1.f, this);
     }
-    public void draw(Canvas canvas){
+
+    public void draw(Canvas canvas) {
         Jamila.draw(canvas);
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        Jamila.update(deltaTime);
     }
 
     @Override
@@ -62,6 +73,6 @@ public class Jamila extends AreaEntity {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-       ((SuperPacmanInteractionVisitor)v).interactWith(this);
+        ((SuperPacmanInteractionVisitor) v).interactWith(this);
     }
 }
