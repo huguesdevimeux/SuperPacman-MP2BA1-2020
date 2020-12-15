@@ -13,6 +13,7 @@ import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Window;
 
 public class SuperPacman extends RPG {
@@ -46,7 +47,7 @@ public class SuperPacman extends RPG {
 
     /**
      * Dynamicaly add and remove area, to allow the "infinite" gamemode.
-     * @param nextLevel index of the next level. 
+     * @param nextLevel index of the next level.
      */
     private void updateProceduralArea(int nextLevel) {
         addArea(new RandomArea(nextLevel));

@@ -1,30 +1,39 @@
 package ch.epfl.cs107.play.game.superpacman.area;
 
+import ch.epfl.cs107.play.game.actor.Actor;
+import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaGraph;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.superpacman.SuperPacman;
+import ch.epfl.cs107.play.game.superpacman.actor.Cherry;
 import ch.epfl.cs107.play.game.superpacman.actor.Gate;
 import ch.epfl.cs107.play.game.superpacman.actor.Jamila;
 import ch.epfl.cs107.play.game.superpacman.actor.Portal;
 import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.signal.logic.Logic;
+import ch.epfl.cs107.play.window.Canvas;
+import ch.epfl.cs107.play.window.Image;
+import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 import ch.epfl.cs107.play.window.swing.ImageItem;
+import ch.epfl.cs107.play.window.swing.SwingImage;
 
 import java.util.List;
 import java.util.Queue;
 
-public abstract class SuperPacmanArea extends Area implements Logic{
-
+public abstract class SuperPacmanArea extends Area implements Logic {
     public abstract DiscreteCoordinates getSpawnLocation();
     public abstract DiscreteCoordinates getTeleportLocation();
     protected abstract SuperPacmanBehavior getBehaviorTypeNewInstance(Window window);
+
     private SuperPacmanBehavior associatedBehavior;
     private AreaGraph associatedGraph;
-    
+    //by default, the game is not paused
+    private boolean gameIsPaused = false;
     /*
     instantiating the number of diamonds at 0
     before launching the games nbDiamonds = 0
@@ -45,9 +54,17 @@ public abstract class SuperPacmanArea extends Area implements Logic{
             return false;
     }
 
-    public void endGame(){
+    public void endGame() {
         //TODO ----- COMPLETE
         System.exit(0);
+    }
+
+    @Override
+    public void update(float deltaTime) {
+        Keyboard keyboard = this.getKeyboard();
+        if (keyboard.get(Keyboard.SPACE).isPressed()) gameIsPaused = true;
+        if (keyboard.get(Keyboard.P).isPressed()) gameIsPaused = false;
+        if (!gameIsPaused) super.update(deltaTime);
     }
 
     public final float getCameraScaleFactor() {
@@ -79,16 +96,18 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     register jamila as actor
     side note : we must register Jamila manually as its celltype is the same as the coins
      */
-    public void createJamila(int x, int y, Logic signal){
-        registerActor(new Jamila(this, Orientation.RIGHT, new DiscreteCoordinates(x,y), signal));
+    public void createJamila(int x, int y, Logic signal) {
+        registerActor(new Jamila(this, Orientation.RIGHT, new DiscreteCoordinates(x, y), signal));
     }
+
     /*
     register portals as characters
     we must manually register portals in areas as they have no predefined cell types
      */
-    public void createPortal(int x, int y){
-        registerActor(new Portal(this, new DiscreteCoordinates(x,y)));
+    public void createPortal(int x, int y) {
+        registerActor(new Portal(this, new DiscreteCoordinates(x, y)));
     }
+
     /**
      * Get the path under the form of a queue of Orientation between point from and to, while excluding a set of point from being part of the path.
      */
@@ -97,35 +116,33 @@ public abstract class SuperPacmanArea extends Area implements Logic{
         return this.associatedGraph.shortestPath(from, to);
     }
 
-    public void resetGhostSpeed(){associatedBehavior.resetGhostSpeed();}
+    public void resetGhostSpeed() {
+        associatedBehavior.resetGhostSpeed();
+    }
     public void scareGhosts() {
         associatedBehavior.scareGhosts();
     }
-    public void resetAllGhosts(){
+    public void resetAllGhosts() {
         associatedBehavior.resetAllGhosts();
     }
     public void calmGhosts() {
         associatedBehavior.calmGhosts();
     }
-
-    public void increaseCurrentDiamonds(){
+    public void increaseCurrentDiamonds() {
         currentDiamonds++;
     }
-    public void decreaseCurrentDiamonds(){
+    public void decreaseCurrentDiamonds() {
         currentDiamonds--;
     }
-
     public int getCurrentDiamonds() {
         return currentDiamonds;
     }
-
     public void setCurrentDiamonds(int number) {
         this.currentDiamonds = number;
-        this.originalNumberDiamonds = number; 
+        this.originalNumberDiamonds = number;
     }
-
     public int getOriginalNumberDiamonds() {
-        return originalNumberDiamonds; 
+        return originalNumberDiamonds;
     }
 }
 
