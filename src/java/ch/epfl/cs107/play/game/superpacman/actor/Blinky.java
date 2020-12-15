@@ -31,9 +31,7 @@ public class Blinky extends Ghost {
     @Override
     protected int getSpeed() {
         //once blinky is afraid, we increase its speed
-        if(isAfraid())increaseMovingSpeed();
+        if (isAfraid()) increaseMovingSpeed();
         return movingSpeed;
     }
-    
-    
 }

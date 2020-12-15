@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.game.superpacman.actor.*;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +26,6 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
         FREE_WITH_CHERRY(-36752), //light red
         FREE_WITH_BONUS(-16478723), //light blue
         FREE_EMPTY(-6118750); // sort of gray
-
         final int type;
 
         SuperPacmanCellType(int type) {
@@ -61,7 +61,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
     }
 
     /**
-     * Set the graph associated to the area. 
+     * Set the graph associated to the area.
      */
     protected void setGraph() {
         associatedAreaGraph = new AreaGraph();
@@ -78,6 +78,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
      * Generate diamonds, cherries and bonuses(coins) automatically
      * and all types of ghosts
      * based on the cell type
+     *
      * @param area grid of the level.
      */
     public void registerActors(SuperPacmanArea area) {
@@ -141,7 +142,6 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
         neighborhood[2][0] = isWall(x + 1, y + 1);
         return neighborhood;
     }
-
     /**
      * Get the graph associated with the behavior.
      *
@@ -159,9 +159,15 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
             ghost.setAfraidState();
         }
     }
-    public void resetAllGhosts(){
-        for(Ghost ghost : ghostsInGrid){
+    public void resetAllGhosts() {
+        for (Ghost ghost : ghostsInGrid) {
             ghost.resetGhost();
+        }
+    }
+
+    public void resetGhostSpeed() {
+        for (Ghost ghost : ghostsInGrid) {
+            ghost.resetGhostSpeed();
         }
     }
     /**
@@ -233,6 +239,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
             super(x, y);
             this.type = type;
         }
+
         @Override
         protected boolean canLeave(Interactable entity) {
             return true;
@@ -253,6 +260,7 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
         }
 
         @Override
-        public void acceptInteraction(AreaInteractionVisitor v) { }
+        public void acceptInteraction(AreaInteractionVisitor v) {
+        }
     }
 }

@@ -37,14 +37,15 @@ public class Pinky extends smartMovingGhost {
             setFollowingPathToTarget(getRandomReachablePosition());
         }
     }
+
     @Override
     protected String getTitle() {
         return "superpacman/ghost.pinky";
     }
+
     //returns moving speed in Ghost class
     @Override
     protected int getSpeed() {
         return movingSpeed;
     }
-
 }

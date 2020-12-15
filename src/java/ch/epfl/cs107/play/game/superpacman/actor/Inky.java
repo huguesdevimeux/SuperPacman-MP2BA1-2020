@@ -41,5 +41,4 @@ public class Inky extends smartMovingGhost {
             setFollowingPathToTarget(getRandomReachablePositionWithinRadius(getRefugePosition(), MAX_DISTANCE_WHEN_NOT_SCARED));        
         }
     }
-
 }

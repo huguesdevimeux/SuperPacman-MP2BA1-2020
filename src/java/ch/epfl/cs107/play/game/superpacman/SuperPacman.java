@@ -18,7 +18,7 @@ import ch.epfl.cs107.play.window.Window;
 public class SuperPacman extends RPG {
 
     //adding this constants to use later on
-    public final static float CAMERA_SCALE_FACTOR = 30.f;
+    public final static float CAMERA_SCALE_FACTOR = 15.f;
     private SuperPacmanPlayer player;
     // Infinite game mode means that there is always a new map after the current (procedurally generated).
     private boolean proceduralGamemode = true;

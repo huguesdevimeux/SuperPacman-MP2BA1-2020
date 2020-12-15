@@ -43,6 +43,11 @@ public class RandomArea extends SuperPacmanArea {
 	}
 
 	@Override
+	public DiscreteCoordinates getTeleportLocation() {
+		return null;
+	}
+
+	@Override
 	protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
 		associatedBehavior = new RandomBehavior(window, 19, 18) ;		
 		return associatedBehavior; 

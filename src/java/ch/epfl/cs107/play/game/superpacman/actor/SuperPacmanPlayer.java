@@ -78,8 +78,11 @@ public class SuperPacmanPlayer extends Player {
     and eating a Jamila, will reset speed but will increase health
     making the game more dynamic
     */
-    public void increaseSpeedAndScareGhosts(){
+    public void increaseSpeed(){
         movingSpeed = 4;
+    }
+
+    public void scareGhosts(){
         ((SuperPacmanArea)getOwnerArea()).scareGhosts();
     }
     /**
@@ -111,8 +114,8 @@ public class SuperPacmanPlayer extends Player {
         }
 
         public void interactWith(Bonus bonus) {
-            //when interacting with the coin - the ghosts get scared and speed increases
-            increaseSpeedAndScareGhosts();
+            //when interacting with the coin - the ghosts get scared
+            scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
         //"eating" a diamond will increment the score by 10
@@ -133,14 +136,47 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Ghost ghost) {
             if (ghost.isAfraid()) {
                 ghost.resetGhost();
-                score += 500;
+                score += ghost.GHOST_SCORE;
             }else {
                 pacmanIsEaten();
-                amountLife --;
-                if(amountLife == 0) endGame();
+                if(amountLife == 0) ((SuperPacmanArea)getOwnerArea()).endGame();
                 ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
             }
         }
+        /*
+        interacting with the actor jamila (Aka a heart) will :
+        -increase health (if it is strictly under maximum health (5))
+        -reset the player's speed which had previously been increased
+        -reset the ghost's speed which had previously been increased
+        but BE CAREFUL - you must interact with the nearest strawberry in order to eat a Jamila and
+        the game will automatically register an enclosure once you interact with either a Jamila or a strawberry
+        so proceed cautiously;)
+         */
+        public void interactWith(Jamila jamila) {
+            if(amountLife < 5)amountLife++;
+            resetSpeed();
+            ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
+            getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
+                    new DiscreteCoordinates((int)getPosition().getX(), (int)getPosition().getY())));
+            getOwnerArea().unregisterActor(jamila);
+        }
+        //eating a straberry will increase speed and allow access to Jamilas to then increase health
+        //and reset the player's and the ghosts' speed
+        public void interactWith(Strawberry strawberry) {
+            increaseSpeed();
+            getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
+                    new DiscreteCoordinates((int)getPosition().getX(), (int)getPosition().getY())));
+            strawberry.setCollected();
+            getOwnerArea().unregisterActor(strawberry);
+        }
+        /*
+        the portal actor will enable the player to teleport somewhere on the map
+        */
+        public void interactWith(Portal portal){
+            teleportPacman();
+            getOwnerArea().unregisterActor(portal);
+        }
+
         @Override
         public void interactWith(Interactable other) {}
     }
@@ -148,13 +184,22 @@ public class SuperPacmanPlayer extends Player {
     public DiscreteCoordinates getSpawnLocation(){
         return ((SuperPacmanArea)getOwnerArea()).getSpawnLocation();
     }
+    public DiscreteCoordinates getTeleportLocation(){
+        return ((SuperPacmanArea)getOwnerArea()).getTeleportLocation();
+    }
 
     public void pacmanIsEaten(){
+        amountLife--;
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getSpawnLocation().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();
-
+    }
+    public void teleportPacman(){
+        getOwnerArea().leaveAreaCells(this, getEnteredCells());
+        setCurrentPosition((getTeleportLocation().toVector()));
+        getOwnerArea().enterAreaCells(this, getCurrentCells());
+        resetMotion();
     }
 
     @Override
@@ -169,12 +214,6 @@ public class SuperPacmanPlayer extends Player {
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
     }
-
-    public void endGame(){
-        //TODO ----- COMPLETE
-        System.exit(0);
-    }
-
 
     @Override
     public List<DiscreteCoordinates> getFieldOfViewCells() {

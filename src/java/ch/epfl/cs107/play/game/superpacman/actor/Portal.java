@@ -1,40 +1,36 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.CollectableAreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
-import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
-public class Bonus extends CollectableAreaEntity {
-    Sprite[] sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1.f, 1.f,
-            this, 16, 16);
-    Animation A = new Animation(4, sprites, true);
-
+/*
+this class will allow for the player to teleport to another area of the map
+each level has its specific teleportation position
+ */
+public class Portal extends CollectableAreaEntity {
+    private Sprite portal;
     /**
-     * Default AreaEntity constructor
+     * Default Shadow constructor
      *
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
      */
-    public Bonus(Area area, DiscreteCoordinates position) {
+    public Portal(Area area, DiscreteCoordinates position) {
         super(area, position);
+        portal = new Sprite("superpacman/portal",1.f,1.f, this);
+    }
+
+    public void draw(Canvas canvas){
+        portal.draw(canvas);
     }
 
     @Override
-    public void draw(Canvas canvas) {
-        A.draw(canvas);
-    }
-
-    public void update(float deltatime) {
-        A.update(deltatime);
-    }
-
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((SuperPacmanInteractionVisitor) v).interactWith(this);
+        ((SuperPacmanInteractionVisitor)v).interactWith(this);
     }
 }
