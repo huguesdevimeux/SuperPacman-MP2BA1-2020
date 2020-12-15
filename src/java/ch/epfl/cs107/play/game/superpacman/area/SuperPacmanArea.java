@@ -25,12 +25,13 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     private AreaGraph associatedGraph;
     
     /*
-        instantiating the number of diamonds at 0
-        before launching the games nbDiamonds = 0
-        however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
-        thus recording the number of diamonds per level
-         */
-    private static int totalNbDiamonds = 0;
+    instantiating the number of diamonds at 0
+    before launching the games nbDiamonds = 0
+    however, when launching, the game will register the number of diamonds and will increment totalnbDiamonds by 1
+    thus recording the number of diamonds per level
+    */
+    private int currentDiamonds = 0;
+    private int originalNumberDiamonds;
 
     public boolean begin(Window window, FileSystem fileSystem) {
         if (super.begin(window, fileSystem)) {
@@ -69,7 +70,7 @@ public abstract class SuperPacmanArea extends Area implements Logic{
 
     //method to create gates depending on certain coordinates x and y and on the orientation
     //check the handout to verify the the coordinates of the gates on each level - page 20
-    public void createGates(Orientation orientation, int x, int y, Logic signal) {
+    public void createGate(Orientation orientation, int x, int y, Logic signal) {
         registerActor(new Gate(this, orientation, new DiscreteCoordinates(x, y), signal));
     }
 
@@ -106,17 +107,24 @@ public abstract class SuperPacmanArea extends Area implements Logic{
         associatedBehavior.calmGhosts();
     }
 
-    public void increaseTotalNbDiamonds(){
-        totalNbDiamonds++;
+    public void increaseCurrentDiamonds(){
+        currentDiamonds++;
     }
-    public void decreaseTotalNbDiamonds(){
-        totalNbDiamonds--;
+    public void decreaseCurrentDiamonds(){
+        currentDiamonds--;
     }
-    public int reset(){
-        return totalNbDiamonds = 0;
+
+    public int getCurrentDiamonds() {
+        return currentDiamonds;
     }
-    public boolean totalNbDiamondsIsNull(){
-        return totalNbDiamonds == 0;
+
+    public void setCurrentDiamonds(int number) {
+        this.currentDiamonds = number;
+        this.originalNumberDiamonds = number; 
+    }
+
+    public int getOriginalNumberDiamonds() {
+        return originalNumberDiamonds; 
     }
 }
 

@@ -37,31 +37,27 @@ public class Level2 extends NonRandomArea {
         registerActor(key2);
         registerActor(key3);
         registerActor(key4);
-        createGates(Orientation.RIGHT, 8, 14, key1);
-        createGates(Orientation.RIGHT, 8, 10, key1);
-        createGates(Orientation.RIGHT, 8, 8, key1);
-        createGates(Orientation.RIGHT, 21, 14, key2);
-        createGates(Orientation.RIGHT, 21, 10, key2);
-        createGates(Orientation.RIGHT, 21, 8, key2);
-        createGates(Orientation.RIGHT, 10,2, key3_4);
-        createGates(Orientation.RIGHT,19,2, key3_4);
-        createGates(Orientation.RIGHT,12,8, key3_4);
-        createGates(Orientation.RIGHT,17,8, key3_4);
-        createGates(Orientation.RIGHT, 14,3, this);
-        createGates(Orientation.RIGHT,15,3, this);
-        createGates(Orientation.DOWN, 5,12, key1);
-        createGates(Orientation.DOWN, 24, 12, key2);
-        createFlockOfJamilas();
-        createPortal(12,19);
-        createPortal(1,3);
-        createPortal(1,22);
-        createPortal(28,12);
+        super.createGates(Orientation.RIGHT, 8, 14, key1);
+        super.createGates(Orientation.RIGHT, 8, 10, key1);
+        super.createGates(Orientation.RIGHT, 8, 8, key1);
+        super.createGates(Orientation.RIGHT, 21, 14, key2);
+        super.createGates(Orientation.RIGHT, 21, 10, key2);
+        super.createGates(Orientation.RIGHT, 21, 8, key2);
+        super.createGates(Orientation.RIGHT, 10,2, key3_4);
+        super.createGates(Orientation.RIGHT,19,2, key3_4);
+        super.createGates(Orientation.RIGHT,12,8, key3_4);
+        super.createGates(Orientation.RIGHT,17,8, key3_4);
+        super.createGates(Orientation.RIGHT, 14,3, this);
+        super.createGates(Orientation.RIGHT,15,3, this);
+        super.createGates(Orientation.DOWN, 5,12, key1);
+        super.createGates(Orientation.DOWN, 24, 12, key2);
+        super.createFlockOfJamilas();
+        super.createPortal(12,19);
+        super.createPortal(1,3);
+        super.createPortal(1,22);
+        super.createPortal(28,12);
     }
-//TODO!! DELETE THE METHOD BELOW, IT'S USELESS- wait to see what hugues did in his PR
-    //calling method from SuperPacmanArea to register gates as actors
-    public void createGates(Orientation orientation, int x, int y, Logic signal) {
-       super.createGates(orientation, x, y, signal);
-    }
+
     public void createFlockOfJamilas(){
         registerActor(strawberry1);
         registerActor(strawberry2);
@@ -88,7 +84,7 @@ public class Level2 extends NonRandomArea {
    */
     @Override
     public boolean isOn() {
-        return !((this.totalNbDiamondsIsNull()));
+        return !(getCurrentDiamonds() == 0);
     }
     @Override
     public boolean isOff() {

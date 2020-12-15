@@ -102,7 +102,7 @@ public class SuperPacmanPlayer extends Player {
         public void interactWith(Door door) {
             setIsPassingADoor(door);
             //when interacting with a door, the total nb of diamonds will be sent back to 0
-            ((SuperPacmanArea) getOwnerArea()).reset();
+            ((SuperPacmanArea) getOwnerArea()).setCurrentDiamonds(0);
             //when entering a new level, we reset the speed to 5
             resetSpeed();
         }
@@ -123,7 +123,7 @@ public class SuperPacmanPlayer extends Player {
             score += 10;
             //when interacting with a diamond
             //logically the total number of diamonds decreases
-            ((SuperPacmanArea) getOwnerArea()).decreaseTotalNbDiamonds();
+            ((SuperPacmanArea) getOwnerArea()).decreaseCurrentDiamonds();
             getOwnerArea().unregisterActor(diamond);
         }
 
