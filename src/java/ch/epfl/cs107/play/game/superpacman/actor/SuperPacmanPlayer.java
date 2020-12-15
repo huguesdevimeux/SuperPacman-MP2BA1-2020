@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
+import ch.epfl.cs107.play.game.superpacman.menu.Pause;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
@@ -22,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class SuperPacmanPlayer extends Player {
+    private Pause pause;
     private int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
@@ -52,6 +54,13 @@ public class SuperPacmanPlayer extends Player {
         updateDesiredOrientation(Orientation.UP, keyboard.get(Keyboard.UP));
         updateDesiredOrientation(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
         updateDesiredOrientation(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
+
+        if(keyboard.get(Keyboard.P).isDown()){
+            deltaTime = 0;
+            //pause.get(80);
+            pause.registerActor(new Cherry(getOwnerArea(), new DiscreteCoordinates(3,4)));
+        }
+        System.out.println(deltaTime);
 
         // NOTE : As the name DOES NOT suggesti, isDisplacementOccurs return whether the player is in displacement between
         // two cells, not in displacement between point A to point B!

@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
 import ch.epfl.cs107.play.window.Window;
+import ch.epfl.cs107.play.window.swing.ImageItem;
 
 import java.util.List;
 import java.util.Queue;
