@@ -1,10 +1,12 @@
 package ch.epfl.cs107.play.game.superpacman.actor;
 
 import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
 import ch.epfl.cs107.play.game.areagame.actor.AreaEntity;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
 
@@ -18,7 +20,9 @@ as such, it is both an obstacle and an advantage as the player can't get past it
 also blocks the ghost, leaving the player some time to collect coins and diamonds and other collectables
  */
 public class Enclosure extends AreaEntity {
-    private Sprite enclosure;
+    Sprite[] Fire = RPGSprite.extractSprites("superpacman/fire", 4, 1.f, 1.f,
+            this, 16, 16);
+    Animation fire = new Animation(4, Fire, true);
 
     /**
      * Default enclosure constructor
@@ -29,13 +33,16 @@ public class Enclosure extends AreaEntity {
      */
     public Enclosure(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
-        enclosure = new Sprite("superpacman/prison", 1.f, 1.f, this);
     }
     @Override
     public void draw(Canvas canvas) {
-        enclosure.draw(canvas);
+        fire.draw(canvas);
     }
 
+    @Override
+    public void update(float deltaTime) {
+        fire.update(deltaTime);
+    }
     @Override
     public List<DiscreteCoordinates> getCurrentCells() {
         return Collections.singletonList((getCurrentMainCellCoordinates()));
