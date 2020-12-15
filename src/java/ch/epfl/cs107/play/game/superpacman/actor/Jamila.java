@@ -38,16 +38,21 @@ public class Jamila extends AreaEntity {
     }
 
     /*the player won't be able to "eat" Jamila if the signal is on
-    BE careful and strategic - don't get stuck as Jamilas will block access if the signal is on
+    BE careful and strategic - don't eat jamilas if you have full health
+    and be aware that once you ingest either Jamila or a strawberry, you leave behind
+    an enclosure
      */
     @Override
     public boolean takeCellSpace() {
-        return signal.isOn();
+        return false;
     }
 
+    /*the interaction between the player and Jamila can only take place if
+    the player has eaten the nearest strawberry (if he hasn't the signal will stay on
+    */
     @Override
     public boolean isCellInteractable() {
-        return true;
+        return signal.isOff();
     }
 
     @Override

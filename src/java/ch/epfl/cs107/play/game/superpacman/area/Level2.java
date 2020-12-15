@@ -17,7 +17,7 @@ public class Level2 extends NonRandomArea {
     //and there is only one occurence of spooky
     private Spooky spooky = new Spooky(this, Orientation.UP, new DiscreteCoordinates(15,15));
     private Strawberry strawberry1 = new Strawberry(this, new DiscreteCoordinates(28, 3));
-    private Strawberry strawberry2 = new Strawberry(this, new DiscreteCoordinates(1, 1));
+    private Strawberry strawberry2 = new Strawberry(this, new DiscreteCoordinates(2, 5));
     private Strawberry strawberry3 = new Strawberry(this, new DiscreteCoordinates(1, 28));
     private Strawberry strawberry4 = new Strawberry(this, new DiscreteCoordinates(28, 28));
     private Key key1 = new Key(this, new DiscreteCoordinates(3,16));
@@ -68,11 +68,11 @@ public class Level2 extends NonRandomArea {
         registerActor(strawberry3);
         registerActor(strawberry4);
         createJamila(19,13, strawberry1);
-        createJamila(5,26, strawberry3);
-        createJamila(7, 26, strawberry4);
-        createJamila(22,26, strawberry4);
-        createJamila(24, 26, strawberry3);
-        createJamila(6,2, strawberry4);
+        createJamila(6,24, strawberry3);
+        createJamila(11, 21, strawberry3);
+        createJamila(23,24, strawberry4);
+        createJamila(18, 21, strawberry4);
+        createJamila(6,2, strawberry2);
     }
 
     @Override

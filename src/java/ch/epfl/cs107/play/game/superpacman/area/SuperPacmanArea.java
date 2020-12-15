@@ -115,7 +115,6 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     public int reset(){
         return totalNbDiamonds = 0;
     }
-
     public boolean totalNbDiamondsIsNull(){
         return totalNbDiamonds == 0;
     }

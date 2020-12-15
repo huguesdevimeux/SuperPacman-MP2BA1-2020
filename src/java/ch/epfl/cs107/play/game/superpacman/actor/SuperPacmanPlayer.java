@@ -144,30 +144,34 @@ public class SuperPacmanPlayer extends Player {
             }
         }
         /*
-        interacting with the actor jamila (Aka a blue dot) will :
+        interacting with the actor jamila (Aka a heart) will :
         -increase health (if it is strictly under maximum health (5))
         -reset the player's speed which had previously been increased
         -reset the ghost's speed which had previously been increased
-        but BE CAREFUL - you must interact with a strawberry in order to eat a Jamila and
-        Jamila occupies its cell space so be strategic ;)
+        but BE CAREFUL - you must interact with the nearest strawberry in order to eat a Jamila and
+        the game will automatically register an enclosure once you interact with either a Jamila or a strawberry
+        so proceed cautiously;)
          */
         public void interactWith(Jamila jamila) {
             if(amountLife < 5)amountLife++;
             resetSpeed();
             ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
+            getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
+                    new DiscreteCoordinates((int)getPosition().getX(), (int)getPosition().getY())));
             getOwnerArea().unregisterActor(jamila);
         }
         //eating a straberry will increase speed and allow access to Jamilas to then increase health
         //and reset the player's and the ghosts' speed
         public void interactWith(Strawberry strawberry) {
             increaseSpeed();
+            getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
+                    new DiscreteCoordinates((int)getPosition().getX(), (int)getPosition().getY())));
             strawberry.setCollected();
             getOwnerArea().unregisterActor(strawberry);
         }
-
         /*
         the portal actor will enable the player to teleport somewhere on the map
-         */
+        */
         public void interactWith(Portal portal){
             teleportPacman();
             getOwnerArea().unregisterActor(portal);
