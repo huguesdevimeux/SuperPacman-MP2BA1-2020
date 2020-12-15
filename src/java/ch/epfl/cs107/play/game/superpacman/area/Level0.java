@@ -41,8 +41,7 @@ public class Level0 extends NonRandomArea {
          */
         createJamila(10,8, strawberry0);
     }
-    
-    }
+
     @Override
     public DiscreteCoordinates getSpawnLocation() {
         return this.PLAYER_SPAWN_POSITION;

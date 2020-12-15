@@ -15,7 +15,7 @@ public class Level2 extends NonRandomArea {
 
     //we manually register spooky as he only lives in level2
     //and there is only one occurence of spooky
-    private Spooky spooky = new Spooky(this, Orientation.UP, new DiscreteCoordinates(15,15));
+    private Spooky spooky = new Spooky(this, Orientation.RIGHT, new DiscreteCoordinates(15,11));
     private Strawberry strawberry1 = new Strawberry(this, new DiscreteCoordinates(28, 3));
     private Strawberry strawberry2 = new Strawberry(this, new DiscreteCoordinates(2, 5));
     private Strawberry strawberry3 = new Strawberry(this, new DiscreteCoordinates(1, 28));
@@ -37,21 +37,21 @@ public class Level2 extends NonRandomArea {
         registerActor(key2);
         registerActor(key3);
         registerActor(key4);
-        super.createGates(Orientation.RIGHT, 8, 14, key1);
-        super.createGates(Orientation.RIGHT, 8, 10, key1);
-        super.createGates(Orientation.RIGHT, 8, 8, key1);
-        super.createGates(Orientation.RIGHT, 21, 14, key2);
-        super.createGates(Orientation.RIGHT, 21, 10, key2);
-        super.createGates(Orientation.RIGHT, 21, 8, key2);
-        super.createGates(Orientation.RIGHT, 10,2, key3_4);
-        super.createGates(Orientation.RIGHT,19,2, key3_4);
-        super.createGates(Orientation.RIGHT,12,8, key3_4);
-        super.createGates(Orientation.RIGHT,17,8, key3_4);
-        super.createGates(Orientation.RIGHT, 14,3, this);
-        super.createGates(Orientation.RIGHT,15,3, this);
-        super.createGates(Orientation.DOWN, 5,12, key1);
-        super.createGates(Orientation.DOWN, 24, 12, key2);
-        super.createFlockOfJamilas();
+        super.createGate(Orientation.RIGHT, 8, 14, key1);
+        super.createGate(Orientation.RIGHT, 8, 10, key1);
+        super.createGate(Orientation.RIGHT, 8, 8, key1);
+        super.createGate(Orientation.RIGHT, 21, 14, key2);
+        super.createGate(Orientation.RIGHT, 21, 10, key2);
+        super.createGate(Orientation.RIGHT, 21, 8, key2);
+        super.createGate(Orientation.RIGHT, 10,2, key3_4);
+        super.createGate(Orientation.RIGHT,19,2, key3_4);
+        super.createGate(Orientation.RIGHT,12,8, key3_4);
+        super.createGate(Orientation.RIGHT,17,8, key3_4);
+        super.createGate(Orientation.RIGHT, 14,3, this);
+        super.createGate(Orientation.RIGHT,15,3, this);
+        super.createGate(Orientation.DOWN, 5,12, key1);
+        super.createGate(Orientation.DOWN, 24, 12, key2);
+        createFlockOfJamilas();
         super.createPortal(12,19);
         super.createPortal(1,3);
         super.createPortal(1,22);
