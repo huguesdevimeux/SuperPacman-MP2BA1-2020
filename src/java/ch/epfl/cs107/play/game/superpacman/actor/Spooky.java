@@ -18,9 +18,6 @@ public class Spooky extends smartMovingGhost {
     @Override
     protected void updateFollowingPath() {
 
-        //don't really know what to put here - kinda inspired from inky
-        //but removed the part is afraid (it works well but idk if i have to add/remove stuff
-
          if (getMemorizedPlayer() == null) {
             if (hasReachedTargetPos())
                 setFollowingPathToTarget(getRandomReachablePosition());

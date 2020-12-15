@@ -31,8 +31,6 @@ public class Bonus extends CollectableAreaEntity {
     }
 
     public void update(float deltatime) {
-        //TODO remove super? - it doesnt change anything
-        super.update(deltatime);
         A.update(deltatime);
     }
 

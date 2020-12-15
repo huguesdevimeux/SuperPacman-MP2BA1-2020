@@ -10,6 +10,7 @@ import ch.epfl.cs107.play.window.Canvas;
 
 /*
 this class will allow for the player to teleport to another area of the map
+each level has its specific teleportation position
  */
 public class Portal extends CollectableAreaEntity {
     private Sprite portal;

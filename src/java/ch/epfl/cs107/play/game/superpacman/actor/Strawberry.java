@@ -11,13 +11,13 @@ import ch.epfl.cs107.play.window.Canvas;
 
 /*
 this class' purpose is uniquely to be a signal for Jamila
-it's pretty cool having pokeballs being signals in certain levels
+it's pretty cool having strawberries being signals in certain levels
  */
 public class Strawberry extends CollectableAreaEntity implements Logic {
     private Sprite strawberry;
     private boolean isCollected;
     /**
-     * Default AreaEntity constructor
+     * Default strawberry constructor
      *
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
@@ -55,7 +55,7 @@ public class Strawberry extends CollectableAreaEntity implements Logic {
         return 0;
     }
     /*
-   this method will be called when the player interacts with a key
+   this method will be called when the player interacts with a strawberry
    changes the value of isCollected to true -- thus turning the signal off
     */
     public void setCollected(){

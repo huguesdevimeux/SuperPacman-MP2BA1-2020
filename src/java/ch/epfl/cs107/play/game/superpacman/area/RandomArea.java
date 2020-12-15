@@ -37,7 +37,6 @@ public class RandomArea extends SuperPacmanArea {
 
 	@Override
 	public DiscreteCoordinates getTeleportLocation() {
-		//To implement in random levels? (must be here bc abstract)
 		return null;
 	}
 
