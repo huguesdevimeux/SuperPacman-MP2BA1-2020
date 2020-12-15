@@ -37,15 +37,17 @@ __________WALKTHROUGH__________
  -the ghosts have two states: normal and scared states. when they are in their normal state, if they interact with the player, the player returns to its spawn position
  the ghosts to their refuge position and the total amount of health points decreases by one
  -you can scare the ghost by eating a coin, they will run away and the ghosts' speed will increase thereafter. To increase the player's speed you must eat a strawberry
- -the respective speeds will reset once the player interacts with a Jamila, which will also increase health points by one. HOWEVER, you must "consume" certain strawberries to have access to certain Jamilas. Jamilas occupy their cell space and are placed in corners so you must move strategically ;) (and don't consume a Jamila if you already have the maximum amount of lives
+ -the respective speeds will reset once the player interacts with a Jamila, which will also increase health points by one. HOWEVER, you must "consume" certain strawberries to have access to certain Jamilas. Jamilas do not occupy their cell space but are not accessible until you eat the nearest strawberry. They are placed in corners so you must move strategically ;) (TIP: do not consume a Jamila if you already have the maximum amount of lives)
+ -when you ingest either a Jamila or a strawberry, an enclosure will be created blocking access to the player and to the ghosts.
+ this is both and advantage and an obstacle for the player: it will have more time to collect diamonds and collectables but it will be harder to get accross the map
  -you have completed the level once the gates open and you go through the doors
  
  
 >Level2
  -To complete level2, you must eat all the diamonds: you must open all the gates to do that (they use different signals (see page 20 of handout))
  -differing from level1, you only have smartmoving ghosts, however, two are trapped until you pick up the key associated to the gates' signal
- -just like the previous level, there are still portals, strawberries and Jamilas that work exactly the same and the speeds and afraid states work also the same
- -in addition however, there is an additional smart ghost that will chase the player with constant speed AND he will not get afraid and will not return to its refuge position once ANY ghost interacts with the pacman whilst not afraid
+ -just like the previous level, there are still portals, strawberries and Jamilas and enclosures that work exactly the same and the speeds and afraid states work also the same
+ -in addition however, there is an additional smart ghost that will chase the player with constant speed AND he will not get afraid and thus not return to its refuge position (as he doesn't have one because he is braver than the others) once ANY ghost interacts with the pacman whilst not afraid
  -you have completed the level once you eat all the diamonds, open all the gates and pass through the doors
  
  __________RANDOM LEVELS__________
