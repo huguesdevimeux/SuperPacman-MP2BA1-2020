@@ -4,17 +4,29 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.epfl.cs107.play.game.actor.GraphicsEntity;
+import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
+import ch.epfl.cs107.play.game.areagame.actor.Animation;
+import ch.epfl.cs107.play.game.areagame.actor.Orientation;
+import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.actor.Text;
+import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
+import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
+import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Positionable;
+import ch.epfl.cs107.play.math.RegionOfInterest;
+import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Window;
 
 public class WelcomeMenu extends Area {
 
-	private static final String FONT = "CMU Serif";
+	private static final String FONT = "ArcadeClassic";
 	private static final String STORY_MODE_TEXT = "Story mode";
 	private String TITLE_TEXT = "Super Pacman!";
 	private Text title;
@@ -25,6 +37,7 @@ public class WelcomeMenu extends Area {
 	private boolean canQuit;
 	private boolean wantToQuit;
 	
+	private float tValue = 0; 
 	
 	public WelcomeMenu() {
 		super();
@@ -79,13 +92,22 @@ public class WelcomeMenu extends Area {
 	@Override
 	public void update(float deltaTime) {
 		if (wantToQuit()) {
-			System.out.println("fuck?");
 			canQuit = true; 
 		}
+		// handle the flash effect of the title.
+		tValue += deltaTime;
+		// Clip between 0 and 1
+		tValue -= Math.floor(tValue); 
+		title.setAlpha(flash(tValue));
+
 		int indexChosen = getIndexChoiceFromKeyboard();
 		// -1 means no choice. 
 		if (indexChosen != -1) updateSelection(indexChosen);
 		super.update(deltaTime);
+	}
+
+	public static float flash(float x) {
+		return (float) Math.ceil(Math.cos(3 * x));
 	}
 
 	@Override
@@ -94,6 +116,7 @@ public class WelcomeMenu extends Area {
 		keyboard = getKeyboard(); 
 		setBehavior(new AreaBehavior(window, 30, 30) {});
 		generateMenu();
+		createItems();
 		return true;
 	}
 	
@@ -112,25 +135,38 @@ public class WelcomeMenu extends Area {
 		registerActor(gamemode1);
 		registerActor(gamemode2);
 
-		title = new Text(TITLE_TEXT, new DiscreteCoordinates(getWidth() / 2 - 1, getHeight() - 7), this, true, 2.6f,
+		title = new Text(TITLE_TEXT, new DiscreteCoordinates(getWidth() / 2 - 1, getHeight() - 7), this, true, 3.5f,
 				Color.RED);
 		title.setFontName(FONT);
-		title.makeItAppear(0.05f);
 		registerActor(title);
+
+		Text subtitle = new Text("Select and press enter!", new DiscreteCoordinates(getWidth() / 2 - 1 , getHeight() - 19), this, true, 1f,
+				Color.YELLOW);
+		subtitle.setFontName(FONT);
+		registerActor(subtitle);
 
 		Text credits = new Text("Credits: Luca Mouchel/Hugues Devimeux", new DiscreteCoordinates(getWidth() / 2 - 1, 3), this, true, 1.f,
 				Color.GRAY);
-		credits.setFontName(FONT);
+		credits.setFontName("CMU Serif");
 		registerActor(credits);
 		
 		Text license = new Text("Code is under WTFPL license. Resources : © EPFL 2020.", new DiscreteCoordinates(getWidth() / 2 - 1, 2), this, true, 1.f,
 				Color.GRAY);
-		license.setFontName(FONT);
+		license.setFontName("CMU Serif");
 		registerActor(license); 		
 	}
+
+	private void createItems() {;
+		GraphicsEntity cherry = new GraphicsEntity(new Vector(15, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/cherry"), 3f, 3f));
+		registerActor(cherry);
+		GraphicsEntity pacmanPlayer = new GraphicsEntity(new Vector(10, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/pacman"), 3f, 3f, new 
+		RegionOfInterest(64 * 2, 64 * 3, 64, 64)));
+		registerActor(pacmanPlayer);
+	}
+	
 	
 	/**
-	 * Update the visual of the things to select.
+	 * Update the visual of the things to selectw.
 	 * @param nextIndex
 	 */
 	private void updateSelection(int nextIndex) {
@@ -148,5 +184,4 @@ public class WelcomeMenu extends Area {
 		choices.get(index).setFillColor(Color.YELLOW);
 	}
 	
-    
 }

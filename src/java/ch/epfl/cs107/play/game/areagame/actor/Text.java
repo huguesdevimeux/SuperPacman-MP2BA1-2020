@@ -141,6 +141,16 @@ public class Text extends Entity {
         textGraphics.setOutlineColor(outlineColor);
     }
 
+    //  [CREATED BY STUDENTS]
+    public void setFontSize(float fontSize) {
+        textGraphics.setFontSize(fontSize);
+    }
+
+    // [CREATED BY STUDENTS] 
+    public void setAlpha(float alpha) {
+        textGraphics.setAlpha(alpha);
+    }
+
     /**
      * Make the text appear by step of given size
      * @param stepSize (float): the step size
