@@ -11,6 +11,7 @@ import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.signal.logic.Logic;
+import ch.epfl.cs107.play.signal.logic.Not;
 import ch.epfl.cs107.play.window.Window;
 
 import java.util.List;
@@ -37,8 +38,8 @@ public abstract class SuperPacmanArea extends Area implements Logic{
         if (super.begin(window, fileSystem)) {
             associatedBehavior = getBehaviorTypeNewInstance(window);
             setBehavior(associatedBehavior);
-            this.createArea();
             associatedGraph = associatedBehavior.getGraph();
+            this.createArea();
             return true;
         } else
             return false;
@@ -72,6 +73,8 @@ public abstract class SuperPacmanArea extends Area implements Logic{
     //check the handout to verify the the coordinates of the gates on each level - page 20
     public void createGate(Orientation orientation, int x, int y, Logic signal) {
         registerActor(new Gate(this, orientation, new DiscreteCoordinates(x, y), signal));
+        // We disable right nodes of the graph. We invert the signal, as ON state that the gate is OPEN.
+        associatedGraph.setSignal(new DiscreteCoordinates(x, y), new Not(signal));
     }
 
     /*

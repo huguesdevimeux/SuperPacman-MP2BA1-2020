@@ -107,7 +107,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
             move(getSpeed());
         }
         afraidTime--;
-        if (afraidTime <= 0) {
+        if (afraidTime <= 0 && isAfraid()) {
             setNormalState();
         }
     }
