@@ -14,7 +14,6 @@ public class Level0 extends NonRandomArea {
     private Strawberry strawberry0 = new Strawberry(this, new DiscreteCoordinates(1,8));
     //registering this actor to experience what it does
     private Portal portal = new Portal(this, new DiscreteCoordinates(1,1));
-
     public final DiscreteCoordinates PLAYER_SPAWN_POSITION = new DiscreteCoordinates(10, 1);
     public final DiscreteCoordinates TELEPORT_LOCATION = new DiscreteCoordinates(8,6);
     public String getTitle() {

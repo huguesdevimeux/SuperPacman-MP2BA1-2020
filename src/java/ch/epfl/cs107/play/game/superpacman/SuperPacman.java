@@ -22,7 +22,7 @@ public class SuperPacman extends RPG {
     public final static float CAMERA_SCALE_FACTOR = 15.f;
     private SuperPacmanPlayer player;
     // Infinite game mode means that there is always a new map after the current (procedurally generated).
-    private boolean proceduralGamemode = true;
+    private boolean proceduralGamemode = false;
     private int infiniteLevel = 0;
 
     //initalising player using method from super class
@@ -30,13 +30,14 @@ public class SuperPacman extends RPG {
     protected void initPlayer(Player player) {
         super.initPlayer(player);
     }
+
     public void update(float deltaTime) {
         // RandomArea is a signal that is on when the player can go to the next area. 
         if (proceduralGamemode && ((RandomArea) getCurrentArea()).isOn() && infiniteLevel == ((RandomArea) getCurrentArea()).getLevel()) {
             infiniteLevel++;
             updateProceduralArea(infiniteLevel);
         }
-        super.update(deltaTime);
+            super.update(deltaTime);
     }
 
     private void createNonProceduralAreas() {
