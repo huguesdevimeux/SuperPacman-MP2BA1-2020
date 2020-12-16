@@ -70,12 +70,14 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
      * @param scoreToDisplay
      */
     private void drawScore(Canvas canvas, int scoreToDisplay) {
-        scoreTitle = new TextGraphics(String.valueOf("Score :"), FONT_SIZE, Color.YELLOW);
+        scoreTitle = new TextGraphics(String.valueOf("Score "), FONT_SIZE, Color.YELLOW);
+        scoreTitle.setFontName("ArcadeClassic");
         scoreTitle.setOutlineColor(Color.RED);
         scoreTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, -0.7f))); // TODo change this cf l.11
         scoreTitle.draw(canvas);
       
         score = new TextGraphics(String.valueOf(scoreToDisplay), FONT_SIZE, Color.YELLOW);
+        score.setFontName("ArcadeClassic");
         score.setOutlineColor(Color.RED);
         score.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, - 1.25f))); // TODo change this to a getter cf l.11
         score.draw(canvas);
