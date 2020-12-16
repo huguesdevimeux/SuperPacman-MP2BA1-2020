@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.window.Canvas;
 /*
 this class' purpose is uniquely to be a signal for Jamila
 it's pretty cool having strawberries being signals in certain levels
+you need to press E to collect strawberries
  */
 public class Strawberry extends CollectableAreaEntity implements Logic {
     private Sprite strawberry;
@@ -30,6 +31,13 @@ public class Strawberry extends CollectableAreaEntity implements Logic {
 
     public void draw(Canvas canvas){
         strawberry.draw(canvas);
+    }
+    /*
+ this method will be called when the player interacts with a strawberry
+ changes the value of isCollected to true -- thus turning the signal off
+  */
+    public void setCollected(){
+        isCollected = true;
     }
 
     @Override
@@ -53,12 +61,5 @@ public class Strawberry extends CollectableAreaEntity implements Logic {
     @Override
     public float getIntensity() {
         return 0;
-    }
-    /*
-   this method will be called when the player interacts with a strawberry
-   changes the value of isCollected to true -- thus turning the signal off
-    */
-    public void setCollected(){
-        isCollected = true;
     }
 }

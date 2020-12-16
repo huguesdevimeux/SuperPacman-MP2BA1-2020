@@ -1,14 +1,14 @@
 package ch.epfl.cs107.play.game.areagame.actor;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Queue;
-
 import ch.epfl.cs107.play.game.actor.Entity;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Polyline;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Queue;
 
 
 /**

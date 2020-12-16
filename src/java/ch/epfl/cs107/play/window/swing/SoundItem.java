@@ -1,6 +1,9 @@
 package ch.epfl.cs107.play.window.swing;
 
-import javax.sound.sampled.*;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
 
 /**
  * Play a single sound

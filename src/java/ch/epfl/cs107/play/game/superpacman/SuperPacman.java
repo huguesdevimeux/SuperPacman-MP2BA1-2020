@@ -1,13 +1,14 @@
 package ch.epfl.cs107.play.game.superpacman;
 
-import java.util.Random;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.superpacman.actor.SuperPacmanPlayer;
-import ch.epfl.cs107.play.game.superpacman.area.*;
+import ch.epfl.cs107.play.game.superpacman.area.Level0;
+import ch.epfl.cs107.play.game.superpacman.area.Level1;
+import ch.epfl.cs107.play.game.superpacman.area.Level2;
+import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -55,7 +56,8 @@ public class SuperPacman extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
-            Area startingArea; 
+            Area startingArea;
+            //initiating areas depending of the boolean value of @proceduralGamemode
             if (!proceduralGamemode) {
                 createNonProceduralAreas();
                 startingArea = setCurrentArea("superpacman/Level0", true);

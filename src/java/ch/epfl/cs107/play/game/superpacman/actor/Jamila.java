@@ -15,6 +15,7 @@ import ch.epfl.cs107.play.window.Canvas;
 import java.util.Collections;
 import java.util.List;
 
+//we hope the classe's name doesn't cause any offense
 public class Jamila extends AreaEntity {
     private Logic signal;
     Sprite[] sprites = RPGSprite.extractSprites("superpacman/heart", 4, 1.f, 1.f,
@@ -26,8 +27,6 @@ public class Jamila extends AreaEntity {
      *
      * @param area     (Area): Owner area. Not null
      * @param position (DiscreteCoordinate): Initial position of the entity in the Area. Not null
-     *                 side note : we are using the ressource bonus but in no case are we using it in its intended use
-     *                 we are "customising" its actual use
      */
     public Jamila(Area area, Orientation orientation, DiscreteCoordinates position, Logic signal) {
         super(area, orientation, position);
@@ -48,17 +47,19 @@ public class Jamila extends AreaEntity {
         return Collections.singletonList((getCurrentMainCellCoordinates()));
     }
 
-    /*the player won't be able to "eat" Jamila if the signal is on
+    /*
+    the player won't be able to "eat" Jamila if the signal is on
     BE careful and strategic - don't eat jamilas if you have full health
     and be aware that once you ingest either Jamila or a strawberry, you leave behind
-    an enclosure
+    a fire
      */
     @Override
     public boolean takeCellSpace() {
         return false;
     }
 
-    /*the interaction between the player and Jamila can only take place if
+    /*
+    the interaction between the player and Jamila can only take place if
     the player has eaten the nearest strawberry (if he hasn't the signal will stay on
     */
     @Override

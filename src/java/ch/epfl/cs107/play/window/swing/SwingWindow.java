@@ -1,21 +1,18 @@
 package ch.epfl.cs107.play.window.swing;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.PointerInfo;
-import java.awt.RenderingHints;
-import java.awt.Toolkit;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import ch.epfl.cs107.play.io.FileSystem;
+import ch.epfl.cs107.play.math.Shape;
+import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.math.*;
+import ch.epfl.cs107.play.window.Button;
+import ch.epfl.cs107.play.window.Image;
+import ch.epfl.cs107.play.window.Window;
+import ch.epfl.cs107.play.window.*;
+
+import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
 import java.awt.image.BufferStrategy;
@@ -24,31 +21,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
-
-import ch.epfl.cs107.play.io.FileSystem;
-import ch.epfl.cs107.play.math.Node;
-import ch.epfl.cs107.play.math.RegionOfInterest;
-import ch.epfl.cs107.play.math.Shape;
-import ch.epfl.cs107.play.math.TextAlign;
-import ch.epfl.cs107.play.math.Transform;
-import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Button;
-import ch.epfl.cs107.play.window.Image;
-import ch.epfl.cs107.play.window.Keyboard;
-import ch.epfl.cs107.play.window.Mouse;
-import ch.epfl.cs107.play.window.Sound;
-import ch.epfl.cs107.play.window.Window;
+import java.util.*;
 
 /**
  * Swing implementation of window context.

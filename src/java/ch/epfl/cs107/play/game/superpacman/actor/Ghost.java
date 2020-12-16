@@ -20,7 +20,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
     public final int GHOST_SCORE = 500;
-    protected int movingSpeed = 12;
+    protected int movingSpeed = 13;
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
@@ -54,7 +54,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     //once the player eats a coin, the ghost's speed will increase (not temporarily)
     //and will reset once the player eats a Jamila
     protected void increaseMovingSpeed() {
-        movingSpeed = 8;
+        movingSpeed = 9;
     }
 
     /**
@@ -136,7 +136,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     }
 
     public void resetGhostSpeed() {
-        movingSpeed = 15;
+        movingSpeed = 13;
     }
 
     @Override
@@ -190,6 +190,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         }
     }
 
+    /**
+     * send ghost back to its refuge position
+     */
     public void returnToRefugePosition() {
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());

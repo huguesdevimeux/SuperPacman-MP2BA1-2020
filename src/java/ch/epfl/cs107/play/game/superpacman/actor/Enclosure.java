@@ -12,16 +12,16 @@ import java.util.Collections;
 import java.util.List;
 
 /*
-this class will register an enclosure, similar to a prison cell, once the player eats a strawberry and/or a Jamila
+this class will register a fire, once the player eats a strawberry and/or a Jamila
 the player and the ghosts both cannot go through it
 as such, it is both an obstacle and an advantage as the player can't get past it (so it can't get across the map as easily) but it
 also blocks the ghost, leaving the player some time to collect coins and diamonds and other collectables
  */
 public class Enclosure extends AreaEntity {
-    private Sprite enclosure;
+    private Sprite fire;
 
     /**
-     * Default enclosure constructor
+     * Default fire constructor
      *
      * @param area        (Area): Owner area. Not null
      * @param orientation (Orientation): Initial orientation of the entity in the Area. Not null
@@ -29,11 +29,11 @@ public class Enclosure extends AreaEntity {
      */
     public Enclosure(Area area, Orientation orientation, DiscreteCoordinates position) {
         super(area, orientation, position);
-        enclosure = new Sprite("superpacman/prison", 1.f, 1.f, this);
+        fire = new Sprite("superpacman/prison", 1.f, 1.f, this);
     }
     @Override
     public void draw(Canvas canvas) {
-        enclosure.draw(canvas);
+        fire.draw(canvas);
     }
 
     @Override

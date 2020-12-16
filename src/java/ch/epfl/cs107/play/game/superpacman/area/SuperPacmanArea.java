@@ -45,7 +45,7 @@ public abstract class SuperPacmanArea extends Area implements Logic {
         } else
             return false;
     }
-
+    //this method will be called when we want the game to end
     public void endGame() {
         gameOverGUI.setGameIsOver();
     }

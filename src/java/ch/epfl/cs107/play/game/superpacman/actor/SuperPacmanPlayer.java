@@ -55,7 +55,7 @@ public class SuperPacmanPlayer extends Player {
         updateDesiredOrientation(Orientation.RIGHT, keyboard.get(Keyboard.RIGHT));
         updateDesiredOrientation(Orientation.DOWN, keyboard.get(Keyboard.DOWN));
 
-        // NOTE : As the name DOES NOT suggesti, isDisplacementOccurs return whether the player is in displacement between
+        // NOTE : As the name DOES NOT suggest, isDisplacementOccurs return whether the player is in displacement between
         // two cells, not in displacement between point A to point B!
         if (!isDisplacementOccurs()) {
             movingAnimations[getOrientation().ordinal()].reset();
@@ -73,19 +73,25 @@ public class SuperPacmanPlayer extends Player {
                 super.update(deltaTime);
             }
         }
-        setPauseStatus();
-        setGameOverStatus();
+        //we update both the pause and gameOver statuses
+        pauseStatus();
+        gameOverStatus();
         //if you want to quit the game, you can press Q
         if (keyboard.get(Keyboard.Q).isPressed()) System.exit(0);
     }
 
-    public void setPauseStatus() {
+    public void pauseStatus() {
         //press SPACE bar to pause and P to unpause
         if (keyboard.get(Keyboard.SPACE).isPressed()) pauseStatus.setPause();
         if (keyboard.get(Keyboard.P).isPressed()) pauseStatus.setPlay();
     }
-    public void setGameOverStatus() {
+    public void gameOverStatus() {
         if (amountLife == 0) ((SuperPacmanArea) getOwnerArea()).endGame();
+    }
+
+    //method will be used when going through doors (ie to a new level)
+    public void resetAmountLives(){
+        amountLife = 5;
     }
     //method will be used when entering a new level or when player eats a Jamila
     public void resetSpeed() {
@@ -93,7 +99,7 @@ public class SuperPacmanPlayer extends Player {
     }
     /*
     method will be used when player eats a coin
-    it will increase the speed but not temporarily
+    it will the increase the ghosts' speed but not temporarily
     and eating a Jamila, will reset speed but will increase health
     making the game more dynamic
     */
@@ -116,6 +122,7 @@ public class SuperPacmanPlayer extends Player {
     }
 
     private class SuperPacmanPlayerHandler implements SuperPacmanInteractionVisitor {
+        //this class handles the interactions between the player and all the possible actors
 
         public void interactWith(Door door) {
             setIsPassingADoor(door);
@@ -123,10 +130,13 @@ public class SuperPacmanPlayer extends Player {
             ((SuperPacmanArea) getOwnerArea()).setCurrentDiamonds(0);
             //when entering a new level, we reset the speed to 5
             resetSpeed();
+            //when entering a new level we also reset de amount of lives
+            resetAmountLives();
         }
 
         //when the player will interact with the key, the actor key will disappear
         public void interactWith(Key key) {
+            //we make sure to turn the signal off when the key is collected
             key.isCollected();
             getOwnerArea().unregisterActor(key);
         }
@@ -164,15 +174,14 @@ public class SuperPacmanPlayer extends Player {
                 ((SuperPacmanArea) getOwnerArea()).resetAllGhosts();
             }
         }
-
         /*
         interacting with the actor jamila (Aka a heart) will :
         -increase health (if it is strictly under maximum health (5))
         -reset the player's speed which had previously been increased
         -reset the ghost's speed which had previously been increased
         but BE CAREFUL - you must interact with the nearest strawberry in order to eat a Jamila and
-        the game will automatically register an enclosure once you interact with either a Jamila or a strawberry
-        so proceed cautiously;)
+        the game will automatically register a fire once you interact with either a Jamila or a strawberry
+        so proceed cautiously ;)
          */
         public void interactWith(Jamila jamila) {
             if (amountLife < 5) amountLife++;
@@ -183,8 +192,10 @@ public class SuperPacmanPlayer extends Player {
             getOwnerArea().unregisterActor(jamila);
         }
 
-        //eating a straberry will increase speed and allow access to Jamilas to then increase health
-        //and reset the player's and the ghosts' speed
+        //eating a strawberry will increase speed and allow access to Jamilas (that will then increase health
+        //but reset the player's and the ghosts' speed)
+        //You decide when to interact with a strawberry
+        //but be careful, eating it will create a fire, meaning you won't be able to access that cell anymore
         public void interactWith(Strawberry strawberry) {
             //you must press E when interacting with a strawberry to eat it
             if (keyboard.get(Keyboard.E).isPressed()) {
@@ -203,10 +214,8 @@ public class SuperPacmanPlayer extends Player {
             teleportPacman();
             getOwnerArea().unregisterActor(portal);
         }
-
         @Override
-        public void interactWith(Interactable other) {
-        }
+        public void interactWith(Interactable other) {}
     }
 
     public DiscreteCoordinates getSpawnLocation() {
