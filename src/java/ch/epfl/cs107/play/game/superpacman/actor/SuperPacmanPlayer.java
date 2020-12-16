@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.Door;
 import ch.epfl.cs107.play.game.rpg.actor.Player;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.GameOverGUI;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.PauseGUI;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
@@ -27,6 +28,7 @@ public class SuperPacmanPlayer extends Player {
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
     private PauseGUI pauseStatus = new PauseGUI();
+    private GameOverGUI gameOverStatus = new GameOverGUI();
     private int score = 0;
     private int amountLife = 5;
     private Keyboard keyboard = getOwnerArea().getKeyboard();
@@ -65,26 +67,28 @@ public class SuperPacmanPlayer extends Player {
             move(movingSpeed);
         } else movingAnimations[getOrientation().ordinal()].update(deltaTime);
 
-        if(!PauseGUI.gameIsPaused) {
-            super.update(deltaTime);
+        //while the game is NOT over and NOT in pause, we call update from super class
+        if (!GameOverGUI.gameIsOver) {
+            if (!PauseGUI.gameIsPaused) {
+                super.update(deltaTime);
+            }
         }
         setPauseStatus();
+        setGameOverStatus();
         //if you want to quit the game, you can press Q
-        if(keyboard.get(Keyboard.Q).isPressed())System.exit(0);
+        if (keyboard.get(Keyboard.Q).isPressed()) System.exit(0);
     }
 
     public void setPauseStatus() {
         //press SPACE bar to pause and P to unpause
-        if (keyboard.get(Keyboard.SPACE).isPressed()) {
-            pauseStatus.setPause();
-        }
-        if (keyboard.get(Keyboard.P).isPressed()) {
-            pauseStatus.setPlay();
-        }
+        if (keyboard.get(Keyboard.SPACE).isPressed()) pauseStatus.setPause();
+        if (keyboard.get(Keyboard.P).isPressed()) pauseStatus.setPlay();
     }
-
+    public void setGameOverStatus() {
+        if (amountLife == 0) ((SuperPacmanArea) getOwnerArea()).endGame();
+    }
     //method will be used when entering a new level or when player eats a Jamila
-    public void resetSpeed(){
+    public void resetSpeed() {
         movingSpeed = 5;
     }
     /*
@@ -93,11 +97,11 @@ public class SuperPacmanPlayer extends Player {
     and eating a Jamila, will reset speed but will increase health
     making the game more dynamic
     */
-    public void increaseSpeed(){
+    public void increaseSpeed() {
         movingSpeed = 4;
     }
-    public void scareGhosts(){
-        ((SuperPacmanArea)getOwnerArea()).scareGhosts();
+    public void scareGhosts() {
+        ((SuperPacmanArea) getOwnerArea()).scareGhosts();
     }
     /**
      * Set the desired orientation if the corresponding key is pressed, and if the orientation needs to be updated.
@@ -132,6 +136,7 @@ public class SuperPacmanPlayer extends Player {
             scareGhosts();
             getOwnerArea().unregisterActor(bonus);
         }
+
         //"eating" a diamond will increment the score by 10
         public void interactWith(Diamond diamond) {
             score += 10;
@@ -144,7 +149,7 @@ public class SuperPacmanPlayer extends Player {
         //"eating" a cherry will increment the score by 200
         public void interactWith(Cherry cherry) {
             //you must press E when interacting with a cherry to eat it
-            if(keyboard.get(Keyboard.E).isPressed()) {
+            if (keyboard.get(Keyboard.E).isPressed()) {
                 score += 200;
                 getOwnerArea().unregisterActor(cherry);
             }
@@ -154,12 +159,12 @@ public class SuperPacmanPlayer extends Player {
             if (ghost.isAfraid()) {
                 ghost.resetGhost();
                 score += ghost.GHOST_SCORE;
-            }else {
+            } else {
                 pacmanIsEaten();
-                if(amountLife == 0) ((SuperPacmanArea)getOwnerArea()).endGame();
-                ((SuperPacmanArea)getOwnerArea()).resetAllGhosts();
+                ((SuperPacmanArea) getOwnerArea()).resetAllGhosts();
             }
         }
+
         /*
         interacting with the actor jamila (Aka a heart) will :
         -increase health (if it is strictly under maximum health (5))
@@ -170,18 +175,19 @@ public class SuperPacmanPlayer extends Player {
         so proceed cautiously;)
          */
         public void interactWith(Jamila jamila) {
-            if(amountLife < 5)amountLife++;
+            if (amountLife < 5) amountLife++;
             resetSpeed();
-            ((SuperPacmanArea)getOwnerArea()).resetGhostSpeed();
+            ((SuperPacmanArea) getOwnerArea()).resetGhostSpeed();
             getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
-                    new DiscreteCoordinates((int)getPosition().getX(), (int)getPosition().getY())));
+                    new DiscreteCoordinates((int) getPosition().getX(), (int) getPosition().getY())));
             getOwnerArea().unregisterActor(jamila);
         }
+
         //eating a straberry will increase speed and allow access to Jamilas to then increase health
         //and reset the player's and the ghosts' speed
         public void interactWith(Strawberry strawberry) {
             //you must press E when interacting with a strawberry to eat it
-            if(keyboard.get(Keyboard.E).isPressed()) {
+            if (keyboard.get(Keyboard.E).isPressed()) {
                 increaseSpeed();
                 getOwnerArea().registerActor(new Enclosure(getOwnerArea(), Orientation.UP,
                         new DiscreteCoordinates((int) getPosition().getX(), (int) getPosition().getY())));
@@ -189,33 +195,37 @@ public class SuperPacmanPlayer extends Player {
                 getOwnerArea().unregisterActor(strawberry);
             }
         }
+
         /*
         the portal actor will enable the player to teleport somewhere on the map
         */
-        public void interactWith(Portal portal){
+        public void interactWith(Portal portal) {
             teleportPacman();
             getOwnerArea().unregisterActor(portal);
         }
 
         @Override
-        public void interactWith(Interactable other) {}
+        public void interactWith(Interactable other) {
+        }
     }
 
-    public DiscreteCoordinates getSpawnLocation(){
-        return ((SuperPacmanArea)getOwnerArea()).getSpawnLocation();
-    }
-    public DiscreteCoordinates getTeleportLocation(){
-        return ((SuperPacmanArea)getOwnerArea()).getTeleportLocation();
+    public DiscreteCoordinates getSpawnLocation() {
+        return ((SuperPacmanArea) getOwnerArea()).getSpawnLocation();
     }
 
-    public void pacmanIsEaten(){
+    public DiscreteCoordinates getTeleportLocation() {
+        return ((SuperPacmanArea) getOwnerArea()).getTeleportLocation();
+    }
+
+    public void pacmanIsEaten() {
         amountLife--;
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getSpawnLocation().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());
         resetMotion();
     }
-    public void teleportPacman(){
+
+    public void teleportPacman() {
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition((getTeleportLocation().toVector()));
         getOwnerArea().enterAreaCells(this, getCurrentCells());
@@ -224,16 +234,17 @@ public class SuperPacmanPlayer extends Player {
 
     @Override
     public void acceptInteraction(AreaInteractionVisitor v) {
-        ((SuperPacmanInteractionVisitor)v).interactWith(this);
+        ((SuperPacmanInteractionVisitor) v).interactWith(this);
     }
 
     @Override
     public void draw(Canvas canvas) {
-            statusDrawer.setScore(score);
-            statusDrawer.setAmountLife(amountLife);
-            statusDrawer.draw(canvas);
-            movingAnimations[getOrientation().ordinal()].draw(canvas);
-            pauseStatus.draw(canvas);
+        statusDrawer.setScore(score);
+        statusDrawer.setAmountLife(amountLife);
+        statusDrawer.draw(canvas);
+        movingAnimations[getOrientation().ordinal()].draw(canvas);
+        pauseStatus.draw(canvas);
+        gameOverStatus.draw(canvas);
     }
 
     @Override
@@ -252,8 +263,8 @@ public class SuperPacmanPlayer extends Player {
         return false;
     }
 
-   @Override
-   public void interactWith(Interactable other) {
+    @Override
+    public void interactWith(Interactable other) {
         other.acceptInteraction(handler);
     }
 
