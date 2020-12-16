@@ -116,22 +116,37 @@ public class Text extends Entity {
      * @param color (Color): Color of the text, not null
      */
     public Text(String text, DiscreteCoordinates position, Area area, boolean isScreenRelative, float fontSize, Color color) {
-        this(text, position, area, isScreenRelative, fontSize, color, false, false, TextAlign.Horizontal.LEFT, TextAlign.Vertical.BOTTOM, 1, 10);
+        this(text, position, area, isScreenRelative, fontSize, color, false, false, TextAlign.Horizontal.CENTER, TextAlign.Vertical.MIDDLE, 1, 10);
     }
 
     /**
+     * [CREATED BY STUDENTS]
      * Update the text displayed
      * @param text (String) the new text, not null
      */
     public void setText(String text){
         textGraphics.setText(text);
     }
+    //  [CREATED BY STUDENTS]
+    public void setFontName(String name) {
+        textGraphics.setFontName(name);
+    }
+    //  [CREATED BY STUDENTS]
+    public void setFillColor(Color color) {
+        textGraphics.setFillColor(color);
+    }
+
+    //  [CREATED BY STUDENTS]
+    public void setOutlineColor(Color outlineColor) {
+        textGraphics.setOutlineColor(outlineColor);
+    }
 
     /**
      * Make the text appear by step of given size
      * @param stepSize (float): the step size
      */
-    public void makeItAppear(float stepSize){
+    public void makeItAppear(float stepSize) {
+        currentAlpha = 0; 
         makeItDisappear = false;
         makeItAppear = true;
         appearStep = stepSize;
@@ -173,7 +188,6 @@ public class Text extends Entity {
 
     @Override
     public void draw(Canvas canvas) {
-
         if(isScreenRelative) {
             setCurrentPosition(canvas.getPosition().sub(DX, DY).add(relativePosition));
         }
