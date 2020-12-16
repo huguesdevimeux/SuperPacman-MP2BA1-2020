@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -56,18 +57,18 @@ public class SuperPacman extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
-            Area startingArea;
+            SuperPacmanArea startingArea;
             //initiating areas depending of the boolean value of @proceduralGamemode
             if (!proceduralGamemode) {
                 createNonProceduralAreas();
-                startingArea = setCurrentArea("superpacman/Level0", true);
+                startingArea = (SuperPacmanArea) setCurrentArea("superpacman/Level0", true);
             }
             else {
                 addArea(new RandomArea(0));
-                startingArea = setCurrentArea("randomAreaLevel0", true);
+                startingArea = (SuperPacmanArea) setCurrentArea("randomAreaLevel0", true);
             }
-            player = new SuperPacmanPlayer(startingArea, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
-            initPlayer(player);
+            player = new SuperPacmanPlayer(startingArea, Orientation.UP, startingArea.getSpawnLocation()); 
+          initPlayer(player);
             return true;
         } else return false;
     }
