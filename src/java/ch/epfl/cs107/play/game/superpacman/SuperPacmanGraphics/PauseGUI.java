@@ -22,11 +22,11 @@ public class PauseGUI implements Graphics {
     }
 
         private void drawPauseStatus(Canvas canvas){
-            pauseStatus = new TextGraphics("PAUSE", FONT_SIZE, Color.RED);
+            pauseStatus = new TextGraphics("PAUSE", FONT_SIZE, Color.WHITE);
             pauseStatus.setFontName("ArcadeClassic");
             pauseStatus.setAnchor(getCenter(canvas).add(new Vector(5, -7)));
             pauseStatus.draw(canvas);
-            pauseStatus2 = new TextGraphics("press p to play", 1, Color.RED);
+            pauseStatus2 = new TextGraphics("press p to play", 1, Color.WHITE);
             pauseStatus2.setFontName("ArcadeClassic");
             pauseStatus2.setAnchor(getCenter(canvas).add(new Vector(4.2f, -8)));
             pauseStatus2.draw(canvas);
