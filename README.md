@@ -9,6 +9,8 @@ Made with love by Luca Mouchel and Hugues Devimeux.
 
 __________CONTROLS__________
 
+Launch game : Run Play.java
+
 SPACE bar : pause
 
 P key : unpause
