@@ -50,16 +50,18 @@ public class SuperPacman extends RPG {
     }
 
     private void startGame(int selectedGameMode) {
-        switch (selectedGameMode) {
+        Area startingArea;
+		switch (selectedGameMode) {
             case 0:
                 createNonProceduralAreas();
-                player = new SuperPacmanPlayer(setCurrentArea("superpacman/Level0", true), Orientation.UP, new DiscreteCoordinates(10, 1));
+                startingArea = setCurrentArea("superpacman/Level0", true);
+                player = new SuperPacmanPlayer(startingArea, Orientation.UP, ((SuperPacmanArea) startingArea).getSpawnLocation());
                 initPlayer(player);
                 break;
             case 1:
                 addArea(new RandomArea(0));
-                player = new SuperPacmanPlayer(setCurrentArea("randomAreaLevel0", true), Orientation.UP,
-                        new DiscreteCoordinates(10, 1));
+                startingArea = setCurrentArea("randomAreaLevel0", true);
+                player = new SuperPacmanPlayer(startingArea, Orientation.UP,((SuperPacmanArea) startingArea).getSpawnLocation());
                 initPlayer(player);
                 proceduralGamemode = true; 
             default:
