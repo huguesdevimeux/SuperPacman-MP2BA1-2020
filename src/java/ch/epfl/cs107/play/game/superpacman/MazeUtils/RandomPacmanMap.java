@@ -1,11 +1,11 @@
 package ch.epfl.cs107.play.game.superpacman.MazeUtils;
 
+import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior.SuperPacmanCellType;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior.SuperPacmanCellType;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 /**
  * This class will implement all the specificities of the pacman-like mazes, such as symetry, or ghost houses, or bonuses.

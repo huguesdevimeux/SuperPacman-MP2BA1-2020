@@ -13,7 +13,8 @@ import ch.epfl.cs107.play.window.Canvas;
 public class Bonus extends CollectableAreaEntity {
     Sprite[] sprites = RPGSprite.extractSprites("superpacman/coin", 4, 1.f, 1.f,
             this, 16, 16);
-    Animation A = new Animation(4, sprites, true);
+    //creating an animation for the coins
+    Animation bonusAnimation = new Animation(4, sprites, true);
 
     /**
      * Default AreaEntity constructor
@@ -27,11 +28,12 @@ public class Bonus extends CollectableAreaEntity {
 
     @Override
     public void draw(Canvas canvas) {
-        A.draw(canvas);
+        bonusAnimation.draw(canvas);
     }
 
+    //we have to repeatedly update the animation or it will stop
     public void update(float deltatime) {
-        A.update(deltatime);
+        bonusAnimation.update(deltatime);
     }
 
     public void acceptInteraction(AreaInteractionVisitor v) {

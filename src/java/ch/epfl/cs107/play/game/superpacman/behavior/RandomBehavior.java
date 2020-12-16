@@ -1,11 +1,10 @@
 package ch.epfl.cs107.play.game.superpacman.behavior;
 
-import java.util.List;
-
 import ch.epfl.cs107.play.game.superpacman.MazeUtils.RandomPacmanMap;
-import ch.epfl.cs107.play.game.superpacman.MazeUtils.RandomPacmanMazeStructure;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.List;
 
 public class RandomBehavior extends SuperPacmanBehavior {
 

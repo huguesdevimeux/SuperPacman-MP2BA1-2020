@@ -1,13 +1,13 @@
 package ch.epfl.cs107.play.game.areagame;
 
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.actor.Interactable;
 import ch.epfl.cs107.play.game.areagame.actor.Interactor;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Image;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.List;
 
 
 /**

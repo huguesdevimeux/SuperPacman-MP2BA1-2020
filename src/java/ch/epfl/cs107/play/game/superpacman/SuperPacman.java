@@ -1,7 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman;
 
-import java.util.Random;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
@@ -59,7 +57,8 @@ public class SuperPacman extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
-            SuperPacmanArea startingArea; 
+            SuperPacmanArea startingArea;
+            //initiating areas depending of the boolean value of @proceduralGamemode
             if (!proceduralGamemode) {
                 createNonProceduralAreas();
                 startingArea = (SuperPacmanArea) setCurrentArea("superpacman/Level0", true);
@@ -68,8 +67,8 @@ public class SuperPacman extends RPG {
                 addArea(new RandomArea(0));
                 startingArea = (SuperPacmanArea) setCurrentArea("randomAreaLevel0", true);
             }
-            player = new SuperPacmanPlayer(startingArea, Orientation.UP, startingArea.getSpawnLocation()); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
-            initPlayer(player);
+            player = new SuperPacmanPlayer(startingArea, Orientation.UP, startingArea.getSpawnLocation()); 
+          initPlayer(player);
             return true;
         } else return false;
     }

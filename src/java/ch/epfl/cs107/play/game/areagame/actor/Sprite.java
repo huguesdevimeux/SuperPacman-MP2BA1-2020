@@ -1,9 +1,7 @@
 package ch.epfl.cs107.play.game.areagame.actor;
 
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
-import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;

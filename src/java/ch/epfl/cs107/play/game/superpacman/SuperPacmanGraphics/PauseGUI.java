@@ -2,20 +2,21 @@ package ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics;
 
 import ch.epfl.cs107.play.game.actor.Graphics;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
-import ch.epfl.cs107.play.window.Keyboard;
 
 import java.awt.*;
-
+/*
+this class will handle the display of the pause text
+ */
 public class PauseGUI implements Graphics {
    private final float FONT_SIZE = 2.f;
+   //by default the game is not paused
    public static boolean gameIsPaused = false;
    private TextGraphics pauseStatus;
    private TextGraphics pauseStatus2;
 
+   //setting the anchor at the center of the window
    private Vector getCenter(Canvas canvas) {
         return canvas.getTransform().getOrigin()
                 .add(new Vector(-canvas.getScaledWidth()/2, canvas.getScaledHeight() / 2));

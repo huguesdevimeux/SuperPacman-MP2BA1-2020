@@ -1,16 +1,10 @@
 package ch.epfl.cs107.play.game.superpacman.MazeUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-
 import ch.epfl.cs107.play.game.superpacman.behavior.SuperPacmanBehavior.SuperPacmanCellType;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.math.Vector;
+
+import java.util.*;
 
 /** 
  * This is the core of the maze generation. It will handle basic pacman-type maze. 

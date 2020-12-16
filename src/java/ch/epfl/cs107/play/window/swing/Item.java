@@ -1,6 +1,6 @@
 package ch.epfl.cs107.play.window.swing;
 
-import java.awt.Graphics2D;
+import java.awt.*;
 
 /**
  * Represent a renderable element in a Swing context.

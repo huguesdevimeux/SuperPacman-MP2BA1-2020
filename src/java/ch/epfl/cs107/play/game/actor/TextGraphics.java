@@ -1,12 +1,12 @@
 package ch.epfl.cs107.play.game.actor;
 
-import java.awt.Color;
-
 import ch.epfl.cs107.play.math.Attachable;
 import ch.epfl.cs107.play.math.Node;
 import ch.epfl.cs107.play.math.TextAlign;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.awt.*;
 
 
 /**

@@ -1,14 +1,13 @@
 package ch.epfl.cs107.play.recorder;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.recorder.recordEntry.RecordEntry;
 import ch.epfl.cs107.play.window.Window;
+
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 
 public class RecordReplayer {
 	private Record record;

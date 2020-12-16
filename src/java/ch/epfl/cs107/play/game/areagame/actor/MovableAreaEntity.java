@@ -1,13 +1,13 @@
 package ch.epfl.cs107.play.game.areagame.actor;
 
+import ch.epfl.cs107.play.game.areagame.Area;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
+import ch.epfl.cs107.play.math.Vector;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import ch.epfl.cs107.play.game.areagame.Area;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Vector;
 
 /**
  * MovableAreaEntity represent AreaEntity which can move on the grid
