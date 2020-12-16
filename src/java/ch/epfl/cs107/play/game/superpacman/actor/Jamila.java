@@ -39,7 +39,7 @@ public class Jamila extends AreaEntity {
 
     @Override
     public void update(float deltaTime) {
-        Jamila.update(deltaTime);
+        if (signal.isOff()) Jamila.update(deltaTime);
     }
 
     @Override
