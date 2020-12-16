@@ -33,7 +33,8 @@ __________WALKTHROUGH__________
   -you will first have to go through a portal that will teleport you somewhere on the map
   -you have the option to interact with other actors (coin, strawberry and Jamila)
   -to complete the level, you must walk through the doors once the gate is open
- 
+
+
 >Level1 
  -you must eat all the diamonds to open the gates that allow you to access the next level
  -like in level0, you will encounter numerous actors : coins, portals, strawberries
@@ -46,6 +47,7 @@ __________WALKTHROUGH__________
  -when you ingest either a Jamila or a strawberry, an fire will be created blocking access to the player and to the ghosts. (the fire is too hot for the player to walk through!)
  this is both an advantage and an obstacle for the player: it will have more time to collect diamonds and collectables but it will be harder to get accross the map
  -you have completed the level once the gates open and you go through the doors
+ 
  
  
 >Level2
