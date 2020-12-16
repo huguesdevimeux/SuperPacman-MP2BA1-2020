@@ -1,11 +1,11 @@
 package ch.epfl.cs107.play.game.areagame;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import ch.epfl.cs107.play.game.Game;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.window.Window;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**

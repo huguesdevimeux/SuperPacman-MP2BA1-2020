@@ -4,6 +4,8 @@ import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.*;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
+import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.GameOverGUI;
+import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.PauseGUI;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
@@ -18,7 +20,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
     private GhostHandler handler = new GhostHandler();
     private DiscreteCoordinates refugePosition;
     public final int GHOST_SCORE = 500;
-    protected int movingSpeed = 12;
+    protected int movingSpeed = 13;
     protected Sprite sprite;
     protected Animation[] normalStateAnimations;
     private Animation[] afraidAnimations;
@@ -51,7 +53,9 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     //once the player eats a coin, the ghost's speed will increase (not temporarily)
     //and will reset once the player eats a Jamila
-    protected void increaseMovingSpeed(){movingSpeed = 8;}
+    protected void increaseMovingSpeed() {
+        movingSpeed = 9;
+    }
 
     /**
      * Handle the generation of the animations of the pacman.
@@ -91,7 +95,13 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
 
     @Override
     public void update(float deltaTime) {
-        super.update(deltaTime);
+
+        //if the game is paused or Over, we "freeze" the ghosts' animations
+        if (!GameOverGUI.gameIsOver) {
+            if (!PauseGUI.gameIsPaused) {
+                super.update(deltaTime);
+            }
+        }
         if (isDisplacementOccurs()) {
             currentAnimations[getOrientation().ordinal()].update(deltaTime);
         } else {
@@ -103,7 +113,7 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
             move(getSpeed());
         }
         afraidTime--;
-        if (afraidTime <= 0) {
+        if (afraidTime <= 0 && isAfraid()) {
             setNormalState();
         }
     }
@@ -125,8 +135,8 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         afraidTime = 230;
     }
 
-    public void resetGhostSpeed(){
-        movingSpeed = 15;
+    public void resetGhostSpeed() {
+        movingSpeed = 13;
     }
 
     @Override
@@ -180,7 +190,10 @@ public abstract class Ghost extends MovableAreaEntity implements Interactor {
         }
     }
 
-    public void returnToRefugePosition(){
+    /**
+     * send ghost back to its refuge position
+     */
+    public void returnToRefugePosition() {
         getOwnerArea().leaveAreaCells(this, getEnteredCells());
         setCurrentPosition(getRefugePosition().toVector());
         getOwnerArea().enterAreaCells(this, getCurrentCells());

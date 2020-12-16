@@ -1,9 +1,5 @@
 package ch.epfl.cs107.play.game.tutosSolution.actor;
 
-import java.awt.Color;
-import java.util.Collections;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.MovableAreaEntity;
@@ -16,6 +12,10 @@ import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Canvas;
 import ch.epfl.cs107.play.window.Keyboard;
+
+import java.awt.*;
+import java.util.Collections;
+import java.util.List;
 
 public class GhostPlayer extends MovableAreaEntity {
 	private float hp;

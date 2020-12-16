@@ -1,21 +1,17 @@
 package ch.epfl.cs107.play.recorder;
 
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 import ch.epfl.cs107.play.math.RandomGenerator;
 import ch.epfl.cs107.play.math.Vector;
-import ch.epfl.cs107.play.recorder.recordEntry.KeyboardPressedRecordEntry;
-import ch.epfl.cs107.play.recorder.recordEntry.KeyboardReleasedRecordEntry;
-import ch.epfl.cs107.play.recorder.recordEntry.MouseButtonPressedRecordEntry;
-import ch.epfl.cs107.play.recorder.recordEntry.MouseButtonReleasedRecordEntry;
-import ch.epfl.cs107.play.recorder.recordEntry.MouseMoveRecordEntry;
+import ch.epfl.cs107.play.recorder.recordEntry.*;
 import ch.epfl.cs107.play.window.Button;
 import ch.epfl.cs107.play.window.Keyboard;
 import ch.epfl.cs107.play.window.Mouse;
 import ch.epfl.cs107.play.window.Window;
+
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 
 public class Recorder{
 	private Keyboard keyboard;

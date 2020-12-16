@@ -1,12 +1,12 @@
 package ch.epfl.cs107.play.window.swing;
 
-import java.awt.*;
-import java.awt.font.GlyphVector;
-import java.awt.geom.AffineTransform;
-
 import ch.epfl.cs107.play.math.TextAlign;
 import ch.epfl.cs107.play.math.Transform;
 import ch.epfl.cs107.play.math.Vector;
+
+import java.awt.*;
+import java.awt.font.GlyphVector;
+import java.awt.geom.AffineTransform;
 
 
 /**

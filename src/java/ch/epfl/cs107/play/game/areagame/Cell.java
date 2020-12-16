@@ -1,13 +1,13 @@
 package ch.epfl.cs107.play.game.areagame;
 
+import ch.epfl.cs107.play.game.areagame.actor.Interactable;
+import ch.epfl.cs107.play.game.areagame.actor.Interactor;
+import ch.epfl.cs107.play.math.DiscreteCoordinates;
+
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import ch.epfl.cs107.play.game.areagame.actor.Interactable;
-import ch.epfl.cs107.play.game.areagame.actor.Interactor;
-import ch.epfl.cs107.play.math.DiscreteCoordinates;
 
 /**
  * Each AreaGame will have its own Cell extension.
