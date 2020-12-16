@@ -62,6 +62,9 @@ __________WALKTHROUGH__________
  -in addition however, there is an additional smart ghost that will chase the player with constant speed AND he will not get afraid and thus not return to its refuge position once ANY ghost interacts with the pacman whilst not afraid (he doesn't have a refuge position because he is braver than the others :o) 
  -you have completed the level once you eat all the diamonds, open all the gates and pass through the doors
  
+ 
+ If you die in any of the levels, meaning your HP falls down to 0, you won't be able to play anymore and a Game Over message will be displayed and it will ask you to quit the game (pressing the Q key)
+ 
  __________RANDOM LEVELS__________
  
 
