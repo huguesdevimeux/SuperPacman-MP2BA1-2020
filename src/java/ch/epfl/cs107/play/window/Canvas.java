@@ -1,13 +1,9 @@
 package ch.epfl.cs107.play.window;
 
-import java.awt.Color;
-
-import ch.epfl.cs107.play.math.Positionable;
-import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Shape;
-import ch.epfl.cs107.play.math.TextAlign;
-import ch.epfl.cs107.play.math.Transform;
-import ch.epfl.cs107.play.math.Vector;
+import ch.epfl.cs107.play.math.*;
+
+import java.awt.*;
 
 /**
  * Represents a rendering context, with various drawing capabilities.

@@ -35,6 +35,6 @@ public class Spooky extends smartMovingGhost {
     //this ghost will go at constant speed and will constantly chase the player
     @Override
     protected int getSpeed() {
-        return 12;
+        return 13;
     }
 }

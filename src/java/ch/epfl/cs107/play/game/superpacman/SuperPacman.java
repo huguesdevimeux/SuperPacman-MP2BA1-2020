@@ -1,7 +1,5 @@
 package ch.epfl.cs107.play.game.superpacman;
 
-import java.util.Random;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.actor.Orientation;
 import ch.epfl.cs107.play.game.rpg.RPG;
@@ -11,6 +9,7 @@ import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Window;
@@ -21,7 +20,7 @@ public class SuperPacman extends RPG {
     public final static float CAMERA_SCALE_FACTOR = 15.f;
     private SuperPacmanPlayer player;
     // Infinite game mode means that there is always a new map after the current (procedurally generated).
-    private boolean proceduralGamemode = true;
+    private boolean proceduralGamemode = false;
     private int infiniteLevel = 0;
 
     //initalising player using method from super class
@@ -29,13 +28,14 @@ public class SuperPacman extends RPG {
     protected void initPlayer(Player player) {
         super.initPlayer(player);
     }
+
     public void update(float deltaTime) {
         // RandomArea is a signal that is on when the player can go to the next area. 
         if (proceduralGamemode && ((RandomArea) getCurrentArea()).isOn() && infiniteLevel == ((RandomArea) getCurrentArea()).getLevel()) {
             infiniteLevel++;
             updateProceduralArea(infiniteLevel);
         }
-        super.update(deltaTime);
+            super.update(deltaTime);
     }
 
     private void createNonProceduralAreas() {
@@ -57,17 +57,18 @@ public class SuperPacman extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
-            Area startingArea; 
+            SuperPacmanArea startingArea;
+            //initiating areas depending of the boolean value of @proceduralGamemode
             if (!proceduralGamemode) {
                 createNonProceduralAreas();
-                startingArea = setCurrentArea("superpacman/Level0", true);
+                startingArea = (SuperPacmanArea) setCurrentArea("superpacman/Level0", true);
             }
             else {
                 addArea(new RandomArea(0));
-                startingArea = setCurrentArea("randomAreaLevel0", true);
+                startingArea = (SuperPacmanArea) setCurrentArea("randomAreaLevel0", true);
             }
-            player = new SuperPacmanPlayer(startingArea, Orientation.UP, new DiscreteCoordinates(10, 1)); // TODO : change spawn pos with the guetteur ARAH ARAH Y A LES KEUFS
-            initPlayer(player);
+            player = new SuperPacmanPlayer(startingArea, Orientation.UP, startingArea.getSpawnLocation()); 
+          initPlayer(player);
             return true;
         } else return false;
     }

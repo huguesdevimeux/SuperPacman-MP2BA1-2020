@@ -1,12 +1,12 @@
 package ch.epfl.cs107.play.game.tutosSolution.actor;
 
-import java.awt.Color;
-
 import ch.epfl.cs107.play.game.actor.Entity;
 import ch.epfl.cs107.play.game.actor.TextGraphics;
 import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.awt.*;
 
 public class SimpleGhost extends Entity {
 	 private float hp;

@@ -1,9 +1,9 @@
 package ch.epfl.cs107.play.recorder;
 
+import ch.epfl.cs107.play.recorder.recordEntry.RecordEntry;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import ch.epfl.cs107.play.recorder.recordEntry.RecordEntry;
 
 public class Record implements java.io.Serializable{
 	private static final long serialVersionUID = 1;

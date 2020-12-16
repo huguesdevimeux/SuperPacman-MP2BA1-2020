@@ -1,12 +1,9 @@
 package test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCellType;
 import org.junit.jupiter.api.Test;
 
-import ch.epfl.cs107.play.game.superpacman.SuperPacman;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCell;
-import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanBehavior.SuperPacmanCellType;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SuperPacmanCellTypeTest {
 

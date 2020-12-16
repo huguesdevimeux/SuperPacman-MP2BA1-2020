@@ -2,9 +2,7 @@ package ch.epfl.cs107.play.window.swing;
 
 import ch.epfl.cs107.play.math.Transform;
 
-import java.awt.AlphaComposite;
-import java.awt.Composite;
-import java.awt.Graphics2D;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 

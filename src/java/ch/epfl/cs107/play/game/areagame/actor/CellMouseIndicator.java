@@ -1,12 +1,12 @@
 package ch.epfl.cs107.play.game.areagame.actor;
 
-import java.util.Collections;
-import java.util.List;
-
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.handler.AreaInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
 import ch.epfl.cs107.play.window.Canvas;
+
+import java.util.Collections;
+import java.util.List;
 
 public class CellMouseIndicator extends AreaEntity {
     private final Sprite overSprite;

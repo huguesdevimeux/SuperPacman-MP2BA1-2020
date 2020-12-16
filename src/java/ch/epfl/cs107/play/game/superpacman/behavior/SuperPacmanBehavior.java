@@ -117,7 +117,6 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
                 }
             }
         }
-
         area.setCurrentDiamonds(totalDiamonds);
     }
 
@@ -159,12 +158,13 @@ public abstract class SuperPacmanBehavior extends AreaBehavior {
             ghost.setAfraidState();
         }
     }
+    //all the registered ghosts will reset (go back to refuge position)
     public void resetAllGhosts() {
         for (Ghost ghost : ghostsInGrid) {
             ghost.resetGhost();
         }
     }
-
+    //all the registered ghosts' speed will be reset
     public void resetGhostSpeed() {
         for (Ghost ghost : ghostsInGrid) {
             ghost.resetGhostSpeed();

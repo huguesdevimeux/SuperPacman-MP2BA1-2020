@@ -1,9 +1,9 @@
 package ch.epfl.cs107.play.recorder.recordEntry;
 
-import java.awt.Robot;
-import java.awt.event.InputEvent;
-
 import ch.epfl.cs107.play.window.Window;
+
+import java.awt.*;
+import java.awt.event.InputEvent;
 
 public class MouseButtonReleasedRecordEntry extends RecordEntry{
 	private static final long serialVersionUID = 1;

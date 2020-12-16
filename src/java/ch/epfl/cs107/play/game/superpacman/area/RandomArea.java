@@ -13,7 +13,7 @@ public class RandomArea extends SuperPacmanArea {
 	private int levelOfTheArea;
 	private RandomBehavior associatedBehavior;
 	// this determines how many diamonds must be collected before the next gate is opened. 
-	private float RATIO_DIAMONDS_TO_COLLECT = 0.99f; 
+	private float RATIO_DIAMONDS_TO_COLLECT = 0.70f; 
 	
 	public RandomArea(int indexOfArea) {
 		super();
@@ -49,7 +49,11 @@ public class RandomArea extends SuperPacmanArea {
 
 	@Override
 	protected SuperPacmanBehavior getBehaviorTypeNewInstance(Window window) {
-		associatedBehavior = new RandomBehavior(window, 19, 18) ;		
+		int height = (int) (levelOfTheArea * 5 + 19);
+		// make it odd
+		height += (height % 2) + 1;
+		double spawnRateGhosts = 0.05 * (levelOfTheArea + 1);
+		associatedBehavior = new RandomBehavior(window, height, 26, spawnRateGhosts) ;		
 		return associatedBehavior; 
 	}
 	
@@ -57,7 +61,7 @@ public class RandomArea extends SuperPacmanArea {
 	protected void createArea() {
 		super.createArea();
 		for (DiscreteCoordinates pCoordinates : associatedBehavior.getDoorsPosition()) {
-			this.registerActor(new Door(getTitleNextArea(), new DiscreteCoordinates(2, 2), Logic.TRUE, this,
+			this.registerActor(new Door(getTitleNextArea(), this.getSpawnLocation(), Logic.TRUE, this,
 					Orientation.UP, new DiscreteCoordinates(pCoordinates.x, pCoordinates.y),
 					new DiscreteCoordinates(6, 9)));
 			// We create gate on top of the doors. 

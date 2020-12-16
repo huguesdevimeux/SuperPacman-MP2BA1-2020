@@ -1,9 +1,9 @@
 package ch.epfl.cs107.play.recorder.recordEntry;
 
-import java.awt.Robot;
-
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Window;
+
+import java.awt.*;
 
 public class MouseMoveRecordEntry extends RecordEntry{
 	private static final long serialVersionUID = 1;

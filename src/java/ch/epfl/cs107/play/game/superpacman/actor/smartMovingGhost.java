@@ -186,6 +186,7 @@ public abstract class smartMovingGhost extends Ghost {
         return testedPos;
     }
 
+    //TODO REMOVE?????
     // FOR DEBUG PURPOSES ! 
     @Override
     public void draw(Canvas canvas) {
