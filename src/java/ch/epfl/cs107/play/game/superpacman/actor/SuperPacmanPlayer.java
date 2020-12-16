@@ -158,11 +158,8 @@ public class SuperPacmanPlayer extends Player {
 
         //"eating" a cherry will increment the score by 200
         public void interactWith(Cherry cherry) {
-            //you must press E when interacting with a cherry to eat it
-            if (keyboard.get(Keyboard.E).isPressed()) {
                 score += 200;
                 getOwnerArea().unregisterActor(cherry);
-            }
         }
 
         public void interactWith(Ghost ghost) {
