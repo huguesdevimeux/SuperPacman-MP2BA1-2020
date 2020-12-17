@@ -118,11 +118,11 @@ seemed reasonable to create these classes as GUI as they simply popup texts when
 ## Extensions
 
 ### Actors 
-* Jamila
-* Strawberry
-* Portal
-* Enclosure
-* Spooky
+* Jamila - increases HP by one, decreases player's and ghosts' speed (player needs to eat the nearest strawberry to be collectable)
+* Strawberry - increases the player's speed and allows access to a Jamila
+* Portal - teleports the player somewhere on the map
+* Enclosure - fire that ignites whenever the player decides to eat a strawberry or when the player picks up a Jamila - TIP: be __strategic__, the player can't move over fire
+* Spooky - smart ghost that appears in __Level 2__, will move at constant speed and has NO refuge position
 
 ### Random Levels
 Generated a possibly infinite amount of levels that will be accessible through the menu.
@@ -130,4 +130,4 @@ Generated a possibly infinite amount of levels that will be accessible through t
 ### GUIs
 * ability to pause the game (SPACE bar and unpause it: P)
 * GameOver text when the player dies
-* JamilaJamilaMenu, to select to choose from the "campaign" or an infinite amount of levels
+* Opening Menu, to select to choose from the "campaign" or an infinite amount of levels
