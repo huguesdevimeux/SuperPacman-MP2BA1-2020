@@ -7,45 +7,36 @@ Paper : https://proginsc.epfl.ch/wwwhiver/mini-projet2/grid-games.pdf
 Made with love by Luca Mouchel and Hugues Devimeux. 
 2020
 
-# Controls
+## Controls
 
 ###### SPACE bar : pause
-
 ###### P key : unpause
-
 ###### Q key : quit game
-
 ###### E key : collect strawberry
-
 ###### LEFT arrow : change orientation and move to left
-
 ###### RIGHT arrow : change orientation and move to right
-
 ###### UP arrow : change orientation and move upwards
-
 ###### DOWN arrow : change orientation and move downwards
 
-__________TECHNIQUES__________
+## Techniques
 
--The user decides when interacting with a strawberry - press E 
-
--Interacting with a strawberry or a Jamila will ignite a fire that will block access to the player and the ghosts
-
--Strawberries are signals for Jamilas (You must interact with a strawberry to be able to interact with a Jamila)
+###### The user decides when interacting with a strawberry - press E 
+###### Interacting with a strawberry or a Jamila will ignite a fire that will block access to the player and the ghosts
+###### Strawberries are signals for Jamilas (You must interact with a strawberry to be able to interact with a Jamila)
            
-__________WALKTHROUGH__________
+## Walkthrough
 
-> Level 0
+ __Level 0__
   
-  -eat the key to open the gates that will lead to Level1
+  1. eat the key to open the gates that will lead to Level1
  
-  -you will first have to go through a portal that will teleport you somewhere on the map
+  1. you will first have to go through a portal that will teleport you somewhere on the map
  
-  -you have the option to interact with other actors (coin, strawberry and Jamila)
+  1. you have the option to interact with other actors (coin, strawberry and Jamila)
  
-  -you must press E when interacting with a strawberry to collect it
+  1. you must press E when interacting with a strawberry to collect it
  
-  -to complete the level, you must go through the doors once the gate is open
+  1. to complete the level, you must go through the doors once the gate is open
 
 
 >Level 1 
