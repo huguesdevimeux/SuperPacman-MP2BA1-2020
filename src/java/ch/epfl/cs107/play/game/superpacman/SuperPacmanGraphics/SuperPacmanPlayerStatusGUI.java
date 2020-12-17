@@ -29,6 +29,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
 	private TextGraphics levelStatusNumberDiamondsLeft;
 	private TextGraphics levelStatusNumberDiamondsLeftTitle;
 	private int numberDiamondsLefts = -1;
+	private int nextLevel;
 
     public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {
         assert (player.getClass() == SuperPacmanPlayer.class); 
@@ -100,7 +101,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
         if (numberDiamondsLeft == 0) levelStatusNumberDiamondsLeft.setFillColor(Color.GREEN);
         levelStatusNumberDiamondsLeft.draw(canvas);
 
-        levelStatusNumberDiamondsLeftTitle = new TextGraphics("Before next level", FONT_SIZE, Color.RED);
+        levelStatusNumberDiamondsLeftTitle = new TextGraphics("Before level " + String.valueOf(nextLevel), FONT_SIZE, Color.RED);
         levelStatusNumberDiamondsLeftTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 3.6f, -1.25f)));
         levelStatusNumberDiamondsLeftTitle.setFontName(FONT);
         levelStatusNumberDiamondsLeftTitle.draw(canvas);
@@ -127,6 +128,10 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
 
     public void setNumberDiamondsLeft(int number) {
         this.numberDiamondsLefts = number; 
+    }
+
+    public void setNextLevel(int nextLevel) {
+        this.nextLevel = nextLevel; 
     }
     
 	@Override

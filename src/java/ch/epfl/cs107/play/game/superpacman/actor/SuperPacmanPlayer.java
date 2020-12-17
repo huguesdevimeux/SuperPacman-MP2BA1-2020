@@ -251,7 +251,8 @@ public class SuperPacmanPlayer extends Player {
         if (getOwnerArea().getClass() == RandomArea.class) {
             int numberDiamondsToCollect = ((RandomArea) getOwnerArea()).getNumberDiamondsToCollect();
             int currentDiamonds = ((SuperPacmanArea) getOwnerArea()).getCurrentDiamonds();
-            statusDrawer.setNumberDiamondsLeft(Math.max(0, - numberDiamondsToCollect + currentDiamonds));
+            statusDrawer.setNumberDiamondsLeft(Math.max(0, -numberDiamondsToCollect + currentDiamonds));
+            statusDrawer.setNextLevel(((RandomArea) getOwnerArea()).getLevel() + 1);
         }
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
