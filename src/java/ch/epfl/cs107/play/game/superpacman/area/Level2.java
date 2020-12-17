@@ -15,22 +15,22 @@ public class Level2 extends NonRandomArea {
 
     //we manually register spooky as he only lives in level2
     //and there is only one occurence of spooky
-    private Spooky spooky = new Spooky(this, Orientation.RIGHT, new DiscreteCoordinates(15,11));
+    private Spooky spooky = new Spooky(this, Orientation.RIGHT, new DiscreteCoordinates(15, 11));
     private Strawberry strawberry1 = new Strawberry(this, new DiscreteCoordinates(28, 3));
     private Strawberry strawberry2 = new Strawberry(this, new DiscreteCoordinates(2, 5));
     private Strawberry strawberry3 = new Strawberry(this, new DiscreteCoordinates(1, 28));
     private Strawberry strawberry4 = new Strawberry(this, new DiscreteCoordinates(28, 28));
-    private Key key1 = new Key(this, new DiscreteCoordinates(3,16));
+    private Key key1 = new Key(this, new DiscreteCoordinates(3, 16));
     private Key key2 = new Key(this, new DiscreteCoordinates(26, 16));
     private Key key3 = new Key(this, new DiscreteCoordinates(2,8));
     private Key key4 = new Key(this, new DiscreteCoordinates(27,8));
-    public Logic key3_4 = new And(key3, key4);
 
     public String getTitle() {
         return "superpacman/Level2";
     }
 
     protected void createArea() {
+        Logic key3_4 = new And(key3, key4);
         super.createArea();
         registerActor(spooky);
         registerActor(key1);
@@ -52,44 +52,48 @@ public class Level2 extends NonRandomArea {
         super.createGate(Orientation.DOWN, 5,12, key1);
         super.createGate(Orientation.DOWN, 24, 12, key2);
         createFlockOfJamilas();
-        super.createPortal(12,19);
-        super.createPortal(1,3);
-        super.createPortal(1,22);
-        super.createPortal(28,12);
+        super.createPortal(12, 19);
+        super.createPortal(1, 3);
+        super.createPortal(28, 12);
     }
 
-    public void createFlockOfJamilas(){
+    public void createFlockOfJamilas() {
         registerActor(strawberry1);
         registerActor(strawberry2);
         registerActor(strawberry3);
         registerActor(strawberry4);
-        createJamila(19,13, strawberry1);
-        createJamila(6,24, strawberry3);
+        createJamila(19, 13, strawberry1);
+        createJamila(6, 24, strawberry3);
         createJamila(11, 21, strawberry3);
-        createJamila(23,24, strawberry4);
+        createJamila(23, 24, strawberry4);
         createJamila(18, 21, strawberry4);
-        createJamila(6,2, strawberry2);
+        createJamila(6, 2, strawberry2);
     }
 
     @Override
     public DiscreteCoordinates getSpawnLocation() {
         return this.PLAYER_SPAWN_POSITION;
     }
-    public DiscreteCoordinates getTeleportLocation(){return this.TELEPORT_LOCATION;}
+
+    public DiscreteCoordinates getTeleportLocation() {
+        return this.TELEPORT_LOCATION;
+    }
 
     /**
-     @return true if the number of the diamonds in Level2 is 0
-     method applies only to the gates at (14,3) and (15,3): they're the only ones
-     depending on the number of diamonds collected
-   */
+     * @return true if the number of the diamonds in Level2 is 0
+     * method applies only to the gates at (14,3) and (15,3): they're the only ones
+     * depending on the number of diamonds collected
+     */
     @Override
     public boolean isOn() {
         return !(getCurrentDiamonds() == 0);
     }
+
     @Override
     public boolean isOff() {
         return false;
     }
+
     @Override
     public float getIntensity() {
         return 0;

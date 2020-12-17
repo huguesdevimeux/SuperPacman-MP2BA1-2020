@@ -150,14 +150,19 @@ public class WelcomeMenu extends Area {
 	}
 
 	private void createItems() {;
-		GraphicsEntity cherry = new GraphicsEntity(new Vector(15, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/cherry"), 3f, 3f));
-		registerActor(cherry);
-		GraphicsEntity pacmanPlayer = new GraphicsEntity(new Vector(10, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/pacman"), 3f, 3f, new 
-		RegionOfInterest(64 * 2, 64 * 3, 64, 64)));
+		GraphicsEntity pacmanPlayer = new GraphicsEntity(new Vector(9, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/pacman"), 3f, 3f, new
+		RegionOfInterest(64, 64 * 3, 64, 64)));
 		registerActor(pacmanPlayer);
+		GraphicsEntity blinky = new GraphicsEntity(new Vector(13, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleblinky"), 3f, 3f));
+		registerActor(blinky);
+		GraphicsEntity pinky = new GraphicsEntity(new Vector(17, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlepinky"), 3f, 3f));
+		registerActor(pinky);
+		GraphicsEntity inky = new GraphicsEntity(new Vector(21, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleinky"), 3f, 3f));
+		registerActor(inky);
+		GraphicsEntity spooky = new GraphicsEntity(new Vector(5, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlespooky"), 3f, 3f));
+		registerActor(spooky);
 	}
-	
-	
+
 	/**
 	 * Update the visual of the things to selectw.
 	 * @param nextIndex
