@@ -7,23 +7,23 @@ Paper : https://proginsc.epfl.ch/wwwhiver/mini-projet2/grid-games.pdf
 Made with love by Luca Mouchel and Hugues Devimeux. 
 2020
 
-#Controls
+# Controls
 
-######SPACE bar : pause
+###### SPACE bar : pause
 
-######P key : unpause
+###### P key : unpause
 
-######Q key : quit game
+###### Q key : quit game
 
-######E key : collect strawberry
+###### E key : collect strawberry
 
-######LEFT arrow : change orientation and move to left
+###### LEFT arrow : change orientation and move to left
 
-######RIGHT arrow : change orientation and move to right
+###### RIGHT arrow : change orientation and move to right
 
-######UP arrow : change orientation and move upwards
+###### UP arrow : change orientation and move upwards
 
-######DOWN arrow : change orientation and move downwards
+###### DOWN arrow : change orientation and move downwards
 
 __________TECHNIQUES__________
 
