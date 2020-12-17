@@ -8,17 +8,10 @@ import ch.epfl.cs107.play.game.actor.GraphicsEntity;
 import ch.epfl.cs107.play.game.actor.ImageGraphics;
 import ch.epfl.cs107.play.game.areagame.Area;
 import ch.epfl.cs107.play.game.areagame.AreaBehavior;
-import ch.epfl.cs107.play.game.areagame.actor.Animation;
-import ch.epfl.cs107.play.game.areagame.actor.Orientation;
-import ch.epfl.cs107.play.game.areagame.actor.Sprite;
 import ch.epfl.cs107.play.game.areagame.actor.Text;
 import ch.epfl.cs107.play.game.areagame.io.ResourcePath;
-import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
-import ch.epfl.cs107.play.game.superpacman.actor.Ghost;
-import ch.epfl.cs107.play.game.tutosSolution.actor.GhostPlayer;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
-import ch.epfl.cs107.play.math.Positionable;
 import ch.epfl.cs107.play.math.RegionOfInterest;
 import ch.epfl.cs107.play.math.Vector;
 import ch.epfl.cs107.play.window.Keyboard;
@@ -125,9 +118,9 @@ public class WelcomeMenu extends Area {
 	 */
 	private void generateMenu() {
 		Text gamemode1 = new Text(STORY_MODE_TEXT, new DiscreteCoordinates(getWidth() / 2 - 1, getHeight() - 13), this, true,
-				1.5f, Color.YELLOW);
+				1.5f, Color.WHITE);
 		Text gamemode2 = new Text("Infinite mode", new DiscreteCoordinates(getWidth() / 2 - 1, getHeight() - 16), this,
-				true, 1.5f, Color.YELLOW);
+				true, 1.5f, Color.WHITE);
 		gamemode1.setFontName(FONT);
 		gamemode2.setFontName(FONT);
 		choices.add(gamemode1);
@@ -181,7 +174,7 @@ public class WelcomeMenu extends Area {
 	}
 
 	private void markFieldAsUnselected(int index) {
-		choices.get(index).setFillColor(Color.YELLOW);
+		choices.get(index).setFillColor(Color.WHITE);
 	}
 	
 }
