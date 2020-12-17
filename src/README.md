@@ -29,48 +29,43 @@ What the actor does is increase your health points - allowing the player to surv
 
 ## Main gameplay features
 
-// METTRE ICI LES ACTEURS 
-- **Jamila** 
+- **Pacman player** : its goal is to consume collectables, eat ghosts when they're afraid and get from one level to the next
 
+- **Blinky** : moves randomly on the map and only appears in __Level 1__
 
-- **Strawberry**: 
+- **Pinky and Inky** : smart moving ghosts. they will chase the player and attempt to make him fail. they appear in __Level 1__ and __Level 2__
 
+- **Spooky** : appears only in __Level 2__. this ghost is smart and does not get afraid - it consequently doesn't have a refuge position. it will chase the player continuosly
+
+- **Bonus** : when collected, bonuses scare ghosts and increase their speed
+
+- **Strawberry**: strawberries are signals for Jamilas. They also increase the player's speed (provides a burst of energy!). Strawberries can be collected whenever the player decides to interact with one, by pressing E
+
+- **Jamila** : increases HP by one. Decreases both the ghosts' and player's speeds. can only be accessed when you have eaten the nearest strawberry (you will see the signal is activated when there is an animation on the Jamila)
+
+- **Enclosure** : shape of a fire that will "enclose" the player. When eating a strawberry or collecting a Jamila, a fire will ignite, blocking access to the player and the ghosts.(the fire is too hot for the player and ghosts to walk through!) this is both an advantage and an obstacle for the player. it will have more time to collect diamonds and collectables but it will be harder to get accross the map. __This__ is why you should be strategic about when to eat a strawberry
+
+- **Portal** : allows player to teleport somewhere on the map
+
+- **Gate** : will open when certain keys are collected
+
+- **Key** : signals for gates. collecting them opens gates
+
+- **Cherry** : increases score by 200
+
+- **Opening menu** : a menu will popup before being able to play, allowing the user to pick a gamemode
 
 - **Pause menu** : presse space anytime to pause the game. 
 
-
 - **Game over** : If you happen to die, there will be a cool game over screen.
-
-/*
-The user decides when interacting with a strawberry - **press E.** 
-Interacting with a strawberry or a Jamila will ignite a fire that will block access to the player and the ghosts
-Strawberries are signals for Jamilas (You must interact with a strawberry to be able to interact with a Jamila)
-*/
 
 ## Gamemodes
 
 ### Story mode
 
-### Infinite mode
+#### Walkthrough
 
-The game has an "infinite" mode, which is basically a succession of map generated procedurally, until the player goes out of lives. 
-Features : 
-- Procedural mazes. To fit pacman maze requirements: 
-  - Removal of dead ends (a few are randomly left untouched).
-  - Symetry of the random-maps: the mazes are symetic along Y axe, as the real game. 
-- Procedural items spawn:
-  - Bonuses are placed **only in dead ends (like the real game!)**
-  - Random placement of cherries, according to a rate. 
-- Procedural ghost spawn
-  - Ghosts spawn according to a rate that increase at every level. 
-- Increasing difficulty the player goes up in the levels, the difficulty increases, which makes : 
-  - The height of the map increase linearly. 
-  - The amount of coins to get to open the next level increase linearly.
-  - The number of ghosts increase linearly. 
-
-## Walkthrough
-
-### Level 0
+##### Level 0
   
   * eat the key to open the gates that will lead to Level1
  
@@ -93,7 +88,7 @@ Features :
   * to complete the level, you must go through the doors once the gate is open
 
 
-### Level 1
+##### Level 1
  
 * you must eat all the diamonds to open the gates that allow you to access the next level
  
@@ -119,7 +114,7 @@ it will have more time to collect diamonds and collectables but it will be harde
 * you have completed the level once the gates open and you go through the doors
  
  
-### Level 2
+##### Level 2
 
 
 * To complete level2, you must eat all the diamonds. you must open all the gates to do that (they use different signals (see page 20 of handout))
@@ -134,11 +129,26 @@ it will have more time to collect diamonds and collectables but it will be harde
 
 **There is no game Over display when reaching the level 2 doors as we do not expect the corrector to reach the end of the three levels**
  
+### Infinite mode
+
+The game has an "infinite" mode, which is basically a succession of map generated procedurally, until the player goes out of lives. 
+Features : 
+- Procedural mazes. To fit pacman maze requirements: 
+  - Removal of dead ends (a few are randomly left untouched).
+  - Symetry of the random-maps: the mazes are symetic along Y axe, as the real game. 
+- Procedural items spawn:
+  - Bonuses are placed **only in dead ends (like the real game!)**
+  - Random placement of cherries, according to a rate. 
+- Procedural ghost spawn
+  - Ghosts spawn according to a rate that increase at every level. 
+- Increasing difficulty the player goes up in the levels, the difficulty increases, which makes : 
+  - The height of the map increase linearly. 
+  - The amount of coins to get to open the next level increase linearly.
+  - The number of ghosts increase linearly. 
+
+
  __GOOD LUCK!__
  
-
-
-
 ## Images
 
 Most of the images are provided in the game's archive
