@@ -3,11 +3,20 @@
 First and foremost, we hope this does not cause any offense: we created an actor entitled Jamila in the shape of an animated heart as a tribute to our professor
 What the actor does is increase your health points - allowing the player to survive in his hostile environment - (a little bit like us students at EPFL)
 
-Paper : https://proginsc.epfl.ch/wwwhiver/mini-projet2/grid-games.pdf
-Made with love by Luca Mouchel and Hugues Devimeux. 
-2020
 
-## Keybinding : 
+## Table of content
+- [Keybinding](#keybinding)
+- [Main gameplay features](#main-gameplay-features)
+- [Gamemodes](#gamemodes)
+  * [Story mode](#story-mode)
+  * [Infinite mode](#infinite-mode)
+- [Walkthrough](#walkthrough)
+  * [Level 0](#level-0)
+  * [Level 1](#level-1)
+  * [Level 2](#level-2)
+- [Images](#images)
+
+## Keybinding
 
 - SPACE bar : pause
 - P key : unpause
@@ -18,7 +27,7 @@ Made with love by Luca Mouchel and Hugues Devimeux.
 - UP arrow : change orientation and move upwards
 - DOWN arrow : change orientation and move downwards
 
-## Main gameplay features : 
+## Main gameplay features
 
 // METTRE ICI LES ACTEURS 
 - **Jamila** 
@@ -38,18 +47,18 @@ Interacting with a strawberry or a Jamila will ignite a fire that will block acc
 Strawberries are signals for Jamilas (You must interact with a strawberry to be able to interact with a Jamila)
 */
 
-## Gamemodes : 
+## Gamemodes
 
-### Story mode : 
+### Story mode
 
-### Infinite mode : Atte
+### Infinite mode
 
 The game has an "infinite" mode, which is basically a succession of map generated procedurally, until the player goes out of lives. 
 Features : 
-- Procedural mazes. To fit pacman mazes requirements: 
+- Procedural mazes. To fit pacman maze requirements: 
   - Removal of dead ends (a few are randomly left untouched).
   - Symetry of the random-maps: the mazes are symetic along Y axe, as the real game. 
-- Procedural items spawn: 
+- Procedural items spawn:
   - Bonuses are placed **only in dead ends (like the real game!)**
   - Random placement of cherries, according to a rate. 
 - Procedural ghost spawn
@@ -61,11 +70,21 @@ Features :
 
 ## Walkthrough
 
- __*Level 0*__
+### Level 0
   
   * eat the key to open the gates that will lead to Level1
  
-  * you will first have to go through a portal that will teleport you somewhere on the map
+  * you will first have to go- [Keybinding](#keybinding)
+- [Main gameplay features](#main-gameplay-features)
+- [Gamemodes](#gamemodes)
+  * [Story mode](#story-mode)
+  * [Infinite mode](#infinite-mode)
+- [Walkthrough](#walkthrough)
+  * [Level 0](#level-0)
+  * [Level 1](#level-1)
+  * [Level 2](#level-2)
+- [Images](#images)
+ through a portal that will teleport you somewhere on the map
  Atte
   * you have the opAttetion to interact with other actors (coin, strawberry and Jamila)
  
@@ -74,7 +93,7 @@ Features :
   * to complete the level, you must go through the doors once the gate is open
 
 
-__*Level 1*__ 
+### Level 1
  
 * you must eat all the diamonds to open the gates that allow you to access the next level
  
@@ -100,8 +119,9 @@ it will have more time to collect diamonds and collectables but it will be harde
 * you have completed the level once the gates open and you go through the doors
  
  
-__*Level 2*__
- 
+### Level 2
+
+
 * To complete level2, you must eat all the diamonds. you must open all the gates to do that (they use different signals (see page 20 of handout))
 
 * differing from level1, you only have smartmoving ghosts, however, two are trapped until you pick up the key associated to the gates' signal
@@ -112,18 +132,18 @@ __*Level 2*__
 
 * you have completed the level once you eat all the diamonds, open all the gates and pass through the doors
 
- ###### There is no game Over display when reaching the level 2 doors as we do not expect the corrector to reach the end of the three levels
+**There is no game Over display when reaching the level 2 doors as we do not expect the corrector to reach the end of the three levels**
  
  __GOOD LUCK!__
  
 
 
 
-## __Images__
+## Images
 
-most of the images are provided in the game's archive
- ###### other sources : 
-* https://www.pinclipart.com/pindetail/mTxmx_strawberry-clipart-pacman-pacman-fruit-png-download/
-* https://grappe.itch.io/pixelportal
+Most of the images are provided in the game's archive
+> other sources : 
+>* https://www.pinclipart.com/pindetail/mTxmx_strawberry-clipart-pacman-pacman-fruit-png-download/
+>* https://grappe.itch.io/pixelportal
 
 GL HF !
