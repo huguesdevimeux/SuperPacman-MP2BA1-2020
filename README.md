@@ -29,7 +29,7 @@ DOWN arrow : change orientation and move downwards
 
 __________TECHNIQUES__________
 
--The user decides when interacting with a strawberry - press E 
+-The user decides when interacting with a strawberry - press E : it's an element of strategy
 
 -Interacting with a strawberry or a Jamila will ignite a fire that will block access to the player and the ghosts
 
