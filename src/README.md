@@ -82,10 +82,22 @@ __*Level 2*__
  
  __GOOD LUCK!__
  
- ## __Procedural levels__
+## Infinite mode : 
 
-
-////
+The game has an "infinite" mode, which is basically a succession of map generated procedurally, until the player goes out of lives. 
+Features : 
+- Procedural mazes. To fit pacman mazes requirements: 
+  - Removal of dead ends (a few are randomly left untouched).
+  - Symetry of the random-maps: the mazes are symetic along Y axe, as the real game. 
+- Procedural items spawn: 
+  - Bonuses are placed **only in dead ends (like the real game!)**
+  - Random placement of cherries, according to a rate. 
+- Procedural ghost spawn
+  - Ghosts spawn according to a rate that increase at every level. 
+- Increasing difficulty the player goes up in the levels, the difficulty increases, which makes : 
+  - The height of the map increase linearly. 
+  - The amount of coins to get to open the next level increase linearly.
+  - The number of ghosts increase linearly. 
 
 
 ## __Images__
