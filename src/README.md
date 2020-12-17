@@ -39,12 +39,6 @@ What the actor does is increase your health points - allowing the player to surv
 
 - **Bonus** : when collected, bonuses scare ghosts and increase their speed
 
-- **Strawberry**: strawberries are signals for Jamilas. They also increase the player's speed (provides a burst of energy!). Strawberries can be collected whenever the player decides to interact with one, by pressing E
-
-- **Jamila** : increases HP by one. Decreases both the ghosts' and player's speeds. can only be accessed when you have eaten the nearest strawberry (you will see the signal is activated when there is an animation on the Jamila)
-
-- **Enclosure** : shape of a fire that will "enclose" the player. When eating a strawberry or collecting a Jamila, a fire will ignite, blocking access to the player and the ghosts.(the fire is too hot for the player and ghosts to walk through!) this is both an advantage and an obstacle for the player. it will have more time to collect diamonds and collectables but it will be harder to get accross the map. __This__ is why you should be strategic about when to eat a strawberry
-
 - **Portal** : allows player to teleport somewhere on the map
 
 - **Gate** : will open when certain keys are collected
@@ -58,6 +52,14 @@ What the actor does is increase your health points - allowing the player to surv
 - **Pause menu** : presse space anytime to pause the game. 
 
 - **Game over** : If you happen to die, there will be a cool game over screen.
+
+### Strategy
+
+- **Strawberry**: strawberries are signals for Jamilas. They also increase the player's speed (provides a burst of energy!). Strawberries can be collected whenever the player decides to interact with one, by pressing E
+
+- **Jamila** : increases HP by one. Decreases both the ghosts' and player's speeds. can only be accessed when you have eaten the nearest strawberry (you will see the signal is activated when there is an animation on the Jamila)
+
+- **Enclosure** : shape of a fire that will "enclose" the player. When eating a strawberry or collecting a Jamila, a fire will ignite, blocking access to the player and the ghosts.(the fire is too hot for the player and ghosts to walk through!) this is both an advantage and an obstacle for the player. it will have more time to collect diamonds and collectables but it will be harder to get accross the map. __This__ is why you should be strategic about when to eat a strawberry
 
 ## Gamemodes
 
