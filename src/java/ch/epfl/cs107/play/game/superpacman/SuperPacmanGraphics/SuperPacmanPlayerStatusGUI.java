@@ -28,7 +28,7 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
 	private TextGraphics levelStatusTitle;
 	private TextGraphics levelStatusNumberDiamondsLeft;
 	private TextGraphics levelStatusNumberDiamondsLeftTitle;
-	private int numberDiamondsLefts;
+	private int numberDiamondsLefts = -1;
 
     public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {
         assert (player.getClass() == SuperPacmanPlayer.class); 
@@ -132,8 +132,8 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
 	@Override
     public void draw(Canvas canvas) {
         drawLifeBar(canvas, this.amountLife);
-        drawScore(canvas, this.scoreDisplayed);		
-        drawLevelStatus(canvas, this.numberDiamondsLefts);
+        drawScore(canvas, this.scoreDisplayed);
+        if (this.numberDiamondsLefts != -1) drawLevelStatus(canvas, this.numberDiamondsLefts);
     }
     
 }
