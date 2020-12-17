@@ -63,9 +63,16 @@ What the actor does is increase your health points - allowing the player to surv
 
 ## Gamemodes
 
+### Infinite mode
+
+The game has an "infinite" mode, which is basically a succession of maps generated procedurally, until the player goes out of lives. 
+To see details, of the implementation, see Conception. 
+
 ### Story mode
 
-#### Walkthrough
+Play an amazing adventure through 3 levele pre-determinded, Level0, Level1, Level2!
+
+## Walkthrough
 
 ##### Level 0
   
@@ -117,23 +124,7 @@ What the actor does is increase your health points - allowing the player to surv
 * you have completed the level once you eat all the diamonds, open all the gates and pass through the doors
 
 **There is no game Over display when reaching the level 2 doors as we do not expect the corrector to reach the end of the three levels**
- 
-### Infinite mode
-
-The game has an "infinite" mode, which is basically a succession of maps generated procedurally, until the player goes out of lives. 
-Features : 
-- Procedural mazes. To fit pacman maze requirements: 
-  - Removal of dead ends (a few are randomly left untouched).
-  - Symetry of the random-maps: the mazes are symetric along Y axis, like the real game. 
-- Procedural items spawn:
-  - Bonuses are placed **only in dead ends (like the real game!)**
-  - Random placement of cherries, according to a rate. 
-- Procedural ghost spawn
-  - Ghosts spawn according to a rate that increase at every level. 
-- Increasing difficulty as the player goes up in the levels, which makes : 
-  - The height of the map increase linearly. 
-  - The amount of coins to collect to open the gates to the next level increases linearly.
-  - The number of ghosts increases linearly.  
+   
 
 ## Images
 
