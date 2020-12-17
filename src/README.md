@@ -91,7 +91,7 @@ __Level 2__
 ## __Images__
 
 most of the images are provided in the game's archive
-other sources : 
+ ****** other sources : 
 * https://www.pinclipart.com/pindetail/mTxmx_strawberry-clipart-pacman-pacman-fruit-png-download/
 * https://grappe.itch.io/pixelportal
 
