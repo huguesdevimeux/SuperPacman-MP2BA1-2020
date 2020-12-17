@@ -26,7 +26,7 @@ Made with love by Luca Mouchel and Hugues Devimeux.
            
 ## __Walkthrough__
 
- __Level 0__
+ __*Level 0*__
   
   * eat the key to open the gates that will lead to Level1
  
@@ -39,7 +39,7 @@ Made with love by Luca Mouchel and Hugues Devimeux.
   * to complete the level, you must go through the doors once the gate is open
 
 
-__Level 1__ 
+__*Level 1*__ 
  
 * you must eat all the diamonds to open the gates that allow you to access the next level
  
@@ -65,7 +65,7 @@ it will have more time to collect diamonds and collectables but it will be harde
 * you have completed the level once the gates open and you go through the doors
  
  
-__Level 2__
+__*Level 2*__
  
 * To complete level2, you must eat all the diamonds. you must open all the gates to do that (they use different signals (see page 20 of handout))
 
