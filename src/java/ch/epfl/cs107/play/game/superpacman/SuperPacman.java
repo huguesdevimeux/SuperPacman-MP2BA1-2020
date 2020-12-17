@@ -9,6 +9,7 @@ import ch.epfl.cs107.play.game.superpacman.area.Level0;
 import ch.epfl.cs107.play.game.superpacman.area.Level1;
 import ch.epfl.cs107.play.game.superpacman.area.Level2;
 import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
+import ch.epfl.cs107.play.game.superpacman.menu.WelcomeMenu;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.io.FileSystem;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -30,12 +31,42 @@ public class SuperPacman extends RPG {
     }
 
     public void update(float deltaTime) {
+
+        if (getCurrentArea().getClass() == WelcomeMenu.class) {
+            if (((WelcomeMenu) getCurrentArea()).canQuit()) {
+                startGame(((WelcomeMenu) getCurrentArea()).getSelectedOption());
+            }
+            // NOTE : We "manually" update the area, as super.update updates an RPG area. 
+            getCurrentArea().update(deltaTime);
+            return;
+        }
+
         // RandomArea is a signal that is on when the player can go to the next area. 
         if (proceduralGamemode && ((RandomArea) getCurrentArea()).isOn() && infiniteLevel == ((RandomArea) getCurrentArea()).getLevel()) {
             infiniteLevel++;
             updateProceduralArea(infiniteLevel);
         }
             super.update(deltaTime);
+    }
+
+    private void startGame(int selectedGameMode) {
+        Area startingArea;
+		switch (selectedGameMode) {
+            case 0:
+                createNonProceduralAreas();
+                startingArea = setCurrentArea("superpacman/Level0", true);
+                player = new SuperPacmanPlayer(startingArea, Orientation.UP, ((SuperPacmanArea) startingArea).getSpawnLocation());
+                initPlayer(player);
+                break;
+            case 1:
+                addArea(new RandomArea(0));
+                startingArea = setCurrentArea("randomAreaLevel0", true);
+                player = new SuperPacmanPlayer(startingArea, Orientation.UP,((SuperPacmanArea) startingArea).getSpawnLocation());
+                initPlayer(player);
+                proceduralGamemode = true; 
+            default:
+                break;
+        }
     }
 
     private void createNonProceduralAreas() {
@@ -57,18 +88,8 @@ public class SuperPacman extends RPG {
     public boolean begin(Window window, FileSystem fileSystem) {
 
         if (super.begin(window, fileSystem)) {
-            SuperPacmanArea startingArea;
-            //initiating areas depending of the boolean value of @proceduralGamemode
-            if (!proceduralGamemode) {
-                createNonProceduralAreas();
-                startingArea = (SuperPacmanArea) setCurrentArea("superpacman/Level0", true);
-            }
-            else {
-                addArea(new RandomArea(0));
-                startingArea = (SuperPacmanArea) setCurrentArea("randomAreaLevel0", true);
-            }
-            player = new SuperPacmanPlayer(startingArea, Orientation.UP, startingArea.getSpawnLocation()); 
-          initPlayer(player);
+            addArea(new WelcomeMenu());
+            setCurrentArea("menu", true);
             return true;
         } else return false;
     }
