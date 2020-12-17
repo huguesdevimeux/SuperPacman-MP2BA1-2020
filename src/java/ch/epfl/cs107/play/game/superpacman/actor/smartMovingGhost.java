@@ -84,7 +84,7 @@ public abstract class smartMovingGhost extends Ghost {
     }
 
     protected boolean hasReachedTargetPos() {
-        return (targetPos == null || this.getCurrentMainCellCoordinates().equals(targetPos));
+        return (targetPos == null || this.getCurrentMainCellCoordinates().equals(targetPos) || followingPath.size() == 0);
     }
     
     
