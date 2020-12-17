@@ -117,17 +117,33 @@ seemed reasonable to create these classes as GUI as they simply popup texts when
 
 ## Extensions
 
-### Actors 
-* Jamila - increases HP by one, decreases player's and ghosts' speed (player needs to eat the nearest strawberry to be collectable)
-* Strawberry - increases the player's speed and allows access to a Jamila
-* Portal - teleports the player somewhere on the map
-* Enclosure - fire that ignites whenever the player decides to eat a strawberry or when the player picks up a Jamila - TIP: be __strategic__, the player can't move over fire
-* Spooky - smart ghost that appears in __Level 2__, will move at constant speed and has NO refuge position
-
 ### Random Levels
 Generated a possibly infinite amount of levels that will be accessible through the menu.
 
+The implementation is quite wide, so here is a resume of the differnent thigs implemented. 
+Features : 
+- Procedural mazes. To fit pacman maze requirements: 
+  - Removal of dead ends (a few are randomly left untouched).
+  - Symetry of the random-maps: the mazes are symetric along Y axis, like the real game. 
+- Procedural items spawn:
+  - Bonuses are placed **only in dead ends (like the real game!)**
+  - Random placement of cherries, according to a rate. 
+- Procedural ghost spawn
+  - Ghosts spawn according to a rate that increase at every level. 
+- Increasing difficulty as the player goes up in the levels, which makes : 
+  - The height of the map increase linearly. 
+  - The amount of coins to collect to open the gates to the next level increases linearly.
+  - The number of ghosts increases linearly.
+  - 
+### Actors 
+* `Jamila` - increases HP by one, decreases player's and ghosts' speed (player needs to eat the nearest strawberry to be collectable)
+* `Strawberry` - increases the player's speed and allows access to a Jamila
+* `Portal` - teleports the player somewhere on the map
+* `Enclosure` - fire that ignites whenever the player decides to eat a strawberry or when the player picks up a Jamila - TIP: be __strategic__, the player can't move over fire
+* `Spooky` - smart ghost that appears in __Level 2__, will move at constant speed and has NO refuge position
+
+
 ### GUIs
-* ability to pause the game (SPACE bar and unpause it: P)
+* Ability to pause the game (SPACE bar and unpause it: P)
 * GameOver text when the player dies
-* Opening Menu, to select to choose from the "campaign" or an infinite amount of levels
+* Opening Menu, to select to choose from the "campaign" or an infinite amount of levels. + Some cools effect on the title :D
