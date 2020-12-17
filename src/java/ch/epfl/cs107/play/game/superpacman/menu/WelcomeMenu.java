@@ -150,16 +150,16 @@ public class WelcomeMenu extends Area {
 	}
 
 	private void createItems() {;
-		GraphicsEntity pacmanPlayer = new GraphicsEntity(new Vector(9, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/pacman"), 3f, 3f, new
+		GraphicsEntity pacmanPlayer = new GraphicsEntity(new Vector(9, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/pacman"), 2.5f, 2.5f, new
 		RegionOfInterest(64, 64 * 3, 64, 64)));
 		registerActor(pacmanPlayer);
-		GraphicsEntity blinky = new GraphicsEntity(new Vector(13, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleblinky"), 3f, 3f));
+		GraphicsEntity blinky = new GraphicsEntity(new Vector(13, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleblinky"), 2.5f, 2.5f));
 		registerActor(blinky);
-		GraphicsEntity pinky = new GraphicsEntity(new Vector(17, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlepinky"), 3f, 3f));
+		GraphicsEntity pinky = new GraphicsEntity(new Vector(17, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlepinky"), 2.5f, 2.5f));
 		registerActor(pinky);
-		GraphicsEntity inky = new GraphicsEntity(new Vector(21, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleinky"), 3f, 3f));
+		GraphicsEntity inky = new GraphicsEntity(new Vector(21, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singleinky"), 2.5f, 2.5f));
 		registerActor(inky);
-		GraphicsEntity spooky = new GraphicsEntity(new Vector(5, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlespooky"), 3f, 3f));
+		GraphicsEntity spooky = new GraphicsEntity(new Vector(5, 6f), new ImageGraphics( ResourcePath.getSprite("superpacman/singlespooky"), 2.5f, 2.5f));
 		registerActor(spooky);
 	}
 
