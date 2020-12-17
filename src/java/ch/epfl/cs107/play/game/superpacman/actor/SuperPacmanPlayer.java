@@ -12,6 +12,7 @@ import ch.epfl.cs107.play.game.rpg.actor.RPGSprite;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.GameOverGUI;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.PauseGUI;
 import ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics.SuperPacmanPlayerStatusGUI;
+import ch.epfl.cs107.play.game.superpacman.area.RandomArea;
 import ch.epfl.cs107.play.game.superpacman.area.SuperPacmanArea;
 import ch.epfl.cs107.play.game.superpacman.handler.SuperPacmanInteractionVisitor;
 import ch.epfl.cs107.play.math.DiscreteCoordinates;
@@ -247,6 +248,12 @@ public class SuperPacmanPlayer extends Player {
     public void draw(Canvas canvas) {
         statusDrawer.setScore(score);
         statusDrawer.setAmountLife(amountLife);
+        if (getOwnerArea().getClass() == RandomArea.class) {
+            int numberDiamondsToCollect = ((RandomArea) getOwnerArea()).getNumberDiamondsToCollect();
+            int currentDiamonds = ((SuperPacmanArea) getOwnerArea()).getCurrentDiamonds();
+            statusDrawer.setNumberDiamondsLeft(Math.max(0, -numberDiamondsToCollect + currentDiamonds));
+            statusDrawer.setNextLevel(((RandomArea) getOwnerArea()).getLevel() + 1);
+        }
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
         pauseStatus.draw(canvas);

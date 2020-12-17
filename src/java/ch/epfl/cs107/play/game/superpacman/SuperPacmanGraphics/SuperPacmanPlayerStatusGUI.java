@@ -15,6 +15,7 @@ import java.awt.*;
  * Handle status graphics for superpacman entities.
  */
 public class SuperPacmanPlayerStatusGUI implements Graphics {
+    private static final String FONT = "ArcadeClassic";
     // DEPTH determines the order of drawing. Low value means drawn in first. 
     private final float DEPTH = 0;
     private final float FONT_SIZE = 0.5f;
@@ -24,6 +25,11 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     private int amountLife;
     private TextGraphics score;
     private TextGraphics scoreTitle;
+	private TextGraphics levelStatusTitle;
+	private TextGraphics levelStatusNumberDiamondsLeft;
+	private TextGraphics levelStatusNumberDiamondsLeftTitle;
+	private int numberDiamondsLefts = -1;
+	private int nextLevel;
 
     public SuperPacmanPlayerStatusGUI(SuperPacmanPlayer player) {
         assert (player.getClass() == SuperPacmanPlayer.class); 
@@ -70,15 +76,35 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
      * @param scoreToDisplay
      */
     private void drawScore(Canvas canvas, int scoreToDisplay) {
-        scoreTitle = new TextGraphics(String.valueOf("Score :"), FONT_SIZE, Color.YELLOW);
+        scoreTitle = new TextGraphics(String.valueOf("Score "), FONT_SIZE, Color.YELLOW);
         scoreTitle.setOutlineColor(Color.RED);
         scoreTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, -0.7f))); // TODo change this cf l.11
+        scoreTitle.setFontName(FONT);
         scoreTitle.draw(canvas);
-      
+
         score = new TextGraphics(String.valueOf(scoreToDisplay), FONT_SIZE, Color.YELLOW);
         score.setOutlineColor(Color.RED);
-        score.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, - 1.25f))); // TODo change this to a getter cf l.11
+        score.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 0.3f, -1.25f))); // TODo change this to a getter cf l.11
+        score.setFontName(FONT);
         score.draw(canvas);
+    }
+    
+    private void drawLevelStatus(Canvas canvas, int numberDiamondsLeft) {
+        levelStatusTitle = new TextGraphics("Diamonds left", FONT_SIZE, Color.RED);
+        levelStatusTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 3.6f, -0.7f)));
+        levelStatusTitle.setFontName(FONT);
+        levelStatusTitle.draw(canvas);
+
+        levelStatusNumberDiamondsLeft = new TextGraphics(String.valueOf(numberDiamondsLeft), FONT_SIZE + 0.8f, Color.WHITE);
+        levelStatusNumberDiamondsLeft.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 2.2f - 0.3f, -1.24f)));
+        levelStatusNumberDiamondsLeft.setFontName(FONT);
+        if (numberDiamondsLeft == 0) levelStatusNumberDiamondsLeft.setFillColor(Color.GREEN);
+        levelStatusNumberDiamondsLeft.draw(canvas);
+
+        levelStatusNumberDiamondsLeftTitle = new TextGraphics("Before level " + String.valueOf(nextLevel), FONT_SIZE, Color.RED);
+        levelStatusNumberDiamondsLeftTitle.setAnchor(getLeftTopCorner(canvas).add(new Vector(5 * WIDTH_LIFE_UNIT + 3.6f, -1.25f)));
+        levelStatusNumberDiamondsLeftTitle.setFontName(FONT);
+        levelStatusNumberDiamondsLeftTitle.draw(canvas);
     }
 
     /**
@@ -99,10 +125,20 @@ public class SuperPacmanPlayerStatusGUI implements Graphics {
     public void setScore(int score) {
         this.scoreDisplayed = score;
     }
+
+    public void setNumberDiamondsLeft(int number) {
+        this.numberDiamondsLefts = number; 
+    }
+
+    public void setNextLevel(int nextLevel) {
+        this.nextLevel = nextLevel; 
+    }
     
 	@Override
     public void draw(Canvas canvas) {
         drawLifeBar(canvas, this.amountLife);
-        drawScore(canvas, this.scoreDisplayed);		
-	}
+        drawScore(canvas, this.scoreDisplayed);
+        if (this.numberDiamondsLefts != -1) drawLevelStatus(canvas, this.numberDiamondsLefts);
+    }
+    
 }
