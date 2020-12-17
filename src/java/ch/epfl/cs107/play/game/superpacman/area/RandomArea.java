@@ -68,6 +68,10 @@ public class RandomArea extends SuperPacmanArea {
 			createGate(Orientation.LEFT, pCoordinates.x, pCoordinates.y, this);		
 		}
 	}
+	
+	public int getNumberDiamondsToCollect() {
+		return (int) Math.floor(getOriginalNumberDiamonds() * RATIO_DIAMONDS_TO_COLLECT); 
+	}
 
 	/**
 	 * The next level will be open if enough diamonds are collected. 
