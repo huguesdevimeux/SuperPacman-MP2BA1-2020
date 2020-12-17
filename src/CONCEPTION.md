@@ -8,16 +8,34 @@
     - Extensions are flagged with "[extension]" or "[extension area]"
     - Classes, abstract classes, interfaces and enumerations are flagged with
     "(class)", "(abstract class)", "(interface)", and "(enum)", respectively. 
+    
+# Table of content : 
+- [Modifications of the provided code](#modifications-of-the-provided-code)
+- [Added classes and interfaces](#added-classes-and-interfaces)
+  * [Actors (superpacman/actor)](#actors--superpacman-actor-)
+    + [1. ghosts](#1-ghosts)
+    + [2. collectables](#2-collectables)
+    + [3. other](#3-other)
+  * [Areas (superpacman/area)](#areas--superpacman-area-)
+  * [Behaviors (superpacman/behavior)](#behaviors--superpacman-behavior-)
+  * [Handlers (superpacman/handler)](#handlers--superpacman-handler-)
+  * [MazeUtils (superpacman/mazeutils)](#mazeutils--superpacman-mazeutils-)
+  * [Miscleanous graphics (superpacman/SuperPacmanGraphics)](#miscleanous-graphics--superpacman-superpacmangraphics-)
+  * [Superpacman game (game/superpacman)](#superpacman-game--game-superpacman-)
+- [Extensions](#extensions)
+  * [Actors](#actors)
+  * [Random Levels](#random-levels)
+  * [GUIs](#guis)
 
-1. Modifications of the provided code 
+## Modifications of the provided code 
 
         removed multipe images, fonts and others from resources folder
         
-2. Added classes and interfaces 
+## Added classes and interfaces 
 
-2a. In ch.epfl.cs107.play.game.superpacman.actor : ACTORS
+### Actors (superpacman/actor)
 
-GHOSTS
+#### 1. ghosts
 - (abstract class) Ghost - general class from which different ghosts will inherit. usees generic methods to deal with ghosts behaviors
 - (abstract class) SmartMovingGhost - same as Ghost class but for smart moving ghosts
  * class Blinky 
@@ -27,7 +45,7 @@ GHOSTS
  - these classes are very similar and all these ghosts are actors. Only Blinky extends from Ghost, the others from SmartMovingGhost
  it seem reasonable to separate ghost from smart moving ghost (which extends ghost) to differentiate the different types of ghosts
  
-COLLECTABLES
+#### 2. collectables
 
 * class CollectableAreaEntity - allows to characterise collectables - a general class from which all colllectables can inherit
 * class Bonus
@@ -38,7 +56,7 @@ COLLECTABLES
 *class Enclosure [extension] - creation of fire once you eat a Jamila or a Strawberry 
 *class Key - signal for the gates
 
-OTHER
+#### 3. other
 
 *class Gate 
 *class Portal[extension] - allows to teleport somewhere on the map
@@ -47,7 +65,7 @@ OTHER
 *class SuperPacmanPlayerHandler - manages interactions between the player and the collectables
 
 
-2b. In ch.epfl.cs107.play.game.superpacman.area
+### Areas (superpacman/area)
 
 *class Level0 
 *class Level1
@@ -60,7 +78,7 @@ hence the random and non random areas
 
 *class SuperPacmanArea
 
-2c. In ch.epfl.cs107.play.game.superpacman.behavior
+### Behaviors (superpacman/behavior)
 
 *class NonRandomBehavior
 *class RandomBehavior
@@ -70,16 +88,17 @@ likewise, we differentiate random and non random behaviors
 *enum SuperPacmanCellType - allows for the automatic creation of players based on the celltypes on the map
 *class SuperPacmanCell
 
-2d. In ch.epfl.cs107.play.game.superpacman.handler
+### Handlers (superpacman/handler)
 
 *interface SuperPacmanInteractionVisitor
-implemented by SuperPacmanPlayerHandler
+implemented by SuperPacon] - manages the pause status of the game
+*class GameOverGUI[extension] - manages end of game statusmanPlayerHandler
 
-2e. In ch.epfl.cs107.play.game.superpacman.MazeUtils
+### MazeUtils (superpacman/mazeutils)
 
 
-
-2f. In ch.epfl.cs107.play.game.superpacman.SuperPacmanGraphics
+le conce
+### Miscleanous graphics (superpacman/SuperPacmanGraphics)
 
 *class SuperPacmanPlayerStatusGUI
 +class PauseGUI [extension] - manages the pause status of the game
@@ -87,23 +106,23 @@ implemented by SuperPacmanPlayerHandler
 seemed reasonable to create these classes as GUI as they simply popup texts when certain conditions are met
 (pause or game over)
 
-2h. In ch.epfl.cs107.play.game.superpacman 
+### Superpacman game (game/superpacman) 
 *class SuperPacman - general class that will initialise player in the area, be it a random area or not
 
 
-3. EXTENSIONS
+## Extensions
 
-3a. Actors 
+### Actors 
 *Jamila
 *Strawberry
 *Portal
 *Enclosure
 *Spooky
 
-3b. Random Levels
+### Random Levels
 generated a possibly infinite amount of levels that will be accessible through the menu
 
-3c. GUIs
+### GUIs
 *ability to pause the game (SPACE bar and unpause it: P)
 *GameOver text when the player dies
 *Menu, to select to choose from the "campaign" or an infinite amount of levels
