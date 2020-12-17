@@ -1,10 +1,4 @@
-0a. Contents
-    1: Modifications to the provided code
-    2. Added classes and interfaces (includes extension descriptions)
-    3. Deviations from the project description
-    4. List of all extensions
-    
-0b. For a better reading experience of this document
+ >For a better reading experience of this document
     - Extensions are flagged with "[extension]" or "[extension area]"
     - Classes, abstract classes, interfaces and enumerations are flagged with
     "(class)", "(abstract class)", "(interface)", and "(enum)", respectively. 
@@ -29,8 +23,14 @@
 
 ## Modifications of the provided code 
 
-        removed multipe images, fonts and others from resources folder
-        
+
+- Added font arcade to the ressources folder. 
+- Added sprites
+- Added new constructor for areaBehavior, to be able to create a behavior without image (for procedural maze generation)
+- Added some setters for areagame.actor.Text. 
+
+_Code added by us is with [CREATED BY STUDENTS] doc._ 
+
 ## Added classes and interfaces 
 
 ### Actors (superpacman/actor)
@@ -67,47 +67,50 @@
 
 ### Areas (superpacman/area)
 
-*class Level0 
-*class Level1
-*class Level2
+- class Level0 
+- class Level1
+- class Level2
 
-*class NonRandomArea extended by Level0,1,2
-*class RandomArea
+- class NonRandomArea extended by Level0,1,2
+- class RandomArea
+
+
 we differentiated these two classes as we have created an extension - procedural levels that generate randomly
 hence the random and non random areas
 
-*class SuperPacmanArea
+- class SuperPacmanArea
 
 ### Behaviors (superpacman/behavior)
 
-*class NonRandomBehavior
-*class RandomBehavior
+- class NonRandomBehavior
+- class RandomBehavior
 likewise, we differentiate random and non random behaviors
 
-*abstract class SuperPacmanBehavior
-*enum SuperPacmanCellType - allows for the automatic creation of players based on the celltypes on the map
-*class SuperPacmanCell
+- abstract class SuperPacmanBehavior
+- enum SuperPacmanCellType - allows for the automatic creation of players based on the celltypes on the map
+- class SuperPacmanCell
 
 ### Handlers (superpacman/handler)
 
-*interface SuperPacmanInteractionVisitor
+- interface SuperPacmanInteractionVisitor
 implemented by SuperPacon] - manages the pause status of the game
-*class GameOverGUI[extension] - manages end of game statusmanPlayerHandler
+- class GameOverGUI[extension] - manages end of game statusmanPlayerHandler
 
 ### MazeUtils (superpacman/mazeutils)
+- Class `RandomPacmanMazeStructure` : Self-explanatory. Generate the maze structure, that will be used by RandomPacmanMap. 
+- Class `RandomPacmanMap` : Generate the pacman map, by generating every specifities, such as bonuses placement, doors placement, ghosts spawn, etc. 
 
-
-le conce
 ### Miscleanous graphics (superpacman/SuperPacmanGraphics)
 
-*class SuperPacmanPlayerStatusGUI
-+class PauseGUI [extension] - manages the pause status of the game
-*class GameOverGUI[extension] - manages end of game status
+- class SuperPacmanPlayerStatusGUI
+- class PauseGUI [extension] - manages the pause status of the game
+- class GameOverGUI[extension] - manages end of game status
+
 seemed reasonable to create these classes as GUI as they simply popup texts when certain conditions are met
 (pause or game over)
 
 ### Superpacman game (game/superpacman) 
-*class SuperPacman - general class that will initialise player in the area, be it a random area or not
+- class SuperPacman - general class that will initialise player in the area, be it a random area or not
 
 
 ## Extensions
