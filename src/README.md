@@ -9,14 +9,14 @@ Made with love by Luca Mouchel and Hugues Devimeux.
 
 ## __Controls__
 
-###### SPACE bar : pause
-###### P key : unpause
-###### Q key : quit game
-###### E key : collect strawberry
-###### LEFT arrow : change orientation and move to left
-###### RIGHT arrow : change orientation and move to right
-###### UP arrow : change orientation and move upwards
-###### DOWN arrow : change orientation and move downwards
+- SPACE bar : pause
+- P key : unpause
+- Q key : quit game
+- E key : collect strawberry
+- LEFT arrow : change orientation and move to left
+- RIGHT arrow : change orientation and move to right
+- UP arrow : change orientation and move upwards
+- DOWN arrow : change orientation and move downwards
 
 ## Techniques
 
@@ -25,6 +25,8 @@ Made with love by Luca Mouchel and Hugues Devimeux.
 ###### Strawberries are signals for Jamilas (You must interact with a strawberry to be able to interact with a Jamila)
            
 ## __Walkthrough__
+
+### Story mode : 
 
  __*Level 0*__
   
@@ -82,7 +84,7 @@ __*Level 2*__
  
  __GOOD LUCK!__
  
-## Infinite mode : 
+### Infinite mode : 
 
 The game has an "infinite" mode, which is basically a succession of map generated procedurally, until the player goes out of lives. 
 Features : 
