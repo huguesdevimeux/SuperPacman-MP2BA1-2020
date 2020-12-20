@@ -88,7 +88,7 @@ public class SuperPacmanPlayer extends Player {
         if (keyboard.get(Keyboard.P).isPressed()) pauseStatus.setPlay();
     }
     public void endGame() {
-        if (amountLife == 4) {
+        if (amountLife == 0) {
             gameOverGUI.setScore(score);
             gameOverGUI.setGameIsOver();
         }
