@@ -28,8 +28,8 @@ public class SuperPacmanPlayer extends Player {
     private int movingSpeed;
     private SuperPacmanPlayerHandler handler = new SuperPacmanPlayerHandler();
     private SuperPacmanPlayerStatusGUI statusDrawer;
+    private GameOverGUI gameOverGUI;
     private PauseGUI pauseStatus = new PauseGUI();
-    private GameOverGUI gameOverStatus = new GameOverGUI();
     private int score = 0;
     private int amountLife = 5;
     private Keyboard keyboard = getOwnerArea().getKeyboard();
@@ -41,6 +41,7 @@ public class SuperPacmanPlayer extends Player {
     public SuperPacmanPlayer(Area area, Orientation orientation, DiscreteCoordinates coordinates) {
         super(area, orientation, coordinates);
         this.statusDrawer = new SuperPacmanPlayerStatusGUI(this);
+        gameOverGUI = new GameOverGUI();
         movingSpeed = 5;
         this.desiredOrientation = orientation;
         sprites = RPGSprite.extractSprites("superpacman/pacman", 4, 1, 1, this, 64, 64,
@@ -76,7 +77,7 @@ public class SuperPacmanPlayer extends Player {
         }
         //we update both the pause and gameOver statuses
         pauseStatus();
-        gameOverStatus();
+        endGame();
         //if you want to quit the game, you can press Q
         if (keyboard.get(Keyboard.Q).isPressed()) System.exit(0);
     }
@@ -86,8 +87,11 @@ public class SuperPacmanPlayer extends Player {
         if (keyboard.get(Keyboard.SPACE).isPressed()) pauseStatus.setPause();
         if (keyboard.get(Keyboard.P).isPressed()) pauseStatus.setPlay();
     }
-    public void gameOverStatus() {
-        if (amountLife == 0) ((SuperPacmanArea) getOwnerArea()).endGame();
+    public void endGame() {
+        if (amountLife == 4) {
+            gameOverGUI.setScore(score);
+            gameOverGUI.setGameIsOver();
+        }
     }
 
     //method will be used when going through doors (ie to a new level)
@@ -257,7 +261,7 @@ public class SuperPacmanPlayer extends Player {
         statusDrawer.draw(canvas);
         movingAnimations[getOrientation().ordinal()].draw(canvas);
         pauseStatus.draw(canvas);
-        gameOverStatus.draw(canvas);
+        gameOverGUI.draw(canvas);
     }
 
     @Override
